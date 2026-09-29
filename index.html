@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI untuk Administrator KEK Kendal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: app shell ala dashboard — sidebar navigasi + layar materi interaktif dengan foto dan simulasi */
+:root{
+  --bg:#F2F5F5; --surface:#FFFFFF; --surface-2:#E8EFEF; --ink:#0D1A20; --muted:#55666D; --line:#D5DFE1;
+  --accent:#0A8C82; --accent-ink:#FFFFFF; --accent-soft:#DAF0EC; --amber:#E08A00; --amber-soft:#FCEED3;
+  --good:#1D8F55; --good-soft:#DDF3E6; --warn:#B87400; --warn-soft:#FBEFD5; --bad:#C43D3D; --bad-soft:#F8E1E1;
+  --code-bg:#0E1A1F; --code-ink:#CFE7E3; --on-photo:#FFFFFF; --shade:rgba(6,16,20,.72);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+  --r:16px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#091216; --surface:#0F1C21; --surface-2:#15262C; --ink:#E3EDEF; --muted:#8EA3AA; --line:#20343B;
+  --accent:#2BC0B2; --accent-ink:#04201D; --accent-soft:#0F3431; --amber:#FFB547; --amber-soft:#3A2A0C;
+  --good:#4CC98A; --good-soft:#123324; --warn:#F2B64B; --warn-soft:#382A0E; --bad:#F07474; --bad-soft:#3A1717;
+  --code-bg:#060D10; --code-ink:#CFE7E3; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#091216; --surface:#0F1C21; --surface-2:#15262C; --ink:#E3EDEF; --muted:#8EA3AA; --line:#20343B;
+  --accent:#2BC0B2; --accent-ink:#04201D; --accent-soft:#0F3431; --amber:#FFB547; --amber-soft:#3A2A0C;
+  --good:#4CC98A; --good-soft:#123324; --warn:#F2B64B; --warn-soft:#382A0E; --bad:#F07474; --bad-soft:#3A1717;
+  --code-bg:#060D10; --code-ink:#CFE7E3; color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+button{font:inherit;color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100%}
+.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--surface);border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:16px}
+.brand{display:flex;gap:10px;align-items:center;padding:0 6px}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;position:relative;overflow:hidden}
+.logo::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shine 4s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.brand b{font-family:var(--display);font-size:16px;display:block;line-height:1.1}
+.brand span{font-size:12px;color:var(--muted)}
+.navlabel{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);padding:0 8px;font-weight:600}
+nav{display:flex;flex-direction:column;gap:2px}
+.nav-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:14.5px;color:var(--muted);font-weight:500;transition:background .2s,color .2s}
+.nav-btn .num{font-family:var(--mono);font-size:11.5px;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:var(--surface-2);flex:none;transition:background .2s,color .2s}
+.nav-btn:hover{background:var(--surface-2);color:var(--ink)}
+.nav-btn[aria-current="true"]{background:var(--accent-soft);color:var(--ink);font-weight:700}
+.nav-btn[aria-current="true"] .num{background:var(--accent);color:var(--accent-ink)}
+.nav-btn.done .num{color:var(--accent)}
+.side-foot{margin-top:auto;font-size:12px;color:var(--muted);padding:0 8px;display:flex;flex-direction:column;gap:6px}
+kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:var(--surface-2)}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 32px;display:flex;align-items:center;gap:14px}
+.crumb{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb b{color:var(--ink)}
+.progress{flex:1;height:5px;border-radius:9px;background:var(--surface-2);overflow:hidden;min-width:60px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--amber));border-radius:9px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.tb-btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;height:36px;min-width:36px;padding:0 12px;cursor:pointer;font-size:14px;font-weight:600}
+.tb-btn:hover{border-color:var(--accent)}
+.content{padding:32px 32px 64px;max-width:1260px;width:100%}
+.screen{display:flex;flex-direction:column;gap:26px}
+.screen.in-f .rv{animation:rvF .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d,0) * 70ms)}
+.screen.in-b .rv{animation:rvB .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d,0) * 70ms)}
+@keyframes rvF{from{opacity:.001;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes rvB{from{opacity:.001;transform:translateX(-28px)}to{opacity:1;transform:none}}
+
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.h-xl{font-size:clamp(36px,5vw,64px);font-weight:800}
+.h-l{font-size:clamp(28px,3.3vw,42px);font-weight:800}
+.h-m{font-size:21px;font-weight:700}
+.h-s{font-size:17px;font-weight:700}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:68ch}
+.muted{color:var(--muted)} .small{font-size:13.5px}
+.src{font-size:12.5px;color:var(--muted)} .src b{color:var(--ink);font-weight:600}
+.head{display:flex;flex-direction:column;gap:10px}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.soft{background:var(--surface-2);border-color:transparent}
+.card.hl{background:var(--accent-soft);border-color:transparent}
+.lift{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.lift:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(0,0,0,.35);border-color:var(--accent)}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--surface-2);white-space:nowrap}
+.chip.acc{background:var(--accent-soft)} .chip.amb{background:var(--amber-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+ul.clean{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.clean li{display:flex;gap:10px}
+ul.clean li::before{content:"";flex:none;width:6px;height:6px;border-radius:2px;background:var(--accent);margin-top:.62em}
+ul.clean.amb li::before{background:var(--amber)} ul.clean.bad li::before{background:var(--bad)} ul.clean.good li::before{background:var(--good)}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:11px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,filter .2s}
+.btn:hover{filter:brightness(1.07)} .btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--surface-2);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 14px;font-size:14px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s}
+.seg button:hover{border-color:var(--accent);color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* Photo banner */
+.banner{position:relative;border-radius:22px;overflow:hidden;min-height:230px;display:flex;align-items:flex-end;color:var(--on-photo);isolation:isolate}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.06);animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.16) translate(-2%,-2%)}}
+.banner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,var(--shade) 20%,rgba(6,16,20,.35) 70%,rgba(6,16,20,.15))}
+.banner .in{padding:30px 34px;display:flex;flex-direction:column;gap:10px;max-width:780px}
+.banner .eyebrow{color:#FFC862}
+.banner .lead{color:rgba(255,255,255,.86)}
+.credit{position:absolute;right:12px;bottom:8px;font-size:10.5px;color:rgba(255,255,255,.7)}
+
+/* Hero */
+.hero{position:relative;border-radius:26px;overflow:hidden;min-height:470px;color:var(--on-photo);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;padding:40px;isolation:isolate}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;animation:kb 22s ease-in-out infinite alternate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(110deg,rgba(5,14,18,.92) 30%,rgba(5,14,18,.55) 75%,rgba(5,14,18,.35))}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.hero .left{display:flex;flex-direction:column;gap:18px;justify-content:center}
+.hero .eyebrow{color:#FFC862}
+.hero .lead{color:rgba(255,255,255,.85)}
+.typer{font-family:var(--display);font-size:clamp(20px,2.2vw,28px);font-weight:600;min-height:1.4em}
+.typer span{color:#5FE3D5}
+.typer i{display:inline-block;width:3px;height:1em;background:#5FE3D5;vertical-align:-.12em;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px}
+.hero-meta span{font-size:13px;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 12px;backdrop-filter:blur(4px)}
+.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px;align-self:center}
+.glass .eyebrow{color:#5FE3D5}
+.obj{display:flex;gap:12px;align-items:flex-start;cursor:pointer;border-radius:12px;padding:8px;margin:-8px;transition:background .2s}
+.obj:hover{background:rgba(255,255,255,.08)}
+.obj .n{font-family:var(--mono);font-size:12px;background:#5FE3D5;color:#04201D;border-radius:8px;min-width:28px;height:28px;display:grid;place-items:center;flex:none}
+.obj p{font-size:13.5px;color:rgba(255,255,255,.75)}
+
+/* Scope cards with photo */
+.scope{position:relative;border-radius:var(--r);overflow:hidden;min-height:190px;color:var(--on-photo);display:flex;align-items:flex-end;isolation:isolate;cursor:pointer;border:0;text-align:left;padding:0}
+.scope img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.scope::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,14,18,.9) 15%,rgba(5,14,18,.15) 75%)}
+.scope:hover img{transform:scale(1.08)}
+.scope .in{padding:16px;display:flex;flex-direction:column;gap:4px}
+.scope .k{font-family:var(--mono);font-size:12px;color:#5FE3D5}
+.scope b{font-size:16px;line-height:1.25}
+.scope small{font-size:12.5px;color:rgba(255,255,255,.78)}
+
+.agenda{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.ag{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;cursor:pointer;text-align:left;transition:border-color .2s,transform .2s}
+.ag:hover{border-color:var(--accent);transform:translateY(-2px)}
+.ag time{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.ag b{font-size:14px;line-height:1.3}
+.ag .bar{height:4px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.ag .bar i{display:block;height:100%;background:var(--accent)}
+
+/* Layers */
+.layers{display:flex;flex-direction:column}
+.layer{border-radius:18px;padding:16px 18px 18px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;transition:border-color .25s,box-shadow .25s}
+.layer .layer{margin-top:12px}
+.layer.l2{background:var(--surface-2)} .layer.l4{background:var(--accent-soft)}
+.layer:hover{border-color:var(--accent)}
+.layer.on{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.layer-t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-weight:700}
+.layer-t small{font-weight:500;color:var(--muted);font-size:13px}
+.def{min-height:170px}
+.fade-in{animation:rvF .4s ease both}
+
+/* Token demo */
+.sentence{font-family:var(--display);font-size:clamp(20px,2.2vw,28px);font-weight:600;line-height:1.35}
+.sentence .new{color:var(--accent);border-bottom:3px solid var(--accent);animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cands{display:flex;flex-direction:column;gap:8px}
+.cand{display:grid;grid-template-columns:140px 1fr 46px;gap:10px;align-items:center;font-size:14.5px}
+.cand .track{height:12px;background:var(--surface-2);border-radius:9px;overflow:hidden}
+.cand .fill{height:100%;width:0;background:var(--muted);border-radius:9px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.cand.top .fill{background:var(--accent)} .cand.top b{color:var(--accent)}
+.cand span{font-family:var(--mono);font-size:12.5px;text-align:right;color:var(--muted)}
+
+.pc{border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.pc.plus{background:var(--good-soft)} .pc.minus{background:var(--bad-soft)}
+.pc h4{font-family:var(--body);font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.pc.plus h4{color:var(--good)} .pc.minus h4{color:var(--bad)}
+
+/* Stats */
+.stat b{font-family:var(--display);font-size:clamp(30px,3.2vw,44px);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:14px;color:var(--muted)}
+.stat .spark{height:4px;border-radius:4px;background:var(--surface-2);overflow:hidden;margin-top:4px}
+.stat .spark i{display:block;height:100%;width:0;background:var(--accent);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+
+/* Tools */
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left;transition:transform .25s,border-color .25s,opacity .3s}
+.tool:hover{transform:translateY(-3px);border-color:var(--accent)}
+.tool[aria-expanded="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.tool .top{display:flex;gap:10px;align-items:center}
+.tool .ico{width:40px;height:40px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;flex:none;overflow:hidden}
+.tool .ico img{width:26px;height:26px}
+.tool b{font-size:15.5px;display:block;line-height:1.2}
+.tool small{font-size:12px;color:var(--muted)}
+.tool p{font-size:13.5px;color:var(--muted)}
+.tool.dim{opacity:.28;transform:scale(.97)}
+.tool-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:14px}
+.tag{font-size:13px;font-weight:600;padding:5px 10px;border-radius:9px;background:var(--surface-2);display:inline-flex;align-items:center;gap:6px}
+.tag img{width:16px;height:16px;border-radius:3px}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px}
+
+/* Data analysis sim */
+.sim{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-height:430px}
+.bub{max-width:92%;border-radius:14px;padding:12px 14px;font-size:14.5px;animation:pop .35s ease both}
+.bub.u{align-self:flex-end;background:var(--ink);color:var(--bg);border-bottom-right-radius:4px}
+.bub.a{align-self:flex-start;background:var(--surface-2);border-bottom-left-radius:4px}
+.code{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:14px;white-space:pre;overflow:auto;margin:0;max-height:260px}
+.code .kw{color:#FFB547} .code .cm{color:#6F8D93} .code .st{color:#7FE0A8}
+.run{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.flag{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;align-self:flex-start}
+.flag.bad{background:var(--bad-soft);color:var(--bad)} .flag.good{background:var(--good-soft);color:var(--good)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.barrow{display:grid;grid-template-columns:90px minmax(0,1fr) 56px;gap:10px;align-items:center;font-size:14px}
+.barrow .t{height:22px;border-radius:6px;background:var(--surface-2);overflow:hidden;display:flex}
+.barrow .t i{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.barrow .t i.g{background:var(--accent)} .barrow .t i.r{background:var(--amber)}
+.barrow span{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:14px;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.mini-tbl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.mini-tbl td,.mini-tbl th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}
+.mini-tbl td:first-child,.mini-tbl th:first-child{text-align:left}
+.mini-tbl th{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.mini-tbl tr.tot td{font-weight:700;border-bottom:0}
+
+/* Prompt */
+.formula{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.fbox{border-radius:14px;padding:16px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;transition:border-color .25s,background .25s}
+.fbox .k{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.fbox b{font-family:var(--display);font-size:19px}
+.fbox p{font-size:14px;color:var(--muted)}
+.fbox.ok{border-color:var(--accent);background:var(--accent-soft)}
+.builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.field textarea,.field select{font:inherit;font-size:14.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 11px;resize:vertical;width:100%}
+.field textarea:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+pre.prompt{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;background:var(--surface-2);border-radius:12px;padding:16px;max-height:420px;overflow:auto}
+.meter{display:flex;align-items:center;gap:16px}
+.gauge{width:92px;height:92px;flex:none}
+.gauge circle{fill:none;stroke-width:10}
+.gauge .bg{stroke:var(--surface-2)}
+.gauge .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1),stroke .3s;transform:rotate(-90deg);transform-origin:50% 50%}
+.gauge text{fill:var(--ink);font-family:var(--display);font-weight:800;font-size:22px}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.resp{min-height:170px;font-size:14.5px;white-space:pre-wrap}
+.resp mark{background:var(--amber-soft);color:var(--ink);border-radius:4px;padding:0 3px}
+.caret::after{content:"▍";color:var(--accent);animation:blink 1s steps(1) infinite}
+
+/* Safety */
+.checker{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.dchips{display:flex;flex-wrap:wrap;gap:8px}
+.dchip{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:600;font-size:14px;transition:all .2s;text-align:left}
+.dchip:hover{border-color:var(--accent);transform:translateY(-2px)}
+.dchip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.verdict{border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px;min-height:210px;transition:background .3s}
+.verdict.g{background:var(--good-soft)} .verdict.y{background:var(--warn-soft)} .verdict.r{background:var(--bad-soft)} .verdict.n{background:var(--surface-2)}
+.lampbig{display:flex;gap:10px}
+.lampbig i{width:22px;height:22px;border-radius:50%;background:var(--line);transition:background .3s,box-shadow .3s}
+.verdict.g .lampbig i:nth-child(1){background:var(--good);box-shadow:0 0 16px var(--good)}
+.verdict.y .lampbig i:nth-child(2){background:var(--warn);box-shadow:0 0 16px var(--warn)}
+.verdict.r .lampbig i:nth-child(3){background:var(--bad);box-shadow:0 0 16px var(--bad)}
+
+/* Use cases */
+.ucgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.uc-card{position:relative;border:0;border-radius:14px;overflow:hidden;min-height:170px;display:flex;align-items:flex-end;color:var(--on-photo);cursor:pointer;text-align:left;padding:0;isolation:isolate;transition:transform .25s,box-shadow .25s,opacity .3s}
+.uc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s}
+.uc-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,14,18,.92) 20%,rgba(5,14,18,.2) 80%)}
+.uc-card:hover{transform:translateY(-3px)} .uc-card:hover img{transform:scale(1.08)}
+.uc-card[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--accent)}
+.uc-card .in{padding:14px;display:flex;flex-direction:column;gap:3px}
+.uc-card .n{font-family:var(--mono);font-size:12px;color:#5FE3D5}
+.uc-card b{font-size:15px;line-height:1.25}
+.uc-card small{font-size:12px;color:rgba(255,255,255,.75)}
+.uc-card.dim{opacity:.25}
+.uc-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.uc-side{position:relative;min-height:320px;color:var(--on-photo);display:flex;align-items:flex-end;isolation:isolate}
+.uc-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.uc-side::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,14,18,.94) 35%,rgba(5,14,18,.3))}
+.uc-side .in{padding:22px;display:flex;flex-direction:column;gap:12px}
+.uc-side .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#5FE3D5;font-weight:700}
+.uc-side p{font-size:14px;color:rgba(255,255,255,.85)}
+.uc-side .tag{background:rgba(255,255,255,.14);color:#fff}
+.uc-main{padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.uc-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.uc-tabs button{border:0;background:none;padding:10px 12px;font-weight:600;font-size:14.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.uc-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.steps li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;align-items:start;padding:8px;border-radius:10px;cursor:pointer;transition:background .25s,opacity .25s;opacity:.5}
+.steps li .sn{font-family:var(--mono);font-size:12.5px;width:28px;height:28px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;transition:background .25s,color .25s}
+.steps li.past{opacity:.8} .steps li.past .sn{background:var(--accent-soft);color:var(--accent)}
+.steps li.cur{opacity:1;background:var(--accent-soft)} .steps li.cur .sn{background:var(--accent);color:var(--accent-ink)}
+.stepbar{height:5px;border-radius:5px;background:var(--surface-2);overflow:hidden}
+.stepbar i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.note{border-left:4px solid var(--amber);background:var(--amber-soft);border-radius:0 10px 10px 0;padding:12px 14px;font-size:14.5px}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:720px}
+table.t th,table.t td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.t th{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;background:var(--surface-2)}
+table.t tr:last-child td{border-bottom:0}
+table.t tr{transition:background .2s} table.t tbody tr:hover{background:var(--accent-soft)}
+td.c{text-align:center}
+.dotm{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.dotm.o{background:transparent;border:2px solid var(--accent)}
+
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.plan .card{border-top:4px solid var(--accent)}
+.plan .card:nth-child(2){border-top-color:var(--amber)}
+.plan .card:nth-child(3){border-top-color:var(--ink)}
+.quote{font-family:var(--display);font-size:clamp(24px,2.8vw,38px);font-weight:800;line-height:1.2;max-width:26ch}
+.flip{perspective:900px;cursor:pointer;min-height:150px;border:0;background:none;padding:0;text-align:left}
+.flip .fi{position:relative;height:100%;min-height:150px;transition:transform .6s;transform-style:preserve-3d}
+.flip[aria-pressed="true"] .fi{transform:rotateY(180deg)}
+.flip .fa,.flip .fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px}
+.flip .fa{background:var(--surface);border:1px solid var(--line)}
+.flip .fb{background:var(--ink);color:var(--bg);transform:rotateY(180deg)}
+.flip .fb p{font-size:14px}
+.flip .hint{font-size:12px;color:var(--muted);margin-top:auto}
+
+.pager{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:20px}
+.pager button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 16px;cursor:pointer;text-align:left;max-width:48%;transition:border-color .2s,transform .2s}
+.pager button:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pager small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.pager b{font-size:15px}
+
+/* Cover (landing) */
+.cover{position:relative;isolation:isolate;overflow:hidden;border-radius:26px;color:#fff;min-height:calc(100vh - 48px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:28px 40px 22px;background:#07141a}
+.cv-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0;transform:scale(1.04);transition:opacity 1.6s ease}
+.cv-slides img.on{opacity:1;animation:kb 16s ease-in-out infinite alternate}
+.cover::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(4,12,16,.9) 0%,rgba(4,12,16,.72) 45%,rgba(4,12,16,.35) 100%),linear-gradient(0deg,rgba(4,12,16,.75) 0%,transparent 40%)}
+.cover canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.6}
+.cv-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.cv-org{display:flex;gap:12px;align-items:center}
+.cv-dot{width:12px;height:12px;border-radius:50%;background:#FFC862;box-shadow:0 0 0 6px rgba(255,200,98,.2)}
+.cv-org b,.cv-date b{display:block;font-size:15px}
+.cv-org small,.cv-date small{font-size:13px;color:rgba(255,255,255,.75)}
+.cv-date{text-align:right;border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:8px 14px;backdrop-filter:blur(8px);background:rgba(255,255,255,.06)}
+.cv-main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;align-items:center}
+.cv-left{display:flex;flex-direction:column;gap:16px}
+.cover .eyebrow{color:#FFC862}
+.cv-title{font-family:var(--display);font-weight:800;font-size:clamp(46px,6.4vw,100px);line-height:.98;letter-spacing:-.025em;margin:0}
+.cv-title span{display:block;background:linear-gradient(90deg,#5FE3D5,#FFC862);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cv-sub{font-family:var(--display);font-size:clamp(20px,2vw,28px);font-weight:600;color:rgba(255,255,255,.92)}
+.cv-speaker{display:flex;gap:14px;align-items:center;padding:12px 16px 12px 12px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);align-self:flex-start}
+.cv-av{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#0A8C82,#2BC0B2);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:17px;flex:none}
+.cv-speaker small{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:#5FE3D5;font-weight:700;display:block}
+.cv-speaker b{font-size:18px;display:block;line-height:1.2}
+.cv-speaker span{font-size:13.5px;color:rgba(255,255,255,.8)}
+.cv-btn{background:#FFC862;color:#1b1400;font-size:15.5px;padding:13px 20px}
+.cv-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);font-size:15.5px;padding:13px 20px}
+.cv-video{background:rgba(6,16,20,.55);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;backdrop-filter:blur(14px);box-shadow:0 30px 60px -30px rgba(0,0,0,.6);min-width:0}
+.cv-video .eyebrow{color:#5FE3D5}
+.cv-frame{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;max-width:100%}
+.cv-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cv-poster{position:absolute;inset:0;border:0;padding:0;cursor:pointer;background:#000;width:100%}
+.cv-poster img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .5s,opacity .3s}
+.cv-poster:hover img{transform:scale(1.04);opacity:1}
+.cv-play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:#FFC862;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(255,200,98,.6);animation:pulse 2s infinite}
+.cv-play::after{content:"";margin-left:6px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #1b1400}
+@keyframes pulse{70%{box-shadow:0 0 0 22px rgba(255,200,98,0)}100%{box-shadow:0 0 0 0 rgba(255,200,98,0)}}
+.cv-vt{font-size:15.5px;line-height:1.3}
+.cv-vm{font-size:12.5px;color:rgba(255,255,255,.72)}
+.cv-vm a{color:#5FE3D5}
+.cv-alt{display:flex;flex-wrap:wrap;gap:6px}
+.cv-alt button{border:1px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.8);border-radius:99px;padding:5px 11px;font-size:12.5px;cursor:pointer}
+.cv-alt button[aria-pressed="true"]{background:#fff;color:#07141a;border-color:#fff}
+.cv-foot{display:flex;align-items:center;gap:14px;font-size:12.5px;color:rgba(255,255,255,.75)}
+.cv-dots{display:flex;gap:6px}
+.cv-dots button{width:26px;height:5px;border-radius:5px;border:0;background:rgba(255,255,255,.3);cursor:pointer;padding:0}
+.cv-dots button.on{background:#FFC862}
+.cv-credit{margin-left:auto}
+.obj-card{cursor:pointer}
+body.is-cover .side,body.is-cover .topbar{display:none}
+body.is-cover .app{grid-template-columns:1fr}
+body.is-cover .content{max-width:none;padding:24px 24px 64px}
+@media (max-width:1100px){.cv-main{grid-template-columns:1fr}.cover{min-height:0}}
+@media (max-width:640px){.cover{padding:20px}.cv-date{text-align:left}}
+
+/* Claude modes */
+:root{--m-chat:#0A8C82;--m-proj:#2F5FD0;--m-cowork:#B86E00;--m-design:#C2457A;--m-code:#2B3A42}
+.mbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;color:#fff;background:var(--mc,var(--m-chat));white-space:nowrap}
+.modes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mode{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.mode::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--mc)}
+.mode:hover{transform:translateY(-3px)}
+.mode[aria-pressed="true"]{border-color:var(--mc);box-shadow:0 0 0 3px color-mix(in srgb,var(--mc) 30%,transparent)}
+.mode .ic{width:40px;height:40px;border-radius:12px;background:var(--mc);color:#fff;display:grid;place-items:center}
+.mode .ic svg{width:22px;height:22px}
+.mode b{font-family:var(--display);font-size:19px}
+.mode small{font-size:12.5px;color:var(--muted)}
+.mode .cnt{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.mdetail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}
+.picker{display:flex;flex-direction:column;gap:10px}
+.pq{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;text-align:left;width:100%}
+.pq:hover{border-color:var(--accent)}
+.pq .sw{width:42px;height:24px;border-radius:99px;background:var(--surface-2);position:relative;flex:none;transition:background .2s}
+.pq .sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.pq[aria-pressed="true"] .sw{background:var(--accent)}
+.pq[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+.rec{border-radius:16px;padding:20px;color:#fff;background:var(--mc,var(--m-chat));display:flex;flex-direction:column;gap:8px;transition:background .3s}
+.rec p{color:rgba(255,255,255,.9);font-size:14.5px}
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.gcard{border:1px solid var(--line);background:var(--surface);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;padding:0;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,opacity .3s}
+.gcard:hover{transform:translateY(-3px);border-color:var(--mc)}
+.gcard[aria-selected="true"]{border-color:var(--mc);box-shadow:0 0 0 3px color-mix(in srgb,var(--mc) 30%,transparent)}
+.gcard .th{height:120px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--mc),color-mix(in srgb,var(--mc) 55%,#000))}
+.gcard .th img{width:100%;height:100%;object-fit:cover;object-position:top}
+.gcard .th .ft{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:11.5px;color:#fff;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:6px}
+.gcard .bd{padding:14px;display:flex;flex-direction:column;gap:6px}
+.gcard b{font-size:15px;line-height:1.25}
+.gcard small{font-size:12.5px;color:var(--muted)}
+.gcard.dim{display:none}
+.gdetail{background:var(--surface);border:1px solid var(--line);border-radius:20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);overflow:hidden}
+.gdetail .info{padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.gdetail .pv{background:var(--surface-2);position:relative;min-height:380px;overflow:hidden;border-left:1px solid var(--line)}
+.gdetail .pv iframe{position:absolute;top:0;left:0;width:1440px;height:1000px;border:0;transform-origin:0 0;background:#fff}
+.gdetail .pv img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.gdetail .pv .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-size:14px}
+.quoteu{font-size:14px;background:var(--surface-2);border-radius:12px;padding:12px 14px;font-style:italic;color:var(--ink)}
+.outs{display:flex;flex-direction:column;gap:6px}
+.out{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);font-size:14px;transition:border-color .2s,background .2s;min-width:0}
+.out:hover{border-color:var(--accent);background:var(--accent-soft)}
+.out .ext{font-family:var(--mono);font-size:11px;font-weight:500;padding:2px 7px;border-radius:5px;background:var(--ink);color:var(--bg);flex:none;text-transform:uppercase}
+.out span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.out .cp{margin-left:auto;border:0;background:var(--surface-2);border-radius:6px;font-size:11.5px;padding:3px 8px;cursor:pointer;flex:none}
+.warnbox{border-left:4px solid var(--bad);background:var(--bad-soft);border-radius:0 10px 10px 0;padding:10px 12px;font-size:13.5px}
+@media (max-width:1150px){.modes{grid-template-columns:repeat(3,minmax(0,1fr))}.mdetail,.gdetail{grid-template-columns:1fr}.gdetail .pv{border-left:0;border-top:1px solid var(--line)}}
+@media (max-width:640px){.modes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media (max-width:1150px){
+  .g4,.ucgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .formula{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .agenda{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tool-detail{grid-template-columns:1fr}
+  .uc-detail,.sim{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:sticky;top:0;height:auto;z-index:6;flex-direction:row;align-items:center;padding:10px 16px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);gap:12px}
+  .brand span,.navlabel,.side-foot,.brand b{display:none}
+  nav{flex-direction:row;gap:4px}
+  .nav-btn{white-space:nowrap;padding:7px 9px}
+  .nav-btn .t{display:none} .nav-btn[aria-current="true"] .t{display:inline}
+  .topbar{display:none}
+  .content{padding:20px 16px 48px}
+  .g2,.g3,.builder,.cmp,.checker,.plan{grid-template-columns:1fr}
+  .agenda{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{padding:24px;min-height:0}
+  .banner .in{padding:22px}
+  .cand{grid-template-columns:100px 1fr 40px}
+}
+@media (max-width:480px){.g4,.formula,.ucgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">AI</div><div><b>AI di Kantor</b><span>Administrator KEK Kendal</span></div></div>
+    <div class="navlabel">Alur materi</div>
+    <nav id="nav" aria-label="Bagian materi"></nav>
+    <div class="side-foot"><span><kbd>←</kbd> <kbd>→</kbd> pindah bagian</span><span>Foto: Unsplash · Logo: milik masing-masing layanan</span></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="crumb" id="crumb"></div>
+      <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+      <button class="tb-btn" id="prev" aria-label="Bagian sebelumnya">←</button>
+      <button class="tb-btn" id="next" aria-label="Bagian berikutnya">→</button>
+      <button class="tb-btn" id="theme">Tema</button>
+    </div>
+    <div class="content" id="content">
+
+<!-- 0 MULAI -->
+<section class="screen" data-id="mulai" data-title="Mulai">
+  <div class="cover" id="cover">
+    <div class="cv-slides" id="cvSlides">
+      <img src="aset/kendal-3.jpg" alt="" class="on" data-cap="Jalan kawasan KEK Kendal">
+      <img src="aset/kendal-1.jpg" alt="" data-cap="Gerbang Kawasan Industri Kendal">
+      <img src="aset/kendal-2.jpg" alt="" data-cap="Kawasan pabrik di KEK Kendal">
+    </div>
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="cv-top">
+      <div class="cv-org"><span class="cv-dot"></span><div><b>Administrator KEK Kendal</b><small>Peningkatan Keterampilan Pegawai (PKP)</small></div></div>
+      <div class="cv-date"><b>Rabu, 30 September 2026</b><small>09.30 WIB s.d. selesai · Daring</small></div>
+    </div>
+    <div class="cv-main">
+      <div class="cv-left">
+        <div class="eyebrow">Sharing Session · Kawasan Ekonomi Khusus Kendal</div>
+        <h1 class="cv-title">Pengenalan <span>Artificial Intelligence</span></h1>
+        <p class="cv-sub">Claude sebagai rekan kerja kantor</p>
+        <p class="typer" aria-live="polite">AI membantu kita <span id="typer"></span><i></i></p>
+        <div class="cv-speaker"><span class="cv-av" aria-hidden="true">DM</span><div><small>Narasumber</small><b>Donny Maha Putra</b><span>Kepala Bagian Strategi Organisasi dan Proses Bisnis</span></div></div>
+        <div class="row"><button class="btn cv-btn" data-go="1">Mulai sesi →</button><button class="btn cv-ghost" id="cvPlayBtn">▶ Tonton video pembuka</button></div>
+      </div>
+      <div class="cv-video" id="cvVideo">
+        <div class="eyebrow">Video pembuka · ±5 menit</div>
+        <div class="cv-frame" id="cvFrame"></div>
+        <b class="cv-vt" id="cvVt"></b>
+        <small class="cv-vm" id="cvVm"></small>
+        <div class="cv-alt" id="cvAlt" role="group" aria-label="Pilihan video"></div>
+      </div>
+    </div>
+    <div class="cv-foot"><div class="cv-dots" id="cvDots"></div><small id="cvCap">Jalan kawasan KEK Kendal</small><small class="cv-credit">Foto: kek.go.id</small></div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card lift rv obj-card" data-go="1"><span class="chip acc">Objektif 1</span><b class="h-s">Pengantar AI</b><p class="small muted">Apa itu AI, macam-macam AI dengan kelebihan dan kekurangannya, dasar penggunaan, dan prompt yang efektif.</p></div>
+    <div class="card lift rv obj-card" data-go="9"><span class="chip acc">Objektif 2</span><b class="h-s">Potensi AI di kantor</b><p class="small muted">Kegiatan di Administrator KEK Kendal yang dapat dibantu AI.</p></div>
+    <div class="card lift rv obj-card" data-go="10"><span class="chip acc">Objektif 3</span><b class="h-s">Sharing Biro Organta</b><p class="small muted">Pengalaman penggunaan AI di Biro Organta.</p></div>
+  </div>
+
+  <div class="head rv"><div class="eyebrow">Ruang lingkup kegiatan kantor</div><h2 class="h-m">Empat pekerjaan yang jadi fokus. Klik untuk lihat use case-nya.</h2></div>
+  <div class="grid g4">
+    <button class="scope rv" data-scope="a"><img data-img="1499914485622-a88fac536970" alt=""><div class="in"><span class="k">a</span><b>Penyusunan laporan rutin</b><small>LAKIN, laporan pengawasan</small></div></button>
+    <button class="scope rv" data-scope="b"><img data-img="1542744173-8e7e53415bb0" alt=""><div class="in"><span class="k">b</span><b>Bahan presentasi</b><small>Visualisasi data, presentasi efektif</small></div></button>
+    <button class="scope rv" data-scope="c"><img data-img="1611926653458-09294b3142bf" alt=""><div class="in"><span class="k">c</span><b>Konten edukatif media sosial</b><small>Edukasi layanan KEK</small></div></button>
+    <button class="scope rv" data-scope="d"><img data-img="1526628953301-3e589a6a8b74" alt=""><div class="in"><span class="k">d</span><b>Pembuatan dashboard</b><small>Investasi, tenaga kerja, ekspor</small></div></button>
+  </div>
+
+  <div class="head rv"><div class="eyebrow">Agenda 120 menit</div></div>
+  <div class="agenda rv" id="agenda"></div>
+</section>
+
+<!-- 1 APA ITU AI -->
+<section class="screen" data-id="apa-itu-ai" data-title="Apa itu AI" hidden>
+  <div class="banner rv"><img data-img="1709120395858-92f1c7c577f5" alt=""><div class="in">
+    <div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Apa itu AI?</h2>
+    <p class="lead">Kecerdasan Artifisial (AI) adalah teknologi yang membuat komputer bisa mengerjakan tugas yang biasanya butuh kecerdasan manusia: memahami bahasa, mengenali pola, mengolah data, dan membuat konten baru.</p></div></div>
+
+  <div class="grid g2 rv">
+    <div class="layers" id="layers">
+      <div class="layer" data-k="ai"><div class="layer-t">Artificial Intelligence <small>payung besar</small></div>
+        <div class="layer l2" data-k="ml"><div class="layer-t">Machine Learning <small>belajar dari data</small></div>
+          <div class="layer" data-k="dl"><div class="layer-t">Deep Learning <small>jaringan saraf tiruan</small></div>
+            <div class="layer l4" data-k="gen"><div class="layer-t">Generative AI / LLM <small>yang kita pakai hari ini</small></div></div>
+          </div></div></div>
+    </div>
+    <div class="card def" id="layerDef" aria-live="polite"></div>
+  </div>
+
+  <div class="card rv">
+    <div class="row" style="justify-content:space-between">
+      <div class="head" style="gap:4px"><div class="eyebrow">Cara kerja AI generatif</div><h3 class="h-m">Saat menulis, AI memilih kata berikutnya yang paling mungkin</h3></div>
+      <div class="row"><button class="btn" id="tokNext">Tebak kata berikutnya</button><button class="btn ghost" id="tokAuto">Putar otomatis</button><button class="btn ghost" id="tokReset">Ulangi</button></div>
+    </div>
+    <p class="sentence" id="tokSentence"></p>
+    <div class="cands" id="tokCands"></div>
+    <p class="src">Ilustrasi sederhana. Persentase dibuat untuk menjelaskan konsep, bukan hasil model sebenarnya.</p>
+    <div class="note">Saat menulis kalimat, AI memilih kata yang <b>paling mungkin</b>, bukan kata yang sudah dicek kebenarannya. Karena itu tulisan AI bisa terdengar meyakinkan tapi keliru (<b>halusinasi</b>). Untuk angka, pakai fitur analisis data. Penjelasannya ada di bagian <button class="btn ghost" data-go="5" style="padding:3px 10px;font-size:13px">AI &amp; olah data →</button></div>
+  </div>
+
+  <div class="grid g2 rv">
+    <div class="pc plus"><h4>AI kuat untuk</h4><ul class="clean good">
+      <li>Membuat draf tulisan: narasi laporan, surat, caption</li>
+      <li>Merangkum dokumen panjang</li>
+      <li>Mengolah dan menganalisis data dengan menjalankan kode (fitur analisis data)</li>
+      <li>Mengubah format: tabel jadi narasi, narasi jadi poin slide</li>
+      <li>Membuat grafik, dashboard, dan rumus Excel</li>
+      <li>Menerjemahkan dan merapikan bahasa</li></ul></div>
+    <div class="pc minus"><h4>Perlu diwaspadai</h4><ul class="clean bad">
+      <li>Menjawab angka langsung di teks tanpa menjalankan kode</li>
+      <li>Fakta spesifik seperti nomor regulasi. AI bisa mengarang</li>
+      <li>Data internal kantor yang tidak kita berikan</li>
+      <li>Informasi terbaru di luar batas data latihnya</li>
+      <li>Keputusan dan tanggung jawab tetap di pegawai</li></ul></div>
+  </div>
+</section>
+
+<!-- 2 KENAPA -->
+<section class="screen" data-id="kenapa-ai" data-title="Kenapa perlu AI" hidden>
+  <div class="banner rv"><img src="aset/kendal-2.jpg" alt=""><div class="in">
+    <div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Kenapa kita perlu memakai AI?</h2>
+    <p class="lead">Jawabannya ada di laporan kita sendiri: layanan terus bertambah, pegawai terbatas, dan waktu belajar sempit.</p></div></div>
+
+  <div class="head rv"><div class="eyebrow">Pekerjaan yang berulang setiap periode</div></div>
+  <div class="grid g4">
+    <div class="card lift rv"><span class="chip acc">Layanan</span><b class="h-s">Dokumen bervolume tinggi</b><p class="small muted">SKA, Masterlist, PB-UMKU, dan NPU diterbitkan setiap hari dengan standar waktu yang ketat.</p></div>
+    <div class="card lift rv"><span class="chip acc">Konsultasi</span><b class="h-s">Pertanyaan pelaku usaha</b><p class="small muted">Pertanyaan serupa dijawab berulang dengan merujuk banyak regulasi.</p></div>
+    <div class="card lift rv"><span class="chip acc">Laporan</span><b class="h-s">Laporan rutin berkala</b><p class="small muted">Laporan kinerja dan laporan pengawasan, penuh tabel dan narasi.</p></div>
+    <div class="card lift rv"><span class="chip acc">Pengawasan</span><b class="h-s">Rekap data banyak pelaku usaha</b><p class="small muted">Investasi, tenaga kerja, ekspor, dan penjualan lokal dari puluhan perusahaan.</p></div>
+  </div>
+  <div class="grid g3">
+    <div class="card hl rv"><b class="h-s">Tim kecil, cakupan luas</b><p class="small">Pegawai yang terbatas menangani perizinan, pengawasan, dan administrasi sekaligus.</p></div>
+    <div class="card hl rv"><b class="h-s">Waktu belajar terbatas</b><p class="small">Beban kerja tinggi membuat pengembangan kompetensi sulit dijadwalkan.</p></div>
+    <div class="card hl rv"><b class="h-s">Di sinilah AI berperan</b><p class="small">AI mengerjakan draf, rekap, dan pemeriksaan. Pegawai fokus pada penilaian dan keputusan.</p></div>
+  </div>
+
+  <div class="head rv"><div class="eyebrow">Kendala umum, dan jawabannya</div><p class="small muted">Klik kartu untuk membalik.</p></div>
+  <div class="grid g4">
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Pegawai terbatas, ada tugas yang belum optimal</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Draf laporan, surat, dan rekap dikerjakan lebih cepat. Waktu pegawai dipakai untuk verifikasi dan pengawasan lapangan.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Pengawasan LKPM masih dipantau manual</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Data LKPM diolah dengan fitur analisis data: rekap, tren, dan penandaan data janggal.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Beban kerja tinggi, sulit meluangkan waktu belajar</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>AI bisa jadi tutor pribadi: menjelaskan regulasi dan sistem kapan saja, sesuai kebutuhan.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Kemampuan teknis pegawai perlu ditingkatkan</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Membantu menulis rumus, membuat grafik, dan menyusun dashboard tanpa harus menguasai software khusus.</p></div></div></button>
+  </div>
+  
+</section>
+
+<!-- 3 MENGENAL CLAUDE -->
+<section class="screen" data-id="claude" data-title="Mengenal Claude" hidden>
+  <div class="banner rv"><img data-img="1680783954745-3249be59e527" alt=""><div class="in">
+    <div class="eyebrow">Fokus sesi ini</div><h2 class="h-l">Claude: satu asisten, lima cara kerja</h2>
+    <p class="lead">Claude dari Anthropic bisa dipakai untuk mengobrol, bekerja dengan dokumen acuan tetap, mengerjakan file langsung di laptop, mendesain visual, sampai membangun dashboard dan aplikasi.</p></div></div>
+  <div class="modes rv" id="modes"></div>
+  <div class="mdetail rv" id="mdetail"></div>
+
+  <div class="head rv"><div class="eyebrow">Pilih mode yang tepat</div><h3 class="h-m">Jawab empat pertanyaan tentang tugas Anda</h3></div>
+  <div class="grid g2 rv">
+    <div class="picker" id="picker"></div>
+    <div class="rec" id="rec"></div>
+  </div>
+</section>
+
+<!-- 4 MACAM AI -->
+<section class="screen" data-id="macam-ai" data-title="Macam-macam AI" hidden>
+  <div class="head rv"><div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Macam-macam AI, kelebihan dan kekurangannya</h2>
+  <p class="lead">Pilih kategori untuk menyorot tools-nya. Klik logo tools untuk detail.</p></div>
+  <div class="seg rv" id="catSeg" role="group" aria-label="Kategori AI"></div>
+  <div class="tool-detail rv" id="catBody"></div>
+  <div class="tools rv" id="tools"></div>
+  <div class="card soft rv" id="toolInfo" aria-live="polite"><p class="muted small">Klik salah satu tools di atas untuk melihat kegunaannya.</p></div>
+  <div class="head rv"><div class="eyebrow">Peta cepat</div><h3 class="h-m">AI mana untuk ruang lingkup yang mana</h3></div>
+  <div class="tbl-wrap rv"><table class="t">
+    <thead><tr><th>Kategori AI</th><th class="c">a. Laporan rutin</th><th class="c">b. Presentasi</th><th class="c">c. Konten medsos</th><th class="c">d. Dashboard</th></tr></thead>
+    <tbody id="matrix"></tbody></table></div>
+  <p class="src rv">● utama &nbsp; ○ pendukung</p>
+</section>
+
+<!-- 4 AI & DATA -->
+<section class="screen" data-id="ai-olah-data" data-title="AI & olah data" hidden>
+  <div class="banner rv"><img data-img="1551288049-bebda4e38f71" alt=""><div class="in">
+    <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">AI untuk analisis dan olah data</h2>
+    <p class="lead">AI modern bisa menulis dan menjalankan kode analisis sendiri. Hitungannya dikerjakan mesin, sehingga akurat dan bisa menggantikan banyak pekerjaan software analisis.</p></div></div>
+
+  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Dua cara AI menjawab pertanyaan angka</h3>
+    <p class="small muted">Data contoh (bukan data sebenarnya): rincian ketepatan waktu lima jenis layanan.</p></div>
+  <div class="row rv">
+    <div class="seg" id="modeSeg" role="group" aria-label="Mode">
+      <button data-m="teks" aria-pressed="false">Mode 1 · Jawab langsung di teks</button>
+      <button data-m="kode" aria-pressed="true">Mode 2 · Fitur analisis data (menjalankan kode)</button>
+    </div>
+    <button class="btn" id="simRun">▶ Jalankan simulasi</button>
+  </div>
+  <div class="sim rv">
+    <div class="chat" id="chat"></div>
+    <div class="card" id="simOut">
+      <div class="eyebrow">Hasil</div>
+      <p class="muted small">Tekan "Jalankan simulasi" untuk melihat prosesnya.</p>
+    </div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card rv"><div class="eyebrow">Tools dengan fitur analisis data</div>
+      <div class="tag-list" id="dataTools"></div>
+      <p class="small muted">Unggah file Excel/CSV, lalu minta analisis. Tools akan menulis kode Python, menjalankannya, dan menampilkan tabel serta grafik.</p></div>
+    <div class="card rv"><div class="eyebrow">Analisis yang bisa dikerjakan</div><ul class="clean">
+      <li>Rekap, pivot, dan statistik deskriptif</li><li>Tren antar-triwulan dan pertumbuhan</li><li>Membersihkan dan menggabungkan tabel</li><li>Korelasi dan regresi</li><li>Grafik dan dashboard</li><li>Menandai data janggal: total tidak cocok, nilai ekstrem</li></ul></div>
+    <div class="card rv"><div class="eyebrow">Yang tetap kita periksa</div><ul class="clean amb">
+      <li><b>Data input</b>: lengkap dan terbaca benar dari file</li>
+      <li><b>Definisi</b>: misalnya "tepat waktu" = lebih cepat + sesuai standar</li>
+      <li><b>Kode</b>: minta AI menjelaskan langkah yang dijalankan</li>
+      <li><b>Kewajaran</b>: hasil dibandingkan dengan laporan sebelumnya</li></ul></div>
+  </div>
+</section>
+
+<!-- 5 PROMPT -->
+<section class="screen" data-id="prompt" data-title="Prompt efektif" hidden>
+  <div class="banner rv"><img data-img="1486312338219-ce68d2c6f44d" alt=""><div class="in">
+    <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">Membuat prompt yang efektif</h2>
+    <p class="lead">Prompt adalah instruksi yang kita tulis ke AI. Semakin jelas konteks dan hasil yang diminta, semakin sedikit revisi.</p></div></div>
+
+  <div class="formula rv" id="formula">
+    <div class="fbox" data-f="peran"><span class="k">01</span><b>Peran</b><p>AI berperan sebagai siapa.</p></div>
+    <div class="fbox" data-f="konteks"><span class="k">02</span><b>Konteks</b><p>Latar belakang dan data yang dilampirkan.</p></div>
+    <div class="fbox" data-f="tugas"><span class="k">03</span><b>Tugas</b><p>Apa yang dikerjakan, spesifik.</p></div>
+    <div class="fbox" data-f="format"><span class="k">04</span><b>Format</b><p>Bentuk hasil: tabel, poin, panjang, gaya.</p></div>
+    <div class="fbox" data-f="batasan"><span class="k">05</span><b>Batasan</b><p>Yang tidak boleh dan cara menandai yang ragu.</p></div>
+  </div>
+
+  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Bandingkan hasil dari dua prompt</h3></div>
+  <div class="cmp rv">
+    <div class="card"><div class="row" style="justify-content:space-between"><span class="flag bad">Prompt kurang efektif</span><button class="btn ghost" data-sim="weak">▶ Kirim</button></div>
+      <pre class="prompt">Buatkan narasi laporan kinerja investasi KEK.</pre>
+      <div class="resp" id="resp-weak"></div></div>
+    <div class="card"><div class="row" style="justify-content:space-between"><span class="flag good">Prompt efektif</span><button class="btn" data-sim="strong">▶ Kirim</button></div>
+      <pre class="prompt">Peran: Kamu analis perencanaan di Administrator KEK Kendal.
+Konteks: Terlampir tabel IKU Triwulan III 2026 dan narasi Triwulan II sebagai contoh gaya.
+Tugas: Susun narasi IKU 1.1 Persentase Capaian Target Investasi.
+Format: Subjudul Latar Belakang dan Hasil Pengukuran Kinerja. Maksimal 400 kata. Tandai angka dengan [CEK].
+Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
+      <div class="resp" id="resp-strong"></div></div>
+  </div>
+  <p class="src rv">Jawaban di atas adalah simulasi tampilan untuk menunjukkan perbedaan, bukan keluaran asli tools tertentu.</p>
+
+  <div class="card rv">
+    <div class="row" style="justify-content:space-between;align-items:flex-end">
+      <div class="head" style="gap:4px"><div class="eyebrow">Latihan</div><h3 class="h-m">Susun prompt sendiri</h3></div>
+      <div class="field" style="min-width:260px"><label for="tplSel">Mulai dari contoh</label><select id="tplSel"></select></div>
+    </div>
+    <div class="builder">
+      <div class="grid" style="gap:10px">
+        <div class="field"><label for="f-peran">Peran</label><textarea id="f-peran" rows="2"></textarea></div>
+        <div class="field"><label for="f-konteks">Konteks</label><textarea id="f-konteks" rows="3"></textarea></div>
+        <div class="field"><label for="f-tugas">Tugas</label><textarea id="f-tugas" rows="3"></textarea></div>
+        <div class="field"><label for="f-format">Format</label><textarea id="f-format" rows="2"></textarea></div>
+        <div class="field"><label for="f-batasan">Batasan</label><textarea id="f-batasan" rows="2"></textarea></div>
+      </div>
+      <div class="grid" style="gap:14px;align-content:start">
+        <div class="meter">
+          <svg class="gauge" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="40"/><circle class="fg" id="gFg" cx="50" cy="50" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3"/><text id="gTx" x="50" y="58" text-anchor="middle">0</text></svg>
+          <div><div class="eyebrow">Kelengkapan prompt</div><b class="h-s" id="gLbl">Belum diisi</b><p class="small muted" id="gHint"></p></div>
+        </div>
+        <div class="field"><label>Hasil prompt</label><pre class="prompt" id="pOut"></pre></div>
+        <div class="row"><button class="btn" id="pCopy">Salin prompt</button><button class="btn ghost" id="pClear">Kosongkan</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card soft lift rv"><b>Kerjakan bertahap</b><p class="small muted">Minta kerangka dulu, setujui, baru minta isi per bagian.</p></div>
+    <div class="card soft lift rv"><b>Beri contoh</b><p class="small muted">Lampirkan laporan periode lalu supaya gaya bahasanya sama.</p></div>
+    <div class="card soft lift rv"><b>Minta AI bertanya balik</b><p class="small muted">"Sebelum mulai, tanyakan informasi yang kamu butuhkan."</p></div>
+    <div class="card soft lift rv"><b>Perbaiki lewat percakapan</b><p class="small muted">"Persingkat jadi 200 kata", "ubah jadi tabel", "lebih formal".</p></div>
+    <div class="card soft lift rv"><b>Untuk angka, minta dijalankan dengan kode</b><p class="small muted">"Hitung dengan Python dan tampilkan kodenya."</p></div>
+    <div class="card soft lift rv"><b>Simpan prompt yang berhasil</b><p class="small muted">Kumpulkan di dokumen bersama supaya dipakai ulang tim.</p></div>
+  </div>
+</section>
+
+<!-- 6 AMAN -->
+<section class="screen" data-id="aman" data-title="Aman & bertanggung jawab" hidden>
+  <div class="banner rv"><img data-img="1550751827-4bd374c3f58b" alt=""><div class="in">
+    <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">Memakai AI dengan aman dan bertanggung jawab</h2>
+    <p class="lead">Yang kita tempel ke AI keluar dari komputer kantor. Pilah dulu datanya sebelum diunggah.</p></div></div>
+  <div class="head rv"><div class="eyebrow">Cek sebelum unggah</div><h3 class="h-m">Pilih jenis data untuk melihat statusnya</h3></div>
+  <div class="checker rv">
+    <div class="dchips" id="dchips"></div>
+    <div class="verdict n" id="verdict"><div class="lampbig"><i></i><i></i><i></i></div><b class="h-m" id="vT">Pilih jenis data</b><p id="vD" class="small">Status akan muncul di sini.</p></div>
+  </div>
+  <div class="grid g2">
+    <div class="card rv"><div class="eyebrow">Aturan main</div><ul class="clean">
+      <li><b>AI membuat draf, pegawai yang memutuskan.</b> Laporan tetap ditandatangani pejabat.</li>
+      <li><b>Untuk angka, pakai fitur analisis data</b> lalu periksa data input, definisi, dan kodenya.</li>
+      <li><b>Cek dasar hukum</b> ke sumber resmi sebelum dikutip.</li>
+      <li><b>Gunakan akun kantor</b> bila tersedia, dan periksa pengaturan privasi tools.</li>
+      <li><b>Baca ulang gaya bahasanya.</b> Kurangi kata berlebihan seperti "krusial", "manifestasi", "secara mutlak".</li></ul></div>
+    <div class="card rv"><div class="eyebrow">Contoh kesalahan yang sering terjadi</div>
+      <p class="small">Hal seperti ini perlu ditangkap sebelum laporan dikirim, baik ditulis manusia maupun AI:</p>
+      <ul class="clean amb">
+        <li>Persentase capaian yang tidak cocok dengan angka realisasi dan target di tabel.</li>
+        <li>Dasar hukum yang berbeda untuk layanan yang sama di dua laporan.</li>
+        <li>Satuan yang tertukar, misalnya kWh dan MWh.</li></ul></div>
+  </div>
+</section>
+
+<!-- 8 GALERI -->
+<section class="screen" data-id="galeri" data-title="Galeri karya Claude" hidden>
+  <div class="head rv"><div class="eyebrow">Bukti nyata</div><h2 class="h-l">Galeri karya dengan Claude</h2>
+  <p class="lead">Project yang sudah dikerjakan dengan Claude. Klik kartu untuk melihat instruksi awal yang diberikan ke Claude dan hasil yang dibuat.</p></div>
+  <div class="row rv" style="justify-content:space-between">
+    <div class="seg" id="galMode" role="group" aria-label="Filter mode"></div>
+    <div class="seg" id="galScope" role="group" aria-label="Filter ruang lingkup"></div>
+  </div>
+  <div class="gal rv" id="gal" role="tablist" aria-label="Daftar karya"></div>
+  <div class="gdetail rv" id="gdetail" aria-live="polite"></div>
+  <p class="src rv">Versi web: file hasil yang memuat data kantor tidak disertakan. Karya yang sudah dipublikasikan bisa dibuka langsung.</p>
+</section>
+
+<!-- 9 USE CASE -->
+<section class="screen" data-id="use-case" data-title="Use case KEK" hidden>
+  <div class="head rv"><div class="eyebrow">Objektif 2 · Potensi kegiatan kantor</div><h2 class="h-l">8 tugas di Administrator KEK Kendal yang bisa dibantu AI</h2>
+  <p class="lead">Pilih kartu. Ikuti langkahnya satu per satu, lalu salin prompt contohnya.</p></div>
+  <div class="seg rv" id="ucFilter" role="group" aria-label="Filter ruang lingkup"></div>
+  <div class="ucgrid rv" id="ucGrid" role="tablist" aria-label="Daftar use case"></div>
+  <div class="uc-detail rv" id="ucDetail" aria-live="polite"></div>
+  <div class="head rv"><div class="eyebrow">Ringkasan</div><h3 class="h-m">AI yang dibutuhkan untuk 8 use case</h3></div>
+  <div class="tbl-wrap rv"><table class="t">
+    <thead><tr><th>#</th><th>Use case</th><th>Ruang lingkup</th><th>AI utama</th><th>Pendukung</th></tr></thead>
+    <tbody id="ucSummary"></tbody></table></div>
+</section>
+
+<!-- 8 ORGANTA -->
+<section class="screen" data-id="organta" data-title="Sharing Biro Organta" hidden>
+  <div class="banner rv"><img data-img="1522071820081-009f0129c71c" alt=""><div class="in">
+    <div class="eyebrow">Objektif 3</div><h2 class="h-l">Sharing penggunaan AI di Biro Organta</h2>
+    <p class="lead">Pengalaman nyata dari rekan di Sekretariat Jenderal: yang berhasil, yang tidak, dan pelajaran yang bisa langsung dipakai.</p></div></div>
+  <div class="head rv"><div class="eyebrow">Karya Biro Organta dengan Claude</div><p class="small muted">Klik untuk membuka detail di galeri.</p></div>
+  <div class="gal rv" id="orgGal"></div>
+  <div class="grid g3">
+    <div class="card lift rv"><span class="chip amb">Pelajaran 1</span><b class="h-s">Mulai dari folder input yang rapi</b><p class="small muted">Setiap project punya folder Input dan Output. Claude membaca bahan dari Input dan menyimpan hasil ke Output.</p></div>
+    <div class="card lift rv"><span class="chip amb">Pelajaran 2</span><b class="h-s">Minta analisis dulu, baru eksekusi</b><p class="small muted">Instruksi awal selalu meminta Claude mempelajari data dan berdiskusi sebelum mengerjakan.</p></div>
+    <div class="card lift rv"><span class="chip amb">Pelajaran 3</span><b class="h-s">Tulis aturan kerja sekali, pakai berulang</b><p class="small muted">Profil dan aturan wajib (misalnya "jangan hapus file input", "buat salinan sebelum mengedit") disimpan di file instruksi.</p></div>
+  </div>
+  <p class="src rv">Narasumber melengkapi dengan cerita langsung: tugas yang paling terbantu, kendala, dan kesalahan AI yang pernah ditemui.</p>
+</section>
+
+<!-- 9 AKSI -->
+<section class="screen" data-id="rencana-aksi" data-title="Rencana aksi" hidden>
+  <div class="banner rv" style="min-height:280px"><img data-img="1521737604893-d14cc237f11d" alt=""><div class="in">
+    <div class="eyebrow">Penutup</div><p class="quote">AI mempercepat pekerjaan. Ketelitian dan tanggung jawab tetap di tangan kita.</p></div></div>
+  <div class="plan">
+    <div class="card lift rv"><span class="chip acc">Minggu ini</span><b class="h-s">Pilih satu use case</b><ul class="clean"><li>Pilih satu tugas rutin dari 8 use case.</li><li>Coba dengan prompt contoh, lalu sesuaikan.</li><li>Catat waktu dan hasilnya.</li></ul></div>
+    <div class="card lift rv"><span class="chip amb">Bulan ini</span><b class="h-s">Kumpulkan prompt tim</b><ul class="clean amb"><li>Satu dokumen bersama berisi prompt yang berhasil.</li><li>Kelompokkan per ruang lingkup a–d.</li><li>Tambahkan catatan hal yang perlu dicek.</li></ul></div>
+    <div class="card lift rv"><span class="chip">Rutin</span><b class="h-s">Berbagi di komunitas belajar</b><ul class="clean"><li>Sesi singkat berbagi antar-pegawai.</li><li>Sejalan dengan upaya "Optimalisasi Knowledge Sharing (Komunitas Belajar)" di LAKIN TW II.</li><li>Catat sebagai kegiatan pembelajaran pegawai.</li></ul></div>
+  </div>
+  <div class="grid g2">
+    <div class="card rv"><div class="eyebrow">Diskusi</div><ul class="clean">
+      <li>Tugas mana yang paling menyita waktu setiap triwulan?</li>
+      <li>Use case mana yang paling ingin dicoba lebih dulu?</li>
+      <li>Aturan apa yang perlu disepakati tim sebelum memakai AI?</li></ul></div>
+    <div class="card soft rv"><div class="eyebrow">Bahan yang dipakai dalam materi ini</div><ul class="clean">
+      <li>Laporan kinerja triwulanan (sebagai contoh format)</li>
+      <li>Laporan pengawasan dan pengendalian berkala (sebagai contoh format)</li>
+      <li>Objektif dan ruang lingkup kegiatan pelatihan</li></ul></div>
+  </div>
+</section>
+
+      <div class="pager" id="pager"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IMG=(id,w)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w||1400}&q=70`;
+const FAV=d=>`https://www.google.com/s2/favicons?domain=${d}&sz=64`;
+$$('img[data-img]').forEach(i=>{i.src=IMG(i.dataset.img,i.closest('.scope')?700:1600);i.loading='lazy'});
+const sleep=ms=>new Promise(r=>setTimeout(r,RM?0:ms));
+
+/* ---------- Navigasi ---------- */
+const screens=$$('.screen');
+screens.forEach((s,i)=>{
+  const b=document.createElement('button');b.className='nav-btn';
+  b.innerHTML=`<span class="num">${String(i).padStart(2,'0')}</span><span class="t">${esc(s.dataset.title)}</span>`;
+  b.onclick=()=>go(i);$('#nav').appendChild(b);
+  $$('.rv',s).forEach((el,j)=>el.style.setProperty('--d',j));
+});
+let cur=-1;
+const onShow={};
+function go(i){
+  i=Math.max(0,Math.min(screens.length-1,i)); if(i===cur)return;
+  const dir=i>cur?'in-f':'in-b'; cur=i;
+  screens.forEach((s,j)=>{s.hidden=j!==i;s.classList.remove('in-f','in-b')});
+  void screens[i].offsetWidth; screens[i].classList.add(dir);
+  $$('.nav-btn').forEach((b,j)=>{b.setAttribute('aria-current',j===i?'true':'false');b.classList.toggle('done',j<i)});
+  $('#crumb').innerHTML=`<b>${esc(screens[i].dataset.title)}</b> · bagian ${i+1} dari ${screens.length}`;
+  $('#prog').style.width=((i+1)/screens.length*100)+'%';
+  const pg=$('#pager');pg.innerHTML='';
+  if(i>0){const p=document.createElement('button');p.innerHTML=`<small>Sebelumnya</small><b>← ${esc(screens[i-1].dataset.title)}</b>`;p.onclick=()=>go(i-1);pg.appendChild(p)}else pg.appendChild(document.createElement('span'));
+  if(i<screens.length-1){const n=document.createElement('button');n.style.textAlign='right';n.innerHTML=`<small>Berikutnya</small><b>${esc(screens[i+1].dataset.title)} →</b>`;n.onclick=()=>go(i+1);pg.appendChild(n)}
+  try{history.replaceState(null,'','#'+screens[i].dataset.id)}catch(e){}
+  window.scrollTo({top:0});
+  document.body.classList.toggle('is-cover',i===0);
+  const f=onShow[screens[i].dataset.id]; if(f) f();
+}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(+g.dataset.go)}});
+$('#prev').onclick=()=>go(cur-1);$('#next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{
+  if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1);e.preventDefault()}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1);e.preventDefault()}
+});
+$('#theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('kek-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('kek-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+/* ---------- Hero: jaringan partikel + typer ---------- */
+(function(){
+  const c=$('#net'),x=c.getContext('2d');let W,H,P=[];
+  function size(){const r=c.getBoundingClientRect();W=c.width=r.width*devicePixelRatio;H=c.height=r.height*devicePixelRatio;P=Array.from({length:46},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35*devicePixelRatio,vy:(Math.random()-.5)*.35*devicePixelRatio}))}
+  function draw(){
+    x.clearRect(0,0,W,H);const L=140*devicePixelRatio;
+    for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1}
+    for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const a=P[i],b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<L){x.strokeStyle=`rgba(95,227,213,${(1-d/L)*.35})`;x.lineWidth=devicePixelRatio;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}
+    for(const p of P){x.fillStyle='rgba(95,227,213,.8)';x.beginPath();x.arc(p.x,p.y,2*devicePixelRatio,0,7);x.fill()}
+    if(!RM)requestAnimationFrame(draw);
+  }
+  size();addEventListener('resize',size);draw();
+  const words=['menyusun narasi LAKIN','mengolah data LKPM','membuat bahan paparan pimpinan','menulis konten edukasi SKA','membangun dashboard kinerja'];
+  let wi=0;const el=$('#typer');
+  async function loop(){for(;;){const w=words[wi++%words.length];for(let k=1;k<=w.length;k++){el.textContent=w.slice(0,k);await sleep(45)}await sleep(1600);for(let k=w.length;k>=0;k--){el.textContent=w.slice(0,k);await sleep(22)}await sleep(250)}}
+  if(RM)el.textContent=words[0];else loop();
+})();
+
+/* ---------- Cover ---------- */
+(function(){
+  const imgs=$$('#cvSlides img');let k=0,timer;
+  $('#cvDots').innerHTML=imgs.map((_,i)=>`<button aria-label="Foto ${i+1}" class="${i?'':'on'}" data-i="${i}"></button>`).join('');
+  function show(i){k=i;imgs.forEach((im,j)=>im.classList.toggle('on',j===i));$$('#cvDots button').forEach((b,j)=>b.classList.toggle('on',j===i));$('#cvCap').textContent=imgs[i].dataset.cap}
+  function start(){clearInterval(timer);if(!RM)timer=setInterval(()=>show((k+1)%imgs.length),7000)}
+  $$('#cvDots button').forEach(b=>b.onclick=()=>{show(+b.dataset.i);start()});
+  start();
+  const VIDS=[
+    {id:'buaCE8Gl1Kc',t:'Kecerdasan Buatan (AI) Bisa Gantikan Pekerjaanmu? Ini Cara Menyelamatkan Masa Depanmu!',ch:'DW Indonesia',d:'5:31',l:'Bahasa Indonesia'},
+    {id:'RDG4agaTIbE',t:'Worried About AI Replacing You? Here\'s how to future-proof your job',ch:'DW News',d:'3:33',l:'Bahasa Inggris'},
+    {id:'NaxZ20xaqZE',t:'Is AI a tool to help us work smarter, not harder?',ch:'ABC News',d:'6:25',l:'Bahasa Inggris'}];
+  let v=0;
+  function render(play){
+    const x=VIDS[v];
+    if(play&&location.protocol==='file:'){window.open('https://www.youtube.com/watch?v='+x.id,'_blank','noopener');return}
+    $('#cvFrame').innerHTML=play?`<iframe src="https://www.youtube-nocookie.com/embed/${x.id}?autoplay=1&rel=0&hl=id" title="${esc(x.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+      :`<button class="cv-poster" id="cvPoster" aria-label="Putar video ${esc(x.t)}"><img src="https://i.ytimg.com/vi/${x.id}/hqdefault.jpg" alt=""><span class="cv-play"></span></button>`;
+    const fb=$('#cvFb');if(fb)fb.remove();
+    if(play)$('#cvFrame').insertAdjacentHTML('afterend',`<a id="cvFb" class="btn cv-ghost" style="align-self:flex-start;padding:8px 14px;font-size:13.5px" href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener">Video tidak muncul? Putar di YouTube ↗</a>`);
+    $('#cvVt').textContent=x.t;
+    $('#cvVm').innerHTML=`${esc(x.ch)} · ${x.d} · ${esc(x.l)} · <a href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener">Buka di YouTube ↗</a>`;
+    $('#cvAlt').innerHTML=VIDS.map((y,i)=>`<button aria-pressed="${i===v}" data-i="${i}">${esc(y.ch)} · ${y.d}</button>`).join('');
+    $$('#cvAlt button').forEach(b=>b.onclick=()=>{v=+b.dataset.i;render(false)});
+    const p=$('#cvPoster');if(p)p.onclick=()=>render(true);
+  }
+  render(false);
+  $('#cvPlayBtn').onclick=()=>{render(true);$('#cvVideo').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'})};
+})();
+
+/* ---------- Agenda ---------- */
+const AGENDA=[['0–10','Pembuka dan tujuan',0,10],['10–20','Apa itu AI dan kenapa perlu',1,10],['20–40','Mengenal Claude dan olah data',3,20],['40–55','Prompt efektif dan etika',6,15],['55–75','Galeri karya Claude',8,20],['75–100','Use case KEK dan Biro Organta',9,25],['100–120','Diskusi dan rencana aksi',11,20]];
+$('#agenda').innerHTML=AGENDA.map(a=>`<button class="ag" data-go="${a[2]}"><time>${a[0]}′</time><b>${a[1]}</b><span class="bar"><i style="width:${a[3]/25*100}%"></i></span></button>`).join('');
+$$('.scope').forEach(b=>b.onclick=()=>{ucScope=b.dataset.scope;const f=UC.findIndex(u=>u.s===ucScope);if(f>=0){ucSel=f;ucStep=0}renderUC();go(9)});
+
+/* ---------- Lapisan AI ---------- */
+const LAYER={
+  ai:['Artificial Intelligence','Bidang ilmu yang membuat mesin bisa meniru kemampuan berpikir manusia.',['Filter spam email','Navigasi rute di peta','Rekomendasi video']],
+  ml:['Machine Learning','Komputer belajar pola dari banyak contoh data, tanpa diprogram aturan satu per satu.',['Deteksi transaksi mencurigakan','Prediksi permintaan barang']],
+  dl:['Deep Learning','Machine learning dengan jaringan saraf tiruan berlapis. Mampu mengenali gambar, suara, dan bahasa.',['Pengenalan wajah','Ubah suara jadi teks (transkrip)']],
+  gen:['Generative AI / Large Language Model','AI yang membuat konten baru (teks, gambar, slide, kode) dari instruksi bahasa sehari-hari, dan kini bisa menjalankan kode untuk mengolah data. Dipakai di ChatGPT, Claude, Gemini, dan Copilot.',['Menyusun draf laporan','Merangkum dokumen','Menganalisis data Excel','Membuat bahan presentasi']]};
+function showLayer(k){$$('#layers .layer').forEach(l=>l.classList.toggle('on',l.dataset.k===k));const d=LAYER[k];
+  $('#layerDef').innerHTML=`<div class="fade-in" style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">Definisi</div><h3 class="h-m">${d[0]}</h3><p>${d[1]}</p><div class="eyebrow">Contoh</div><div class="chips">${d[2].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`}
+$$('#layers .layer').forEach(l=>{l.addEventListener('click',e=>{e.stopPropagation();showLayer(l.dataset.k)});l.addEventListener('mouseenter',e=>{e.stopPropagation();showLayer(l.dataset.k)})});
+showLayer('gen');
+
+/* ---------- Tebak kata ---------- */
+const TOK_BASE='Laporan kinerja triwulan ini menunjukkan bahwa';
+const TOK=[[['capaian',46],['realisasi',27],['target',14],['kinerja',9]],[['investasi',52],['kinerja',21],['layanan',15],['indikator',8]],[['telah',44],['melampaui',30],['mencapai',17],['masih',6]],[['melampaui',49],['mencapai',33],['memenuhi',12],['sesuai',4]],[['target',71],['angka',14],['rencana',9],['harapan',4]]];
+let tokI=0,tokW=[],tokT=null;
+function tokRender(){
+  $('#tokSentence').innerHTML=esc(TOK_BASE)+' '+tokW.map((w,i)=>i===tokW.length-1?`<span class="new">${esc(w)}</span>`:esc(w)).join(' ')+(tokI<TOK.length?' …':'.');
+  if(tokI<TOK.length){$('#tokCands').innerHTML=TOK[tokI].map((x,i)=>`<div class="cand ${i===0?'top':''}"><b>${esc(x[0])}</b><div class="track"><div class="fill" data-w="${x[1]}"></div></div><span>${x[1]}%</span></div>`).join('');requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#tokCands .fill').forEach(f=>f.style.width=f.dataset.w+'%')))}
+  else $('#tokCands').innerHTML='<p class="small muted">Kalimat selesai dan terdengar meyakinkan. Tapi AI tidak memeriksa apakah target benar-benar terlampaui.</p>';
+  $('#tokNext').disabled=tokI>=TOK.length;
+}
+function tokStep(){if(tokI<TOK.length){tokW.push(TOK[tokI][0][0]);tokI++;tokRender()}}
+$('#tokNext').onclick=tokStep;
+$('#tokReset').onclick=()=>{clearInterval(tokT);tokI=0;tokW=[];tokRender()};
+$('#tokAuto').onclick=()=>{clearInterval(tokT);tokI=0;tokW=[];tokRender();tokT=setInterval(()=>{if(tokI>=TOK.length)return clearInterval(tokT);tokStep()},1300)};
+tokRender();
+
+/* ---------- Count-up ---------- */
+onShow['kenapa-ai']=()=>{
+  $$('[data-count]').forEach(el=>{const n=+el.dataset.count,suf=el.dataset.suffix||'',t0=performance.now(),D=RM?0:1400;
+    (function f(t){const p=D?Math.min(1,(t-t0)/D):1,e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e).toLocaleString('id-ID')+suf;if(p<1)requestAnimationFrame(f)})(t0)});
+  $$('.spark i').forEach(i=>{i.style.width='0';setTimeout(()=>i.style.width=i.dataset.w+'%',150)});
+};
+$$('.flip').forEach(f=>f.onclick=()=>f.setAttribute('aria-pressed',f.getAttribute('aria-pressed')==='true'?'false':'true'));
+
+/* ---------- Macam-macam AI ---------- */
+const TOOLS=[
+  {n:'ChatGPT',by:'OpenAI',d:'chatgpt.com',c:['chat','data','vis'],u:'Asisten serbaguna: menulis, merangkum, analisis data dengan menjalankan kode, membuat gambar.'},
+  {n:'Claude',by:'Anthropic',d:'claude.ai',c:['chat','data'],u:'Kuat untuk tulisan panjang dan dokumen besar, analisis file, serta membuat halaman interaktif atau dashboard.'},
+  {n:'Gemini',by:'Google',d:'gemini.google.com',c:['chat','data','vis','web'],u:'Terhubung dengan Google Workspace (Docs, Sheets, Gmail) dan pencarian Google.'},
+  {n:'Microsoft Copilot',by:'Microsoft',d:'copilot.microsoft.com',c:['chat','pres','data'],u:'Terintegrasi di Word, Excel, PowerPoint, dan Teams, tergantung lisensi kantor.'},
+  {n:'NotebookLM',by:'Google',d:'notebooklm.google.com',c:['doc'],u:'Tanya-jawab hanya dari dokumen yang diunggah, lengkap dengan rujukan ke bagian dokumen.'},
+  {n:'Perplexity',by:'Perplexity AI',d:'perplexity.ai',c:['web'],u:'Riset di internet dengan tautan sumber pada setiap jawaban.'},
+  {n:'Gamma',by:'Gamma',d:'gamma.app',c:['pres'],u:'Membuat presentasi dari teks atau kerangka dalam hitungan menit.'},
+  {n:'Canva',by:'Canva',d:'canva.com',c:['pres','vis'],u:'Desain konten media sosial dan presentasi dengan fitur AI dan banyak template.'},
+  {n:'Napkin AI',by:'Napkin',d:'napkin.ai',c:['vis'],u:'Mengubah teks menjadi diagram dan infografis.'},
+  {n:'Looker Studio',by:'Google',d:'lookerstudio.google.com',c:['data'],u:'Dashboard gratis dari Google Sheets. AI membantu menyiapkan data dan rumusnya.'},
+  {n:'Zoom / Teams / Meet',by:'Fitur transkrip',d:'zoom.us',c:['rapat'],u:'Transkrip otomatis rapat online, lalu diringkas menjadi notulen dengan asisten AI.'}];
+const CATS=[
+  {k:'all',t:'Semua'},
+  {k:'chat',t:'Asisten percakapan',use:'Menulis draf, merangkum, menerjemahkan, menganalisis file.',plus:['Serbaguna untuk tugas tulis-menulis','Membaca PDF, Word, dan Excel','Revisi lewat percakapan'],minus:['Bisa mengarang fakta (halusinasi)','Tidak tahu data internal kecuali diberikan','Versi gratis punya batas pemakaian'],m:[2,2,2,2]},
+  {k:'data',t:'Analisis data dan dashboard',use:'Mengolah tabel dengan menjalankan kode, membuat pivot, grafik, dan dashboard.',plus:['Hitungan akurat karena dijalankan dengan kode','Bisa menggantikan banyak pekerjaan software analisis','Hasil disertai kode yang bisa diperiksa'],minus:['Data input dan definisi tetap harus benar','Hati-hati mengunggah data per pelaku usaha'],m:[2,2,0,2]},
+  {k:'doc',t:'Riset berbasis dokumen',use:'Tanya-jawab dari kumpulan dokumen sendiri, misalnya regulasi KEK.',plus:['Jawaban disertai rujukan','Terbatas pada sumber, risiko mengarang lebih kecil','Cocok untuk regulasi dan SOP'],minus:['Hanya tahu dokumen yang diunggah','Tetap perlu dicek ke pasal aslinya'],m:[2,1,1,0]},
+  {k:'web',t:'Riset web',use:'Mencari informasi terbaru di internet dengan tautan sumber.',plus:['Informasi lebih baru','Menampilkan tautan sumber'],minus:['Kualitas sumber bervariasi','Perlu membaca sumber aslinya'],m:[1,1,1,0]},
+  {k:'pres',t:'Presentasi dan desain',use:'Membuat slide dan desain konten dari teks atau kerangka.',plus:['Draf slide dan desain dalam hitungan menit','Banyak template siap pakai'],minus:['Desain cenderung generik','Teks di slide sering terlalu padat'],m:[0,2,2,1]},
+  {k:'vis',t:'Visual dan diagram',use:'Mengubah teks menjadi diagram, infografis, atau ilustrasi.',plus:['Ide cepat jadi visual','Membantu menjelaskan alur proses'],minus:['Teks di dalam gambar sering salah eja','Hindari gambar realistis yang menyesatkan'],m:[0,2,2,0]},
+  {k:'rapat',t:'Transkrip rapat',use:'Rekaman rapat jadi teks, lalu diringkas menjadi notulen.',plus:['Notulen dan tindak lanjut lebih cepat','Tidak ada poin yang terlewat'],minus:['Istilah teknis sering salah tulis','Perlu izin peserta untuk merekam'],m:[2,0,0,0]}];
+let catK='all',toolSel=null;
+function renderCat(){
+  $('#catSeg').innerHTML=CATS.map(c=>`<button aria-pressed="${c.k===catK}" data-k="${c.k}">${c.t}</button>`).join('');
+  $$('#catSeg button').forEach(b=>b.onclick=()=>{catK=b.dataset.k;renderCat()});
+  const c=CATS.find(x=>x.k===catK);
+  $('#catBody').hidden=catK==='all';
+  if(catK!=='all')$('#catBody').innerHTML=`<div class="card fade-in"><div class="eyebrow">Kegunaan</div><b class="h-s">${c.t}</b><p class="small muted">${c.use}</p></div><div class="pc plus fade-in"><h4>Kelebihan</h4><ul class="clean good">${c.plus.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="pc minus fade-in"><h4>Kekurangan</h4><ul class="clean bad">${c.minus.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  $$('.tool').forEach(t=>t.classList.toggle('dim',catK!=='all'&&!TOOLS[+t.dataset.i].c.includes(catK)));
+}
+$('#tools').innerHTML=TOOLS.map((t,i)=>`<button class="tool" data-i="${i}" aria-expanded="false"><div class="top"><div class="ico"><img src="${FAV(t.d)}" alt="" loading="lazy"></div><div><b>${t.n}</b><small>${t.by}</small></div></div><div class="chips">${t.c.map(k=>`<span class="chip">${CATS.find(c=>c.k===k).t}</span>`).join('')}</div></button>`).join('');
+$$('.tool').forEach(b=>b.onclick=()=>{const t=TOOLS[+b.dataset.i];$$('.tool').forEach(x=>x.setAttribute('aria-expanded',x===b?'true':'false'));
+  $('#toolInfo').innerHTML=`<div class="row fade-in"><div class="tool" style="cursor:default;padding:0;border:0;background:none"><div class="top"><div class="ico"><img src="${FAV(t.d)}" alt=""></div><div><b>${t.n}</b><small>${t.by}</small></div></div></div><p style="flex:1;min-width:240px">${t.u}</p></div>`});
+renderCat();
+$('#matrix').innerHTML=CATS.filter(c=>c.m).map(c=>`<tr><td><b>${c.t}</b><br><span class="small muted">${TOOLS.filter(t=>t.c.includes(c.k)).map(t=>t.n).join(', ')}</span></td>${c.m.map(v=>`<td class="c">${v===2?'<span class="dotm" title="utama"></span>':v===1?'<span class="dotm o" title="pendukung"></span>':''}</td>`).join('')}</tr>`).join('');
+$('#dataTools').innerHTML=['ChatGPT','Claude','Gemini','Microsoft Copilot'].map(n=>{const t=TOOLS.find(x=>x.n===n);return`<span class="tag"><img src="${FAV(t.d)}" alt="">${n}</span>`}).join('');
+
+/* ---------- Simulasi olah data ---------- */
+const LAY=[['Masterlist',120,15,25],['SKA',400,60,20],['PB-UMKU',18,2,5],['SPI',1,1,2],['NIPU',3,1,2]];
+const Q='Dari tabel rincian ketepatan waktu layanan ini, berapa persen layanan yang selesai tepat waktu, per jenis dan total?';
+const CODE=`<span class="kw">import</span> pandas <span class="kw">as</span> pd
+df = pd.DataFrame({
+  <span class="st">"layanan"</span>: [<span class="st">"Masterlist"</span>,<span class="st">"SKA"</span>,<span class="st">"PB-UMKU"</span>,<span class="st">"SPI"</span>,<span class="st">"NIPU"</span>],
+  <span class="st">"lebih_cepat"</span>: [120, 400, 18, 1, 3],
+  <span class="st">"sesuai"</span>:      [15, 60, 2, 1, 1],
+  <span class="st">"melewati"</span>:    [25, 20, 5, 2, 2]})
+df[<span class="st">"total"</span>] = df[[<span class="st">"lebih_cepat"</span>,<span class="st">"sesuai"</span>,<span class="st">"melewati"</span>]].sum(axis=1)
+<span class="cm"># tepat waktu = lebih cepat + sesuai standar</span>
+df[<span class="st">"tepat_%"</span>] = ((df.lebih_cepat + df.sesuai) / df.total * 100).round(1)
+total = (df.lebih_cepat.sum() + df.sesuai.sum()) / df.total.sum() * 100`;
+let mode='kode',simBusy=false;
+$$('#modeSeg button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('#modeSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));resetSim()});
+function resetSim(){$('#chat').innerHTML=`<div class="bub u">${Q}</div><p class="small muted">Tekan "Jalankan simulasi".</p>`;$('#simOut').innerHTML='<div class="eyebrow">Hasil</div><p class="muted small">Belum dijalankan.</p>'}
+async function typeInto(el,html,speed){if(RM){el.innerHTML=html;return}const tmp=document.createElement('div');tmp.innerHTML=html;const txt=tmp.textContent;for(let k=0;k<=txt.length;k+=3){el.textContent=txt.slice(0,k);await sleep(speed)}el.innerHTML=html}
+$('#simRun').onclick=async()=>{
+  if(simBusy)return;simBusy=true;$('#simRun').disabled=true;
+  const chat=$('#chat');chat.innerHTML=`<div class="bub u">${Q}</div>`;$('#simOut').innerHTML='<div class="eyebrow">Hasil</div><p class="muted small">Menunggu…</p>';
+  await sleep(500);
+  if(mode==='teks'){
+    const a=document.createElement('div');a.className='bub a';chat.appendChild(a);
+    await typeInto(a,'Berdasarkan tabel, sebagian besar layanan selesai tepat waktu, dengan persentase sekitar 95%.',18);
+    chat.insertAdjacentHTML('beforeend','<span class="flag bad">Tidak ada cara hitung yang bisa diperiksa</span>');
+    $('#simOut').innerHTML=`<div class="eyebrow">Masalahnya</div><b class="h-s">Angka "ditebak" dari pola kalimat</b><ul class="clean bad"><li>Tidak ada rumus atau kode yang bisa dicek.</li><li>Tidak jelas definisi "tepat waktu" yang dipakai.</li><li>Bisa berbeda setiap kali ditanya.</li></ul><p class="src">Ilustrasi jawaban tanpa menjalankan kode.</p><button class="btn" id="toKode">Coba Mode 2 →</button>`;
+    $('#toKode').onclick=()=>{$$('#modeSeg button')[1].click();$('#simRun').click()};
+  }else{
+    const a=document.createElement('div');a.className='bub a';a.textContent='Saya akan menghitungnya dengan Python.';chat.appendChild(a);
+    await sleep(400);
+    const pre=document.createElement('pre');pre.className='code';chat.appendChild(pre);
+    await typeInto(pre,CODE,12);
+    const r=document.createElement('div');r.className='run';r.innerHTML='<span class="spin"></span> Menjalankan kode…';chat.appendChild(r);
+    await sleep(1100);r.innerHTML='✓ Kode selesai dijalankan';
+    chat.insertAdjacentHTML('beforeend','<div class="bub a">Total 621 dari 675 layanan selesai tepat waktu, yaitu <b>92,0%</b>. Rincian per jenis ada di panel hasil.</div><span class="flag good">Rumus dan kode bisa diperiksa</span>');
+    const rows=LAY.map(l=>{const t=l[1]+l[2]+l[3],ok=l[1]+l[2];return{n:l[0],ok,t,p:ok/t*100}});
+    $('#simOut').innerHTML=`<div class="eyebrow">Hasil dari kode</div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Tepat waktu</span><span><i style="background:var(--amber)"></i>Melewati standar</span></div>
+      <div class="bars">${rows.map(r=>`<div class="barrow"><b>${r.n}</b><div class="t"><i class="g" data-w="${r.p}"></i><i class="r" data-w="${100-r.p}"></i></div><span>${r.p.toFixed(1).replace('.',',')}%</span></div>`).join('')}</div>
+      <table class="mini-tbl"><thead><tr><th>Layanan</th><th>Tepat</th><th>Total</th><th>%</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.n}</td><td>${r.ok}</td><td>${r.t}</td><td>${r.p.toFixed(1).replace('.',',')}</td></tr>`).join('')}<tr class="tot"><td>Total</td><td>621</td><td>675</td><td>92,0</td></tr></tbody></table>
+      <div class="note"><b>Kebiasaan baik:</b> cocokkan hasil hitungan dengan angka yang dilaporkan sebelum dokumen dikirim.</div>`;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#simOut .barrow i').forEach(i=>i.style.width=i.dataset.w+'%')));
+  }
+  simBusy=false;$('#simRun').disabled=false;
+};
+resetSim();
+
+/* ---------- Simulasi prompt ---------- */
+const RESP={
+  weak:'Kinerja investasi KEK menunjukkan perkembangan yang sangat positif dan signifikan. Berbagai upaya strategis telah dilakukan secara optimal untuk mendorong peningkatan investasi, sehingga diharapkan dapat memberikan kontribusi yang krusial terhadap perekonomian nasional…',
+  strong:'<b>Latar Belakang</b>\nUntuk tahun 2026, BUPP KEK Kendal menyepakati target investasi sebesar <mark>[CEK] Rp…</mark>. Administrator KEK Kendal berperan memberikan layanan perizinan dan non-perizinan serta pengawasan dan pengendalian.\n\n<b>Hasil Pengukuran Kinerja</b>\nRealisasi investasi s.d. Triwulan III 2026 adalah <mark>[DATA DIPERLUKAN: realisasi TW III dari LKPM]</mark>…'};
+const NOTE={weak:'<span class="flag bad">Umum, tanpa data, tanpa periode, kata berlebihan</span>',strong:'<span class="flag good">Terstruktur, angka ditandai, tidak mengarang data yang belum ada</span>'};
+$$('[data-sim]').forEach(b=>b.onclick=async()=>{const k=b.dataset.sim,el=$('#resp-'+k);b.disabled=true;el.classList.add('caret');
+  const plain=RESP[k].replace(/<[^>]+>/g,'');if(!RM)for(let i=0;i<=plain.length;i+=2){el.textContent=plain.slice(0,i);await sleep(14)}
+  el.classList.remove('caret');el.innerHTML=RESP[k]+'\n\n'+NOTE[k];b.disabled=false});
+
+/* ---------- Prompt builder + meter ---------- */
+const TPL=[
+  {t:'a. Narasi laporan rutin',peran:'Kamu analis perencanaan di Administrator KEK Kendal.',konteks:'Terlampir tabel capaian IKU Triwulan III 2026 dan narasi Triwulan II sebagai contoh gaya.',tugas:'Susun narasi IKU 3.1 Persentase Penyelesaian Perizinan dan Non Perizinan KEK yang Tepat Waktu.',format:'Subjudul: Latar Belakang, Hasil Pengukuran Kinerja, Kendala dan Upaya Perbaikan. Bahasa baku, maksimal 400 kata. Tandai angka dengan [CEK].',batasan:'Hanya gunakan data terlampir. Semua penyebutan periode adalah Triwulan III.'},
+  {t:'b. Bahan presentasi',peran:'Kamu penyusun bahan paparan untuk pimpinan.',konteks:'Terlampir Bab Isu Strategis Laporan Pengawasan Semester I 2026 KEK Kendal.',tugas:'Buat alur presentasi 6 slide untuk rapat koordinasi dengan Dewan Kawasan.',format:'Per slide: judul berupa kalimat pesan, maksimal 3 poin, dan saran visual.',batasan:'Jangan menambah data di luar dokumen. Satu slide satu pesan.'},
+  {t:'c. Konten media sosial',peran:'Kamu penulis konten edukasi layanan publik.',konteks:'Administrator KEK Kendal adalah instansi penerbit Surat Keterangan Asal (SKA). Terlampir ringkasan prosedur SKA.',tugas:'Buat naskah carousel Instagram 6 slide berjudul "Kenalan dengan SKA".',format:'Per slide maksimal 25 kata. Tambahkan caption 80 kata dan 5 hashtag.',batasan:'Jangan menyebut nama perusahaan. Jangan menulis dasar hukum yang tidak ada di dokumen terlampir.'},
+  {t:'d. Olah data dan dashboard',peran:'Kamu analis data.',konteks:'Terlampir Excel data investasi, tenaga kerja, ekspor, dan penjualan lokal per pelaku usaha Semester I 2026.',tugas:'Hitung total, perubahan TW I ke TW II, dan 10 pelaku usaha terbesar per kategori, lalu usulkan dashboard satu halaman.',format:'Jalankan dengan Python dan tampilkan kodenya. Hasil dalam tabel dan grafik.',batasan:'Laporkan jika penjumlahan tidak sama dengan baris TOTAL di file.'}];
+const F=['peran','konteks','tugas','format','batasan'];
+$('#tplSel').innerHTML=TPL.map((t,i)=>`<option value="${i}">${t.t}</option>`).join('');
+function build(){
+  $('#pOut').textContent=F.map(k=>`${k[0].toUpperCase()+k.slice(1)}: ${$('#f-'+k).value.trim()}`).join('\n');
+  const ok=F.filter(k=>$('#f-'+k).value.trim().length>=15);
+  $$('#formula .fbox').forEach(b=>b.classList.toggle('ok',ok.includes(b.dataset.f)));
+  const p=ok.length/5;$('#gFg').style.strokeDashoffset=251.3*(1-p);$('#gTx').textContent=Math.round(p*100);
+  $('#gFg').style.stroke=p>=.8?'var(--accent)':p>=.4?'var(--amber)':'var(--bad)';
+  $('#gLbl').textContent=p===1?'Lengkap':p>=.6?'Cukup':p>0?'Kurang':'Belum diisi';
+  const miss=F.filter(k=>!ok.includes(k));$('#gHint').textContent=miss.length?'Belum ada: '+miss.join(', '):'Semua unsur terisi.';
+}
+function loadTpl(i){F.forEach(k=>$('#f-'+k).value=TPL[i][k]);build()}
+$('#tplSel').onchange=e=>loadTpl(+e.target.value);
+F.forEach(k=>$('#f-'+k).addEventListener('input',build));
+$('#pClear').onclick=()=>{F.forEach(k=>$('#f-'+k).value='');build()};
+loadTpl(0);
+function copyText(txt,btn,el){const o=btn.textContent;const done=()=>{btn.textContent='✓ Tersalin';setTimeout(()=>btn.textContent=o,1400)};
+  const fb=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Teks dipilih, tekan Ctrl+C'};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,fb);else fb()}
+$('#pCopy').onclick=()=>copyText($('#pOut').textContent,$('#pCopy'),$('#pOut'));
+
+/* ---------- Cek data ---------- */
+const DATA=[
+  ['Teks regulasi publik (PP 85/2019)','g','Boleh diunggah','Dokumen publik. Cocok untuk ditanyakan ke AI atau dimasukkan ke NotebookLM.'],
+  ['Template format LAKIN','g','Boleh diunggah','Template tidak memuat data sensitif.'],
+  ['Data capaian yang sudah dipublikasikan','g','Boleh diunggah','Data agregat yang sudah terbuka untuk publik.'],
+  ['Tabel LKPM per pelaku usaha','y','Hati-hati','Data per perusahaan. Gunakan akun kantor, unggah hanya kolom yang diperlukan, dan jangan dipublikasikan.'],
+  ['Draf laporan yang belum final','y','Hati-hati','Boleh untuk dirapikan atau diperiksa, tetapi hapus nama pejabat dan NIP yang tidak diperlukan.'],
+  ['Notulen rapat internal','y','Hati-hati','Ringkas dan hapus informasi yang belum boleh beredar sebelum diunggah.'],
+  ['Username dan password OSS / INSW','r','Jangan','Kredensial akun tidak boleh dimasukkan ke AI dalam kondisi apa pun.'],
+  ['NIK, NIP, dan data pribadi pekerja','r','Jangan','Data pribadi dilindungi. Hapus atau samarkan sebelum menggunakan AI.'],
+  ['Dokumen berklasifikasi rahasia','r','Jangan','Ikuti ketentuan klasifikasi dokumen instansi.']];
+$('#dchips').innerHTML=DATA.map((d,i)=>`<button class="dchip" data-i="${i}" aria-pressed="false">${d[0]}</button>`).join('');
+$$('.dchip').forEach(b=>b.onclick=()=>{const d=DATA[+b.dataset.i];$$('.dchip').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  const v=$('#verdict');v.className='verdict '+d[1];$('#vT').textContent=d[2];$('#vD').textContent=d[3]});
+
+/* ---------- Use case ---------- */
+const SCOPE={a:'a. Laporan rutin',b:'b. Presentasi',c:'c. Konten medsos',d:'d. Dashboard',e:'Layanan'};
+const UC=[
+ {s:'a',img:'1499914485622-a88fac536970',t:'Narasi LAKIN triwulanan',ai:['ChatGPT','Claude','Gemini'],sup:['Excel'],
+  now:'Setiap triwulan menyusun narasi IKU (latar belakang, hasil pengukuran, rencana aksi, kendala dan upaya) untuk Biro Perencanaan dan Pembentukan KEK.',
+  steps:['Siapkan tabel IKU triwulan ini (target, realisasi, capaian) dan narasi triwulan lalu sebagai contoh gaya.','Hapus nama pejabat, NIP, dan data yang tidak diperlukan.','Minta AI menghitung capaian dengan fitur analisis data (menjalankan kode), lalu cocokkan dengan tabel sumber.','Kirim prompt narasi. Kerjakan satu IKU dulu, jangan sekaligus.','Minta AI memeriksa penyebutan periode (TW II/TW III, "sebelumnya/berikutnya").','Rapikan bahasa, lalu ajukan ke atasan.'],
+  prompt:`Peran: Kamu analis perencanaan di Administrator KEK Kendal.
+Konteks: Terlampir tabel IKU Triwulan III 2026 (target, realisasi, capaian) dan narasi Triwulan II sebagai contoh gaya.
+Tugas: (1) Hitung ulang capaian setiap IKU dengan Python dan tampilkan kodenya. (2) Susun narasi IKU 1.1 Persentase Capaian Target Investasi dengan subjudul: Latar Belakang, Hasil Pengukuran Kinerja, Pelaksanaan Rencana Aksi, Kendala dan Upaya Perbaikan.
+Format: Bahasa Indonesia baku laporan pemerintah, maksimal 400 kata. Tandai setiap angka dengan [CEK].
+Batasan: Hanya gunakan data terlampir. Jika data kurang, tulis [DATA DIPERLUKAN: ...]. Semua penyebutan periode harus Triwulan III.`,
+  out:'Hitungan capaian yang bisa diperiksa dan draf narasi per IKU.',
+  warn:'Laporan yang disalin dari periode sebelumnya sering menyisakan penyebutan periode lama. Minta AI mencarinya.'},
+ {s:'a',img:'1496247749665-49cf5b1022e9',t:'Laporan Pengawasan dari tabel data',ai:['ChatGPT','Claude'],sup:['Microsoft Copilot'],
+  now:'Menyusun Laporan Pengawasan dan Pengendalian Operasional ke Dewan Nasional dengan banyak tabel per pelaku usaha: investasi, tenaga kerja, ekspor, penjualan lokal.',
+  steps:['Gabungkan data TW I dan TW II dalam satu file Excel.','Unggah ke fitur analisis data. Minta rekap total, perubahan antar-triwulan, dan 10 pelaku usaha terbesar.','Minta AI mencocokkan hasil penjumlahan dengan baris TOTAL di tabel asli.','Minta draf narasi per subbab (investasi, tenaga kerja, ekspor, penjualan lokal).','Tambahkan sendiri analisis isu strategis dari hasil pengawasan lapangan.','Baca ulang dan buang kata-kata berlebihan.'],
+  prompt:`Peran: Kamu analis pengawasan di Administrator KEK Kendal.
+Konteks: Terlampir Excel data per pelaku usaha Semester I 2026: investasi, tenaga kerja (TKI/TKA), ekspor, dan penjualan lokal per triwulan.
+Tugas: (1) Dengan Python, hitung total per kolom dan perubahan TW I ke TW II. (2) Tampilkan 10 pelaku usaha terbesar per kategori. (3) Cocokkan penjumlahan dengan baris TOTAL. (4) Susun draf narasi subbab "Kinerja Investasi Kawasan".
+Format: Bagian 1–3 dalam tabel beserta kode. Bagian 4 maksimal 300 kata.
+Batasan: Jangan membulatkan tanpa menyebutkan. Hindari kata "eksponensial", "masif", "secara mutlak".`,
+  out:'Tabel rekap yang bisa diperiksa, daftar pelaku usaha terbesar, dan draf narasi subbab.',
+  warn:'Selalu cocokkan hasil penjumlahan per baris dengan baris TOTAL di tabel sumber.'},
+ {s:'a',img:'1515378791036-0648a3ef77b2',t:'Cek konsistensi laporan sebelum dikirim',ai:['Claude','ChatGPT'],sup:['Excel'],
+  now:'Laporan disusun beberapa orang dan disalin dari periode sebelumnya, sehingga angka, rumus, dan dasar hukum bisa tidak konsisten.',
+  steps:['Unggah draf laporan dan laporan pembanding.','Kirim prompt pemeriksaan. Minta setiap hitungan dijalankan dengan kode.','Minta hasil dalam bentuk tabel temuan.','Periksa setiap temuan satu per satu.','Perbaiki dokumen dan catat perubahannya.'],
+  prompt:`Peran: Kamu pemeriksa mutu dokumen pemerintah yang teliti.
+Konteks: Terlampir LAKIN Triwulan II 2026 dan Laporan Pengawasan Semester I 2026 Administrator KEK Kendal.
+Tugas: Periksa (1) hitungan persentase dan capaian, (2) kesesuaian rumus dan bobot, (3) angka yang berbeda antar-dokumen, (4) penyebutan periode, (5) dasar hukum, (6) satuan.
+Format: Tabel dengan kolom No | Lokasi | Jenis | Temuan | Hitungan ulang | Saran perbaikan.
+Batasan: Jalankan hitungan dengan kode dan tampilkan. Jika ragu, tulis "perlu konfirmasi".`,
+  out:'Daftar temuan yang siap ditindaklanjuti sebelum laporan ditandatangani.',
+  warn:'Periksa kesesuaian bobot dalam rumus dengan narasi, dan capaian di tabel ringkasan dengan tabel rinci.'},
+ {s:'b',img:'1542744173-8e7e53415bb0',t:'Bahan paparan isu strategis',ai:['ChatGPT','Claude','Gemini'],sup:['Gamma','Canva','Microsoft Copilot'],
+  now:'Menyiapkan bahan paparan untuk pimpinan atau rapat koordinasi, misalnya isu infrastruktur kawasan dan kendala sistem layanan.',
+  steps:['Tentukan audiens, durasi, dan keputusan yang diharapkan dari rapat.','Minta AI membuat alur slide: satu pesan per slide.','Periksa dan setujui alurnya.','Buat slide di Gamma, Canva, atau Copilot PowerPoint dari alur tersebut.','Pindahkan ke template kantor dan ganti visual yang generik.','Cek angka dan sumbernya, lalu latihan membawakan.'],
+  prompt:`Peran: Kamu penyusun bahan paparan untuk Kepala Administrator KEK Kendal.
+Konteks: Terlampir Bab III Isu Strategis Laporan Pengawasan Semester I 2026. Audiens: rapat koordinasi dengan Dewan Kawasan, durasi 10 menit.
+Tugas: Buat alur presentasi 6 slide yang berakhir dengan permintaan dukungan yang jelas.
+Format: Per slide: judul berupa kalimat pesan, maksimal 3 poin, saran visual, dan catatan pembicara 2 kalimat.
+Batasan: Hanya gunakan data dari dokumen terlampir. Satu slide satu pesan.`,
+  out:'Alur 6 slide beserta catatan pembicara, siap dibuat di tools presentasi.',
+  warn:'Tools presentasi AI cenderung membuat slide padat teks. Pangkas sampai satu pesan per slide.'},
+ {s:'b',img:'1460925895917-afdab827c52f',t:'Dari tabel ke grafik yang tepat',ai:['ChatGPT','Claude'],sup:['Excel','Napkin AI'],
+  now:'Tabel di laporan disalin mentah ke slide, sehingga pesan utamanya tidak terlihat.',
+  steps:['Tentukan pesan yang ingin disampaikan.','Unggah tabel dan minta 2–3 pilihan grafik beserta alasannya.','Minta AI membuat grafik terbaik dengan menjalankan kode, atau buat sendiri di Excel.','Tulis judul grafik berupa kesimpulan.','Cek skala sumbu, satuan, dan cantumkan sumber data.'],
+  prompt:`Peran: Kamu ahli visualisasi data untuk laporan pemerintah.
+Konteks: [Tempel tabel kapasitas air baku, IPAL, dan drainase untuk dua periode].
+Tugas: Usulkan 3 pilihan grafik untuk menunjukkan kesenjangan suplai air dan pengolahan limbah, lalu buat grafik terbaik dengan Python.
+Format: Untuk tiap pilihan: jenis grafik, alasan, kelemahan. Judul grafik berupa kalimat kesimpulan.
+Batasan: Jangan menambah data. Cantumkan sumber di bawah grafik.`,
+  out:'Grafik dengan judul berisi pesan, siap ditempel di slide.',
+  warn:'Perhatikan satuan. Samakan satuan sebelum membandingkan angka.'},
+ {s:'c',img:'1611926653458-09294b3142bf',t:'Konten edukasi layanan di media sosial',ai:['ChatGPT','Claude','Gemini'],sup:['Canva'],
+  now:'Banyak layanan yang perlu dipahami pelaku usaha: SKA, Masterlist, NPU, IT Inventory, Tax Holiday dan Tax Allowance.',
+  steps:['Pilih satu topik layanan per konten.','Siapkan sumber resmi: regulasi, SOP, atau standar pelayanan.','Minta AI membuat naskah carousel dan caption dari sumber tersebut.','Cek istilah, alur, dan dasar hukum.','Desain di Canva memakai identitas visual instansi.','Minta persetujuan atasan sebelum diunggah.'],
+  prompt:`Peran: Kamu penulis konten edukasi layanan publik.
+Konteks: Administrator KEK Kendal adalah Instansi Penerbit SKA di Jawa Tengah. Terlampir ringkasan prosedur penerbitan SKA.
+Tugas: Buat naskah carousel Instagram 6 slide berjudul "Kenalan dengan SKA".
+Format: Per slide maksimal 25 kata dan saran visual. Tambahkan caption 80 kata dan 5 hashtag.
+Batasan: Bahasa ramah tapi tetap resmi. Jangan menyebut nama perusahaan. Jangan menulis dasar hukum yang tidak ada di dokumen terlampir.`,
+  out:'Naskah carousel dan caption, siap didesain.',
+  warn:'Jangan mengunggah data per pelaku usaha ke media sosial. Pastikan dasar hukum yang ditulis sama dengan yang dipakai di laporan resmi.'},
+ {s:'d',img:'1526628953301-3e589a6a8b74',t:'Dashboard dari data lampiran laporan',ai:['ChatGPT','Claude'],sup:['Excel','Looker Studio'],
+  now:'Data per pelaku usaha tersedia di lampiran PDF (investasi, tenaga kerja, ekspor, penjualan lokal), tetapi sulit diolah dan dibandingkan.',
+  steps:['Unggah PDF lampiran dan minta AI mengubah tabel menjadi Excel.','Minta AI merapikan data dengan kode: satu baris satu pelaku usaha, angka tanpa "Rp".','Cocokkan penjumlahan dengan baris TOTAL di PDF.','Tentukan 4–6 pertanyaan yang ingin dijawab pimpinan.','Minta AI membuat grafik dan dashboard, atau buat di Excel / Looker Studio.','Perbarui data tiap triwulan dengan langkah yang sama.'],
+  prompt:`Peran: Kamu analis data.
+Konteks: Terlampir PDF Lampiran III, IV, VII, dan VIII Laporan Pengawasan Semester I 2026 KEK Kendal (data per pelaku usaha).
+Tugas: (1) Ubah setiap tabel menjadi tabel rapi dengan Python. (2) Gabungkan jadi satu tabel per pelaku usaha. (3) Buat dashboard satu halaman: 4 angka utama dan 4 grafik.
+Format: File Excel dengan kolom: nama, investasi_tw1, investasi_tw2, tki, tka, ekspor, penjualan_lokal. Lalu dashboard.
+Batasan: Laporkan jika penjumlahan tidak sama dengan baris TOTAL.`,
+  out:'File Excel bersih dan dashboard yang bisa diperbarui tiap triwulan.',
+  warn:'Hasil ekstraksi tabel PDF bisa bergeser kolomnya. Cocokkan dengan baris TOTAL sebelum dipakai.'},
+ {s:'e',img:'1517245386807-bb43f82c33c4',t:'Asisten regulasi untuk konsultasi pelaku usaha',ai:['NotebookLM'],sup:['ChatGPT','Claude'],
+  now:'Konsultasi pelaku usaha berlangsung setiap hari. Pertanyaan yang mirip dijawab berulang dengan merujuk banyak regulasi.',
+  steps:['Kumpulkan regulasi resmi yang dipakai dalam layanan, misalnya PP 85/2019, SE Sekjen DN KEK tentang fasilitas pembebasan bea masuk (masterlist), Peraturan Sekjen DN KEK No. 4/2025 (NPU), Perdirjen BC No. 24/BC/2023 (IT Inventory), Permendag No. 34/2023 (SKA).','Buat notebook baru di NotebookLM dan unggah dokumen tersebut.','Ajukan pertanyaan yang sering muncul dari pelaku usaha.','Klik rujukan di jawaban untuk memeriksa pasal aslinya.','Pakai jawaban sebagai bahan, bukan jawaban final ke pelaku usaha.'],
+  prompt:`Berdasarkan dokumen di notebook ini saja:
+Seorang pelaku usaha baru di KEK Kendal bertanya: "Apa saja kewajiban kami terkait IT Inventory dan kapan batas waktunya?"
+Jawab dalam 5 poin singkat, sebutkan pasal rujukannya, dan tulis "tidak ditemukan di dokumen" untuk hal yang tidak ada di sumber.`,
+  out:'Jawaban konsultasi yang lebih cepat, konsisten, dan menyebut rujukan.',
+  warn:'Pastikan versi regulasi yang diunggah adalah yang terbaru dan berlaku.'}];
+const tagOf=n=>{const t=TOOLS.find(x=>x.n===n)||(n.startsWith('Claude')?{d:'claude.ai'}:null);return`<span class="tag">${t?`<img src="${FAV(t.d)}" alt="">`:''}${n}</span>`};
+/* Use case berbasis mode Claude */
+[[['Claude Projects','Claude Chat'],['Excel'],'Buat Project "LAKIN KEK Kendal" di Claude: tulis instruksi tetap, unggah template, laporan triwulan lalu, dan definisi IKU.'],
+ [['Claude Cowork'],['Claude Chat','Excel'],'Buka Cowork di aplikasi Claude desktop dan pilih folder berisi data LKPM, ekspor, dan penjualan lokal.'],
+ [['Claude Chat'],['Claude Projects'],'Buka Claude Chat dan lampirkan kedua dokumen.'],
+ [['Claude Chat','Claude Design'],['Gamma','Microsoft Copilot'],'Mulai di Claude Chat untuk menyusun alur, lalu buat slide di kanvas Claude Design atau minta file PowerPoint.'],
+ [['Claude Chat'],['Excel','Napkin AI'],'Buka Claude Chat dan unggah tabelnya (Excel atau tempel langsung).'],
+ [['Claude Design','Claude Chat'],['Canva'],'Susun naskah di Claude Chat, lalu minta Claude membuat desain carousel di kanvas Design.'],
+ [['Claude Code','Claude Cowork'],['Excel','Looker Studio'],'Siapkan folder project berisi PDF lampiran, lalu buka tab Code (atau Cowork) di aplikasi Claude.'],
+ [['Claude Projects'],['NotebookLM'],null]
+].forEach((m,i)=>{UC[i].ai=m[0];UC[i].sup=m[1];if(m[2])UC[i].steps.unshift(m[2])});
+UC[7].steps=['Kumpulkan regulasi resmi yang dipakai dalam layanan, misalnya PP 85/2019, SE Sekjen DN KEK tentang fasilitas pembebasan bea masuk (masterlist), Peraturan Sekjen DN KEK No. 4/2025 (NPU), Perdirjen BC No. 24/BC/2023 (IT Inventory), Permendag No. 34/2023 (SKA).','Buat Project "Regulasi Layanan KEK" di Claude dan unggah dokumen tersebut sebagai knowledge.','Tulis instruksi tetap: jawab hanya dari dokumen project dan sebutkan pasal rujukannya.','Ajukan pertanyaan yang sering muncul dari pelaku usaha.','Cek pasal yang dirujuk ke dokumen aslinya.','Pakai jawaban sebagai bahan, bukan jawaban final ke pelaku usaha.'];
+UC[7].prompt=UC[7].prompt.replace('Berdasarkan dokumen di notebook ini saja:','Berdasarkan dokumen di project ini saja:');
+var ucSel=0,ucScope='all',ucTab='langkah',ucStep=0;
+function renderUC(){
+  $('#ucFilter').innerHTML=[['all','Semua']].concat(Object.entries(SCOPE)).map(([k,v])=>`<button aria-pressed="${ucScope===k}" data-k="${k}">${v}</button>`).join('');
+  $$('#ucFilter button').forEach(b=>b.onclick=()=>{ucScope=b.dataset.k;const f=UC.findIndex(u=>ucScope==='all'||u.s===ucScope);if(f>=0&&!(ucScope==='all'||UC[ucSel].s===ucScope)){ucSel=f;ucStep=0}renderUC()});
+  $('#ucGrid').innerHTML=UC.map((u,i)=>`<button class="uc-card ${ucScope!=='all'&&u.s!==ucScope?'dim':''}" role="tab" aria-selected="${i===ucSel}" data-i="${i}"><img src="${IMG(u.img,600)}" alt="" loading="lazy"><div class="in"><span class="n">${String(i+1).padStart(2,'0')} · ${SCOPE[u.s]}</span><b>${u.t}</b></div></button>`).join('');
+  $$('.uc-card').forEach(b=>b.onclick=()=>{ucSel=+b.dataset.i;ucStep=0;ucTab='langkah';renderUC();$('#ucDetail').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})});
+  const u=UC[ucSel],N=u.steps.length;
+  $('#ucDetail').innerHTML=`
+    <div class="uc-side"><img src="${IMG(u.img,900)}" alt=""><div class="in fade-in">
+      <span class="lbl">${SCOPE[u.s]} · Use case ${ucSel+1}/${UC.length}</span><h3 class="h-m">${u.t}</h3>
+      <span class="lbl">Tugas saat ini</span><p>${u.now}</p>
+      <span class="lbl">AI utama</span><div class="tag-list">${u.ai.map(tagOf).join('')}</div>
+      <span class="lbl">Pendukung</span><div class="tag-list">${u.sup.map(tagOf).join('')}</div>
+      <span class="lbl">Hasil</span><p>${u.out}</p></div></div>
+    <div class="uc-main">
+      <div class="uc-tabs" role="tablist">${[['langkah','Langkah kerja'],['prompt','Contoh prompt']].map(t=>`<button role="tab" aria-selected="${ucTab===t[0]}" data-t="${t[0]}">${t[1]}</button>`).join('')}</div>
+      ${ucTab==='langkah'?`
+        <div class="stepbar"><i style="width:${(ucStep+1)/N*100}%"></i></div>
+        <ol class="steps">${u.steps.map((s,i)=>`<li class="${i<ucStep?'past':i===ucStep?'cur':''}" data-s="${i}"><span class="sn">${i<ucStep?'✓':i+1}</span><span>${s}</span></li>`).join('')}</ol>
+        <div class="row"><button class="btn ghost" id="sPrev" ${ucStep===0?'disabled':''}>← Sebelumnya</button><button class="btn" id="sNext">${ucStep<N-1?'Langkah berikutnya →':'Lihat contoh prompt →'}</button><span class="small muted">Langkah ${ucStep+1} dari ${N}</span></div>`:
+        `<pre class="prompt fade-in" id="ucPrompt">${esc(u.prompt)}</pre><div class="row"><button class="btn" id="ucCopy">Salin prompt</button><button class="btn ghost" id="ucBack">← Kembali ke langkah</button></div>`}
+      <div class="note"><b>Perlu dicek:</b> ${u.warn}</div>
+    </div>`;
+  $$('.uc-tabs button').forEach(b=>b.onclick=()=>{ucTab=b.dataset.t;renderUC()});
+  $$('.steps li').forEach(li=>li.onclick=()=>{ucStep=+li.dataset.s;renderUC()});
+  const sp=$('#sPrev'),sn=$('#sNext'),cb=$('#ucCopy'),bk=$('#ucBack');
+  if(sp)sp.onclick=()=>{ucStep=Math.max(0,ucStep-1);renderUC()};
+  if(sn)sn.onclick=()=>{if(ucStep<N-1)ucStep++;else ucTab='prompt';renderUC()};
+  if(cb)cb.onclick=()=>copyText(u.prompt,cb,$('#ucPrompt'));
+  if(bk)bk.onclick=()=>{ucTab='langkah';renderUC()};
+}
+renderUC();
+$('#ucSummary').innerHTML=UC.map((u,i)=>`<tr><td>${i+1}</td><td><b>${u.t}</b></td><td>${SCOPE[u.s]}</td><td><div class="tag-list">${u.ai.map(tagOf).join('')}</div></td><td><div class="tag-list">${u.sup.map(tagOf).join('')}</div></td></tr>`).join('');
+
+/* ---------- Mengenal Claude ---------- */
+const ICON={
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>',
+  proj:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 13h8"/></svg>',
+  cowork:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 11l2 2 4-4"/></svg>',
+  design:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><circle cx="11" cy="11" r="2"/></svg>',
+  code:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>'};
+const MODES=[
+ {k:'chat',t:'Chat',sub:'Percakapan',c:'var(--m-chat)',what:'Bertanya, menulis, merangkum, dan menganalisis file yang diunggah. Hasilnya bisa berupa teks, file Word, Excel, PowerPoint, atau Artifact (halaman interaktif) yang bisa dibagikan lewat tautan.',fit:['Draf narasi, surat, dan caption','Merangkum dan memeriksa dokumen','Analisis data dari file Excel dengan menjalankan kode'],start:['Buka claude.ai atau aplikasi Claude','Lampirkan file lewat ikon lampiran','Tulis prompt dengan rumus Peran, Konteks, Tugas, Format, Batasan'],kek:'Cek konsistensi LAKIN sebelum dikirim. Ubah Bab Isu Strategis menjadi alur paparan.',note:'Setiap percakapan baru mulai dari nol, kecuali dijalankan di dalam Projects.'},
+ {k:'proj',t:'Projects',sub:'Ruang kerja berulang',c:'var(--m-proj)',what:'Ruang kerja berisi instruksi tetap dan dokumen acuan (knowledge) yang otomatis dipakai di setiap percakapan dalam project tersebut.',fit:['Tugas rutin dengan acuan yang sama','Kumpulan regulasi untuk menjawab konsultasi','Format dan gaya bahasa laporan yang konsisten'],start:['Buat Project baru di claude.ai','Tulis instruksi tetap: peran, gaya bahasa, aturan','Unggah dokumen acuan: template, laporan lalu, regulasi','Mulai percakapan di dalam Project'],kek:'Project "LAKIN KEK Kendal" dan Project "Regulasi Layanan KEK".',note:'Perbarui dokumen acuan saat regulasi atau template berubah.'},
+ {k:'cowork',t:'Cowork',sub:'Bekerja di folder laptop',c:'var(--m-cowork)',what:'Mode agen di aplikasi desktop Claude. Claude membuka folder yang Anda izinkan, membaca banyak file sekaligus, lalu membuat dan menyimpan hasil (Word, Excel, PowerPoint, HTML) langsung ke folder. Bisa terhubung ke aplikasi seperti Gmail dan Google Drive.',fit:['Rekap dari banyak file Excel dan PDF','Menyusun laporan dari folder bahan','Merapikan, mengindeks, dan memilah file atau email'],start:['Buka aplikasi Claude desktop, pilih Cowork','Pilih folder kerja (misalnya Input dan Output)','Jelaskan tugas dan minta rencana kerja dulu','Setujui langkahnya, periksa hasil di folder Output'],kek:'Folder data LKPM per triwulan menjadi rekap Excel dan draf Bab II Laporan Pengawasan.',note:'Beri akses hanya ke folder yang diperlukan. Simpan salinan sebelum file diubah.'},
+ {k:'design',t:'Design',sub:'Kanvas visual',c:'var(--m-design)',what:'Kanvas untuk membuat desain visual: poster, slide, konten media sosial, mockup layar, dan prototipe. Hasilnya bisa direvisi lewat percakapan, diedit, dan dibagikan.',fit:['Carousel dan poster edukasi layanan','Slide paparan pimpinan','Mockup tampilan aplikasi atau dashboard'],start:['Minta Claude membuat desain di kanvas Design','Jelaskan ukuran, pesan, dan gaya visual','Revisi lewat percakapan atau edit langsung','Bagikan tautan atau ekspor'],kek:'Carousel "Kenalan dengan SKA" dan poster alur layanan Masterlist.',note:'Gunakan logo dan identitas visual instansi sesuai aturan.'},
+ {k:'code',t:'Code',sub:'Membangun alat kerja',c:'var(--m-code)',what:'Claude Code menulis dan menjalankan kode di folder project: mengolah data, membangun dashboard, website, dan aplikasi. Tersedia di tab Code aplikasi desktop Claude, terminal, dan VS Code.',fit:['Dashboard dari data Excel dan PDF','Otomasi pengolahan data yang berulang','Prototipe aplikasi dan halaman web'],start:['Siapkan folder project berisi bahan di Input','Buka tab Code di aplikasi Claude dan pilih folder','Minta analisis bahan dan rencana kerja dulu','Uji hasil, minta perbaikan, simpan versi'],kek:'Dashboard kinerja KEK dari Lampiran III sampai VIII, diperbarui tiap triwulan.',note:'Materi sharing ini juga dibuat dengan Claude Code.'}];
+const MC=k=>MODES.find(m=>m.k===k).c;
+let modeK='chat';
+function renderModes(){
+  $('#modes').innerHTML=MODES.map(m=>{const n=G.filter(g=>g.mode.includes(m.k)&&!g.usul).length;return`<button class="mode" style="--mc:${m.c}" aria-pressed="${m.k===modeK}" data-k="${m.k}"><span class="cnt">${n?n+' karya':'usulan'}</span><span class="ic">${ICON[m.k]}</span><b>${m.t}</b><small>${m.sub}</small></button>`}).join('');
+  $$('.mode').forEach(b=>b.onclick=()=>{modeK=b.dataset.k;renderModes()});
+  const m=MODES.find(x=>x.k===modeK);
+  $('#mdetail').innerHTML=`
+    <div class="card fade-in" style="border-top:4px solid ${m.c}"><span class="mbadge" style="--mc:${m.c}">Claude ${m.t}</span><p>${m.what}</p>
+      <div class="eyebrow">Cocok untuk</div><ul class="clean">${m.fit.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="note"><b>Contoh di KEK:</b> ${m.kek}</div></div>
+    <div class="card fade-in"><div class="eyebrow">Cara mulai</div><ol class="steps">${m.start.map((s,i)=>`<li class="cur" style="cursor:default"><span class="sn">${i+1}</span><span>${s}</span></li>`).join('')}</ol>
+      <p class="small muted">${m.note}</p>
+      <div class="row"><button class="btn" id="toGal">Lihat karya ${m.t} →</button></div></div>`;
+  $('#toGal').onclick=()=>{galMode=modeK;galScope='all';renderGal();go(8)};
+}
+const PQ=[['proj','Tugas ini berulang dengan dokumen acuan yang sama?'],['cowork','Bahannya banyak file di laptop dan hasilnya perlu disimpan sebagai file?'],['design','Hasilnya berupa visual: poster, slide, atau konten media sosial?'],['code','Hasilnya alat kerja: dashboard, aplikasi, atau otomasi?']];
+const pqOn=new Set();
+function renderPicker(){
+  $('#picker').innerHTML=PQ.map(([k,q])=>`<button class="pq" aria-pressed="${pqOn.has(k)}" data-k="${k}"><span>${q}</span><span class="sw"></span></button>`).join('');
+  $$('.pq').forEach(b=>b.onclick=()=>{pqOn.has(b.dataset.k)?pqOn.delete(b.dataset.k):pqOn.add(b.dataset.k);renderPicker()});
+  const order=['code','cowork','design','proj'],pick=order.filter(k=>pqOn.has(k)),main=pick[0]||'chat',m=MODES.find(x=>x.k===main);
+  const also=pick.slice(1).map(k=>'Claude '+MODES.find(x=>x.k===k).t);
+  $('#rec').style.setProperty('--mc',m.c);
+  $('#rec').innerHTML=`<div class="eyebrow" style="color:rgba(255,255,255,.8)">Rekomendasi</div><h3 class="h-l">Claude ${m.t}</h3><p>${m.what}</p>${also.length?`<p><b>Bisa dikombinasikan dengan:</b> ${also.join(', ')}.</p>`:''}${!pick.length?'<p>Tanpa kebutuhan khusus, mulai dari Chat.</p>':''}`;
+}
+
+/* ---------- Galeri karya ---------- */
+const G=[
+ {id:'osdm',mode:['code'],scope:['d'],org:true,t:'OSDM Analytics Dashboard Kemenkeu',d:'Dashboard analitik organisasi dan SDM: OTK, uraian jabatan, kompetensi jabatan, pelimpahan wewenang, cuti, suksesi, penghargaan, dan pemberhentian. Dikembangkan bertahap dalam 12 sesi, setiap modul dari data Excel dan Word di folder input.',
+  q:'kita akan menambah 1 modul terkait kompetensi jabatan, data nya sudah gue feeding di folder input, loe analisis dulu yah dari data … pastikan tidak ada bug, data yang hilang atau tertinggal ketika loe transform ke json',outs:[]},
+ {id:'aisetjen',mode:['code'],scope:['a','b'],org:true,t:'Konsep AI-Enabled Setjen',d:'Paket bahan pemanfaatan AI di Sekretariat Jenderal: deck presentasi, konsep naratif, contoh notula yang disusun AI, dan simulasi optimasi AI per jabatan.',outs:[]},
+ {id:'probis',mode:['cowork','code'],scope:['d'],org:true,t:'Dashboard Proses Bisnis Kemenkeu',d:'Dashboard peta proses bisnis, katalog layanan, dan aplikasi. Dikembangkan dalam beberapa sesi Cowork, lalu datanya dipisah ke file eksternal lewat Claude Code agar mudah diperbarui.',
+  q:'Tolong baca file Dashboard Proses Bisnis Kemenkeu.html … Setelah itu kita refactor supaya data dipisah ke JSON eksternal dan HTML tidak perlu diubah setiap update data.',outs:[]},
+ {id:'abk',mode:['code'],scope:['d'],org:true,t:'Mesin Data Analisis Beban Kerja (ABK)',d:'Mengurai file XML Form ABK berukuran besar secara bertahap, lalu menghitung kebutuhan pegawai dibanding pegawai eksisting per jabatan, dengan status kurang, sesuai, atau lebih.',
+  q:'Cek ukuran file dan preview 100-200 baris pertama untuk memahami struktur … JANGAN load seluruh file sekaligus ke memory',outs:[]},
+ {id:'kanvas',mode:['code'],scope:['b'],org:true,t:'Kanvas Inovasi Probis',d:'Halaman kerja interaktif satu file untuk workshop inovasi proses bisnis, siap dihosting di GitHub Pages.',
+  q:'Buatkan satu file HTML mandiri bernama index.html … Ini halaman kerja interaktif untuk workshop inovasi, namanya Kanvas Inovasi Probis.',outs:[]},
+ {id:'rap',mode:['code'],scope:['a'],org:true,t:'Rancangan Aksi Perubahan',d:'Draf rancangan aksi perubahan yang berangkat dari hasil asesmen organisasi, dengan prototipe dashboard sebagai pendukung program. Disusun dalam beberapa versi draf.',outs:[]},
+ {id:'bumdes',mode:['code'],scope:['a'],t:'Laporan Studi Lapangan BUMDes Kutuh',d:'Laporan studi lapangan dalam dua bentuk, dokumen Word dan halaman web, termasuk analisis Business Model Canvas.',
+  q:'…membuat landing page BUMDES KUTUH, dalam laporan Study Lapangan dan nant ada output MBC … mari kita diskusikan brok laporan dalam bentuk web yang profesional',
+  outs:[['Buka laporan versi web','https://doniebelva.github.io/bumdes-kutuh/']]},
+ {id:'lppm',mode:['code'],scope:['a'],t:'Laporan Akhir Penelitian dan Pengabdian',d:'Menyusun dua laporan akhir (penelitian dan pengabdian masyarakat) dari bahan yang tersedia, sekaligus SPTB dan lampiran bukti pertanggungjawaban belanja.',
+  q:'…ada 2 proyek laporan yaitu LPPM dan Pengmas … Tugas loe buat 2 laporan akhir … untuk LPPM loe buat juga SPTB',outs:[]},
+ {id:'sengketa',mode:['code'],scope:['d'],t:'Dashboard Analitik Sengketa Pajak',d:'Menarik data dengan skrip, lalu membangun dashboard analitik beserta telaah dan rancangan pengembangannya.',
+  q:'gue mau bikin dashboard analitik sengketa pajak, tahap 1 gue mau tarikan datanya, gue sudah buat scipitr dan rancangannya … trus berikan insight',outs:[]},
+ {id:'sigap',mode:['code'],scope:['b','d'],t:'Prototipe Aplikasi SIGAP Bencana',d:'Rancangan aplikasi web dan HP untuk komunikasi unit di daerah dengan pusat dalam Manajemen Keberlangsungan Bisnis, beserta nota kebutuhan teknis dan panduan deploy.',
+  q:'…desain apps berbasis web dan HP terkait Manajemen Keberlansungan Bisnis … analisis dulu',outs:[]},
+ {id:'bigdata',mode:['code'],scope:['b'],t:'Website Materi Kuliah Big Data',d:'Materi perkuliahan disajikan sebagai website interaktif untuk ditayangkan di kelas, dihosting di GitHub Pages.',
+  q:'…buat website untuk materi kuliah … nanti gue akan tayangankan website ini untuk mahasiswa menjelaskan perkuliahan',
+  prev:'https://donny-apps.github.io/belajar-data-analitik/index.html',outs:[['Buka website materi','https://donny-apps.github.io/belajar-data-analitik/']]},
+ {id:'index',mode:['cowork','code'],scope:['d'],t:'Indeks File Laptop "Boxfiles Saya"',d:'Cowork membuat indeks dari ribuan file di laptop. Claude Code lalu membangun dashboard pencarian file dengan filter per folder.',
+  q:'Saya ingin membuat File Index Dashboard system dengan 3 komponen: Python script untuk scan … HTML Dashboard yang bisa search by keyword, filter by folder/kategori',outs:[]},
+ {id:'aboutme',mode:['cowork'],scope:[],t:'File Instruksi Kerja "About me"',d:'Profil, struktur folder, aturan wajib, dan preferensi keluaran yang dibaca Claude di setiap sesi, sehingga tidak perlu menjelaskan ulang. Contoh aturannya: jangan hapus file di folder input, simpan hasil di folder output, buat salinan sebelum mengedit.',outs:[]},
+ {id:'poster',mode:['design'],scope:['c'],t:'Islamic Banking Framework Poster',d:'Poster kerangka konsep yang dibuat di kanvas Design dan bisa dibagikan lewat tautan.',outs:[]},
+ {id:'materi',mode:['code'],scope:['b'],t:'Materi Sharing Session Ini',d:'Halaman yang sedang Anda lihat dibuat dengan Claude Code: membaca laporan kantor, menguji angka, mencari foto, dan menyusun materi interaktif.',outs:[]},
+ {id:'u-chat',usul:true,mode:['chat'],scope:['a'],t:'Usulan: Cek konsistensi laporan di Chat',d:'Lampirkan laporan kinerja dan laporan pengawasan, lalu minta Claude memeriksa angka, rumus, periode, dan dasar hukum sebelum dokumen dikirim.',outs:[['Buka Claude','https://claude.ai/new']]},
+ {id:'u-proj',usul:true,mode:['proj'],scope:['a'],t:'Usulan: Project "LAKIN KEK Kendal"',d:'Satu Project berisi instruksi tetap, template LAKIN, laporan triwulan lalu, dan definisi IKU. Setiap triwulan cukup membuka percakapan baru di Project tersebut.',outs:[['Buka Projects','https://claude.ai/projects']]}];
+const HTTP=/^https?:$/.test(location.protocol);
+const MAP=[];
+const localFile=p=>p;
+const fileURL=p=>{if(/^https?:/.test(p))return p;if(HTTP){const m=MAP.find(([a])=>p.startsWith(a));if(m)return m[1]+p.slice(m[0].length).split('/').map(encodeURIComponent).join('/')}return localFile(p)};
+const EXT=p=>/^https?:/.test(p)?'web':(p.endsWith('/')?'folder':(p.split('.').pop()||'').toLowerCase());
+const OFFICE={docx:'ms-word',xlsx:'ms-excel',pptx:'ms-powerpoint'};
+const openURL=p=>{const e=EXT(p);return OFFICE[e]?`${OFFICE[e]}:ofe|u|${localFile(p)}`:fileURL(p)};
+let galMode='all',galScope='all',galSel='osdm';
+function gcardHTML(g){const m=g.mode[0],c=MC(m);return`<button class="gcard ${(galMode!=='all'&&!g.mode.includes(galMode))||(galScope!=='all'&&!g.scope.includes(galScope))?'dim':''}" style="--mc:${c}" role="tab" aria-selected="${g.id===galSel}" data-id="${g.id}">
+  <div class="th">${g.thumb?`<img src="${fileURL(g.thumb)}" alt="" loading="lazy" onerror="this.remove()">`:`<div style="position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85)"><span style="width:54px;height:54px;display:block">${ICON[m]}</span></div>`}<span class="ft">${g.usul?'usulan':'karya nyata'}</span></div>
+  <div class="bd"><div class="chips">${g.mode.map(k=>`<span class="mbadge" style="--mc:${MC(k)}">${MODES.find(x=>x.k===k).t}</span>`).join('')}${g.org?'<span class="chip amb">Biro Organta</span>':''}</div><b>${g.t}</b></div></button>`}
+function renderGal(){
+  $('#galMode').innerHTML=[['all','Semua mode']].concat(MODES.map(m=>[m.k,m.t])).map(([k,v])=>`<button aria-pressed="${galMode===k}" data-k="${k}">${v}</button>`).join('');
+  $('#galScope').innerHTML=[['all','Semua lingkup'],['a','a. Laporan'],['b','b. Presentasi'],['c','c. Medsos'],['d','d. Dashboard']].map(([k,v])=>`<button aria-pressed="${galScope===k}" data-k="${k}">${v}</button>`).join('');
+  $$('#galMode button').forEach(b=>b.onclick=()=>{galMode=b.dataset.k;renderGal()});
+  $$('#galScope button').forEach(b=>b.onclick=()=>{galScope=b.dataset.k;renderGal()});
+  $('#gal').innerHTML=G.map(gcardHTML).join('');
+  $$('#gal .gcard').forEach(b=>b.onclick=()=>{galSel=b.dataset.id;renderGal();$('#gdetail').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})});
+  renderGDetail();
+}
+function renderGDetail(){
+  const g=G.find(x=>x.id===galSel),m=g.mode[0];
+  const pv=g.prev?(g.prev.endsWith('.html')?`<iframe id="gFrame" src="${fileURL(g.prev)}" title="Pratinjau ${esc(g.t)}" loading="lazy"></iframe>`:`<img src="${fileURL(g.prev)}" alt="Pratinjau ${esc(g.t)}">`):`<div class="empty">Hasil karya ini ditunjukkan langsung oleh narasumber saat sesi.</div>`;
+  $('#gdetail').style.setProperty('--mc',MC(m));
+  $('#gdetail').innerHTML=`<div class="info fade-in">
+    <div class="chips">${g.mode.map(k=>`<span class="mbadge" style="--mc:${MC(k)}">Claude ${MODES.find(x=>x.k===k).t}</span>`).join('')}${g.org?'<span class="chip amb">Biro Organta</span>':''}${g.usul?'<span class="chip">Usulan untuk KEK</span>':''}</div>
+    <h3 class="h-m">${g.t}</h3><p class="small">${g.d}</p>
+    ${g.q?`<div class="eyebrow">Instruksi awal ke Claude</div><div class="quoteu">"${esc(g.q)}"</div>`:''}
+    ${g.outs.length?`<div class="eyebrow">Buka hasil</div><div class="outs">${g.outs.map(([l,p])=>`<a class="out" href="${openURL(p)}" target="_blank" rel="noopener"><span class="ext">${EXT(p)}</span><span>${esc(l)}</span>${/^https?:/.test(p)?'':`<button class="cp" data-p="${esc(p.replace(/\//g,'\\'))}">Salin path</button>`}</a>`).join('')}</div>`:''}
+    ${g.warn?`<div class="warnbox"><b>Perhatian:</b> ${g.warn}</div>`:''}
+    </div><div class="pv" id="gPv">${pv}${g.prev&&g.prev.endsWith('.html')?`<a class="btn" href="${fileURL(g.prev)}" target="_blank" rel="noopener" style="position:absolute;right:12px;bottom:12px;z-index:2">Buka penuh ↗</a>`:''}</div>`;
+  $$('#gdetail .cp').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const t=document.createElement('textarea');t.value=b.dataset.p;document.body.appendChild(t);t.select();
+    const ok=()=>{b.textContent='Tersalin';setTimeout(()=>b.textContent='Salin path',1400)};
+    if(navigator.clipboard)navigator.clipboard.writeText(b.dataset.p).then(ok,()=>{document.execCommand('copy');ok()});else{document.execCommand('copy');ok()}t.remove()});
+  fitFrame();
+}
+function fitFrame(){const f=$('#gFrame'),pv=$('#gPv');if(f&&pv){const s=pv.clientWidth/1440;f.style.transform=`scale(${s})`;pv.style.height=Math.max(380,1000*s)+'px'}}
+addEventListener('resize',fitFrame);
+onShow['galeri']=fitFrame;
+$('#orgGal').innerHTML=G.filter(g=>g.org).map(g=>gcardHTML(g).replace('class="gcard dim"','class="gcard"')).join('');
+$$('#orgGal .gcard').forEach(b=>b.onclick=()=>{galSel=b.dataset.id;galMode='all';galScope='all';renderGal();go(8)});
+renderModes();renderPicker();renderGal();
+
+/* ---------- Mulai ---------- */
+const h=(location.hash||'').slice(1),st=screens.findIndex(s=>s.dataset.id===h);
+go(st>=0?st:0);
+})();
+</script>
+</body>
+</html>
