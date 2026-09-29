@@ -113,8 +113,8 @@ kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-b
 .chip.acc{background:var(--accent-soft)} .chip.amb{background:var(--amber-soft)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 ul.clean{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-ul.clean li{display:flex;gap:10px}
-ul.clean li::before{content:"";flex:none;width:6px;height:6px;border-radius:2px;background:var(--accent);margin-top:.62em}
+ul.clean li{display:block;position:relative;padding-left:16px}
+ul.clean li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--accent)}
 ul.clean.amb li::before{background:var(--amber)} ul.clean.bad li::before{background:var(--bad)} ul.clean.good li::before{background:var(--good)}
 .btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:11px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,filter .2s}
 .btn:hover{filter:brightness(1.07)} .btn:active{transform:scale(.97)}
@@ -128,9 +128,10 @@ ul.clean.amb li::before{background:var(--amber)} ul.clean.bad li::before{backgro
 
 /* Photo banner */
 .banner{position:relative;border-radius:22px;overflow:hidden;min-height:230px;display:flex;align-items:flex-end;color:var(--on-photo);isolation:isolate}
-.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.06);animation:kb 18s ease-in-out infinite alternate}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:-2}
 @keyframes kb{to{transform:scale(1.16) translate(-2%,-2%)}}
-.banner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,var(--shade) 20%,rgba(6,16,20,.35) 70%,rgba(6,16,20,.15))}
+.banner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,13,17,.94) 0%,rgba(5,13,17,.9) 45%,rgba(5,13,17,.55) 72%,rgba(5,13,17,.25) 100%)}
+.banner h2,.banner .quote,.banner .lead{text-shadow:0 2px 12px rgba(0,0,0,.55)}
 .banner .in{padding:30px 34px;display:flex;flex-direction:column;gap:10px;max-width:780px}
 .banner .eyebrow{color:#FFC862}
 .banner .lead{color:rgba(255,255,255,.86)}
@@ -304,9 +305,9 @@ pre.prompt{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.6;whi
 .uc-card small{font-size:12px;color:rgba(255,255,255,.75)}
 .uc-card.dim{opacity:.25}
 .uc-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-.uc-side{position:relative;min-height:320px;color:var(--on-photo);display:flex;align-items:flex-end;isolation:isolate}
-.uc-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.uc-side::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,14,18,.94) 35%,rgba(5,14,18,.3))}
+.uc-side{position:relative;color:#fff;display:flex;flex-direction:column;background:#0D1A20}
+.uc-side img{width:100%;height:170px;object-fit:cover;flex:none}
+
 .uc-side .in{padding:22px;display:flex;flex-direction:column;gap:12px}
 .uc-side .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#5FE3D5;font-weight:700}
 .uc-side p{font-size:14px;color:rgba(255,255,255,.85)}
@@ -420,7 +421,8 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 .qr img,.qr canvas{width:136px!important;height:136px!important}
 .share-txt{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
 .share-txt a{color:var(--accent);font-weight:700;word-break:break-all}
-.closing{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr)}
+.closing{grid-template-columns:repeat(2,minmax(0,1fr))}
+.closing .share{grid-column:1/-1;order:-1}
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(3,10,13,.86);display:grid;place-items:center;padding:24px;cursor:zoom-out}
 .overlay img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5);background:#fff}
 .help{position:fixed;right:24px;bottom:24px;z-index:40;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 20px 50px -20px rgba(0,0,0,.45);width:min(340px,calc(100vw - 32px))}
@@ -1437,7 +1439,7 @@ document.addEventListener('click',e=>{const im=e.target.closest('.gdetail .pv im
   document.body.insertAdjacentHTML('beforeend',`<div class="overlay" role="dialog" aria-label="Gambar layar penuh"><img src="${im.src}" alt=""></div>`);
   $('.overlay').onclick=()=>$('.overlay').remove()});
 // QR, salin link, salin semua prompt
-function drawQR(){const q=$('#qr');if(!q||q.dataset.done)return;if(window.QRCode){new QRCode(q,{text:WEB_URL,width:136,height:136,colorDark:'#0D1A20',colorLight:'#ffffff'});q.dataset.done=1}else q.textContent='QR memerlukan internet'}
+function drawQR(n){const q=$('#qr');if(!q||q.dataset.done)return;if(window.QRCode){q.innerHTML='';new QRCode(q,{text:WEB_URL,width:136,height:136,colorDark:'#0D1A20',colorLight:'#ffffff'});q.dataset.done=1}else if((n||0)<20)setTimeout(()=>drawQR((n||0)+1),500);else q.textContent='QR memerlukan internet'}
 onShow['rencana-aksi']=drawQR;window.addEventListener('load',drawQR);
 $('#copyLink').onclick=()=>copyText(WEB_URL,$('#copyLink'),$('#webLink'));
 $('#copyAll').onclick=()=>{const txt='PROMPT AI UNTUK TUGAS KANTOR\nAdministrator KEK Kendal · '+WEB_URL+'\n\n'
