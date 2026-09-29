@@ -565,12 +565,12 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
   </div>
 
   <div class="grid g3">
-    <div class="card lift rv obj-card" data-go="1"><span class="chip acc">Objektif 1</span><b class="h-s">Pengantar AI</b><p class="small muted">Apa itu AI, macam-macam AI dengan kelebihan dan kekurangannya, dasar penggunaan, dan prompt yang efektif.</p></div>
-    <div class="card lift rv obj-card" data-go="9"><span class="chip acc">Objektif 2</span><b class="h-s">Potensi AI di kantor</b><p class="small muted">Kegiatan di Administrator KEK Kendal yang dapat dibantu AI.</p></div>
-    <div class="card lift rv obj-card" data-go="10"><span class="chip acc">Objektif 3</span><b class="h-s">Sharing Biro Organta</b><p class="small muted">Pengalaman penggunaan AI di Biro Organta.</p></div>
+    <div class="card lift rv obj-card" data-go="1"><span class="chip acc">Objektif 1</span><b class="h-s">Pengantar AI</b><p class="small muted">Apa itu AI, jenisnya, kelebihan dan kekurangan, serta prompt efektif.</p></div>
+    <div class="card lift rv obj-card" data-go="9"><span class="chip acc">Objektif 2</span><b class="h-s">Potensi AI di kantor</b><p class="small muted">Tugas kantor yang bisa dibantu AI.</p></div>
+    <div class="card lift rv obj-card" data-go="10"><span class="chip acc">Objektif 3</span><b class="h-s">Sharing Biro Organta</b><p class="small muted">Pengalaman nyata memakai AI.</p></div>
   </div>
 
-  <div class="head rv"><div class="eyebrow">Ruang lingkup kegiatan kantor</div><h2 class="h-m">Empat pekerjaan yang jadi fokus. Klik untuk lihat use case-nya.</h2></div>
+  <div class="head rv"><div class="eyebrow">Ruang lingkup kegiatan kantor</div><h2 class="h-m">Empat fokus pekerjaan. Klik untuk lihat use case.</h2></div>
   <div class="grid g4">
     <button class="scope rv" data-scope="a"><img data-img="1499914485622-a88fac536970" alt=""><div class="in"><span class="k">a</span><b>Penyusunan laporan rutin</b><small>LAKIN, laporan pengawasan</small></div></button>
     <button class="scope rv" data-scope="b"><img data-img="1542744173-8e7e53415bb0" alt=""><div class="in"><span class="k">b</span><b>Bahan presentasi</b><small>Visualisasi data, presentasi efektif</small></div></button>
@@ -586,14 +586,14 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 <section class="screen" data-id="apa-itu-ai" data-title="Apa itu AI" hidden>
   <div class="banner rv"><img data-img="1709120395858-92f1c7c577f5" alt=""><div class="in">
     <div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Apa itu AI?</h2>
-    <p class="lead">Kecerdasan Artifisial (AI) adalah teknologi yang membuat komputer bisa mengerjakan tugas yang biasanya butuh kecerdasan manusia: memahami bahasa, mengenali pola, mengolah data, dan membuat konten baru.</p></div></div>
+    <p class="lead">AI membuat komputer bisa memahami bahasa, mengenali pola, mengolah data, dan membuat konten.</p></div></div>
 
   <div class="grid g2 rv">
     <div class="layers" id="layers">
       <div class="layer" data-k="ai"><div class="layer-t">Artificial Intelligence <small>payung besar</small></div>
         <div class="layer l2" data-k="ml"><div class="layer-t">Machine Learning <small>belajar dari data</small></div>
           <div class="layer" data-k="dl"><div class="layer-t">Deep Learning <small>jaringan saraf tiruan</small></div>
-            <div class="layer l4" data-k="gen"><div class="layer-t">Generative AI / LLM <small>yang kita pakai hari ini</small></div></div>
+            <div class="layer l4" data-k="gen"><div class="layer-t">Generative AI / LLM <small>dipakai hari ini</small></div></div>
           </div></div></div>
     </div>
     <div class="card def" id="layerDef" aria-live="polite"></div>
@@ -601,57 +601,57 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 
   <div class="card rv">
     <div class="row" style="justify-content:space-between">
-      <div class="head" style="gap:4px"><div class="eyebrow">Cara kerja AI generatif</div><h3 class="h-m">Saat menulis, AI memilih kata berikutnya yang paling mungkin</h3></div>
+      <div class="head" style="gap:4px"><div class="eyebrow">Cara kerja AI generatif</div><h3 class="h-m">AI menulis dengan menebak kata berikutnya</h3></div>
       <div class="row"><button class="btn" id="tokNext">Tebak kata berikutnya</button><button class="btn ghost" id="tokAuto">Putar otomatis</button><button class="btn ghost" id="tokReset">Ulangi</button></div>
     </div>
     <p class="sentence" id="tokSentence"></p>
     <div class="cands" id="tokCands"></div>
-    <p class="src">Ilustrasi sederhana. Persentase dibuat untuk menjelaskan konsep, bukan hasil model sebenarnya.</p>
-    <div class="note">Saat menulis kalimat, AI memilih kata yang <b>paling mungkin</b>, bukan kata yang sudah dicek kebenarannya. Karena itu tulisan AI bisa terdengar meyakinkan tapi keliru (<b>halusinasi</b>). Untuk angka, pakai fitur analisis data. Penjelasannya ada di bagian <button class="btn ghost" data-go="5" style="padding:3px 10px;font-size:13px">AI &amp; olah data →</button></div>
+    <p class="src">Ilustrasi. Persentase bukan hasil model sebenarnya.</p>
+    <div class="note">AI memilih kata yang <b>paling mungkin</b>, bukan yang pasti benar. Hasilnya bisa meyakinkan tapi keliru (<b>halusinasi</b>). Untuk angka, pakai fitur analisis data: <button class="btn ghost" data-go="5" style="padding:3px 10px;font-size:13px">AI &amp; olah data →</button></div>
   </div>
 
   <div class="grid g2 rv">
     <div class="pc plus"><h4>AI kuat untuk</h4><ul class="clean good">
-      <li>Membuat draf tulisan: narasi laporan, surat, caption</li>
+      <li>Draf tulisan: narasi, surat, caption</li>
       <li>Merangkum dokumen panjang</li>
-      <li>Mengolah dan menganalisis data dengan menjalankan kode (fitur analisis data)</li>
-      <li>Mengubah format: tabel jadi narasi, narasi jadi poin slide</li>
-      <li>Membuat grafik, dashboard, dan rumus Excel</li>
-      <li>Menerjemahkan dan merapikan bahasa</li></ul></div>
+      <li>Olah dan analisis data lewat kode</li>
+      <li>Ubah format: tabel jadi narasi, narasi jadi slide</li>
+      <li>Grafik, dashboard, rumus Excel</li>
+      <li>Terjemahan dan perbaikan bahasa</li></ul></div>
     <div class="pc minus"><h4>Perlu diwaspadai</h4><ul class="clean bad">
-      <li>Menjawab angka langsung di teks tanpa menjalankan kode</li>
-      <li>Fakta spesifik seperti nomor regulasi. AI bisa mengarang</li>
-      <li>Data internal kantor yang tidak kita berikan</li>
-      <li>Informasi terbaru di luar batas data latihnya</li>
-      <li>Keputusan dan tanggung jawab tetap di pegawai</li></ul></div>
+      <li>Angka yang dijawab tanpa kode</li>
+      <li>Nomor regulasi dan fakta spesifik: bisa dikarang</li>
+      <li>Data kantor yang tidak diberikan</li>
+      <li>Informasi terbaru di luar data latih</li>
+      <li>Keputusan tetap di tangan pegawai</li></ul></div>
   </div>
 </section>
 
 <!-- 2 KENAPA -->
 <section class="screen" data-id="kenapa-ai" data-title="Kenapa perlu AI" hidden>
   <div class="banner rv"><img src="aset/kendal-2.jpg" alt=""><div class="in">
-    <div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Kenapa kita perlu memakai AI?</h2>
-    <p class="lead">Jawabannya ada di laporan kita sendiri: layanan terus bertambah, pegawai terbatas, dan waktu belajar sempit.</p></div></div>
+    <div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Kenapa perlu AI?</h2>
+    <p class="lead">Layanan bertambah, pegawai terbatas, waktu belajar sempit.</p></div></div>
 
   <div class="head rv"><div class="eyebrow">Pekerjaan yang berulang setiap periode</div></div>
   <div class="grid g4">
-    <div class="card lift rv"><span class="chip acc">Layanan</span><b class="h-s">Dokumen bervolume tinggi</b><p class="small muted">SKA, Masterlist, PB-UMKU, dan NPU diterbitkan setiap hari dengan standar waktu yang ketat.</p></div>
-    <div class="card lift rv"><span class="chip acc">Konsultasi</span><b class="h-s">Pertanyaan pelaku usaha</b><p class="small muted">Pertanyaan serupa dijawab berulang dengan merujuk banyak regulasi.</p></div>
-    <div class="card lift rv"><span class="chip acc">Laporan</span><b class="h-s">Laporan rutin berkala</b><p class="small muted">Laporan kinerja dan laporan pengawasan, penuh tabel dan narasi.</p></div>
-    <div class="card lift rv"><span class="chip acc">Pengawasan</span><b class="h-s">Rekap data banyak pelaku usaha</b><p class="small muted">Investasi, tenaga kerja, ekspor, dan penjualan lokal dari puluhan perusahaan.</p></div>
+    <div class="card lift rv"><span class="chip acc">Layanan</span><b class="h-s">Dokumen bervolume tinggi</b><p class="small muted">SKA, Masterlist, PB-UMKU, NPU terbit tiap hari, dengan standar waktu ketat.</p></div>
+    <div class="card lift rv"><span class="chip acc">Konsultasi</span><b class="h-s">Pertanyaan pelaku usaha</b><p class="small muted">Pertanyaan serupa dijawab berulang.</p></div>
+    <div class="card lift rv"><span class="chip acc">Laporan</span><b class="h-s">Laporan berkala</b><p class="small muted">Laporan kinerja dan pengawasan, penuh tabel dan narasi.</p></div>
+    <div class="card lift rv"><span class="chip acc">Pengawasan</span><b class="h-s">Rekap data perusahaan</b><p class="small muted">Investasi, tenaga kerja, ekspor, penjualan lokal.</p></div>
   </div>
   <div class="grid g3">
-    <div class="card hl rv"><b class="h-s">Tim kecil, cakupan luas</b><p class="small">Pegawai yang terbatas menangani perizinan, pengawasan, dan administrasi sekaligus.</p></div>
-    <div class="card hl rv"><b class="h-s">Waktu belajar terbatas</b><p class="small">Beban kerja tinggi membuat pengembangan kompetensi sulit dijadwalkan.</p></div>
-    <div class="card hl rv"><b class="h-s">Di sinilah AI berperan</b><p class="small">AI mengerjakan draf, rekap, dan pemeriksaan. Pegawai fokus pada penilaian dan keputusan.</p></div>
+    <div class="card hl rv"><b class="h-s">Tim kecil, cakupan luas</b><p class="small">Perizinan, pengawasan, dan administrasi sekaligus.</p></div>
+    <div class="card hl rv"><b class="h-s">Waktu belajar terbatas</b><p class="small">Beban kerja tinggi, belajar sulit dijadwalkan.</p></div>
+    <div class="card hl rv"><b class="h-s">Di sinilah AI berperan</b><p class="small">AI: draf, rekap, pemeriksaan. Pegawai: penilaian dan keputusan.</p></div>
   </div>
 
   <div class="head rv"><div class="eyebrow">Kendala umum, dan jawabannya</div><p class="small muted">Klik kartu untuk membalik.</p></div>
   <div class="grid g4">
-    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Pegawai terbatas, ada tugas yang belum optimal</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Draf laporan, surat, dan rekap dikerjakan lebih cepat. Waktu pegawai dipakai untuk verifikasi dan pengawasan lapangan.</p></div></div></button>
-    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Pengawasan LKPM masih dipantau manual</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Data LKPM diolah dengan fitur analisis data: rekap, tren, dan penandaan data janggal.</p></div></div></button>
-    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Beban kerja tinggi, sulit meluangkan waktu belajar</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>AI bisa jadi tutor pribadi: menjelaskan regulasi dan sistem kapan saja, sesuai kebutuhan.</p></div></div></button>
-    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Kemampuan teknis pegawai perlu ditingkatkan</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Membantu menulis rumus, membuat grafik, dan menyusun dashboard tanpa harus menguasai software khusus.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Pegawai terbatas</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Draf dan rekap lebih cepat. Waktu pegawai untuk verifikasi dan lapangan.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>LKPM dipantau manual</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Rekap, tren, dan data janggal diolah otomatis.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Sulit meluangkan waktu belajar</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>AI jadi tutor: jelaskan regulasi dan sistem kapan saja.</p></div></div></button>
+    <button class="flip rv" aria-pressed="false"><div class="fi"><div class="fa"><span class="chip amb">Kendala</span><b>Kemampuan teknis terbatas</b><span class="hint">Klik untuk membalik</span></div><div class="fb"><span class="chip acc">Dengan AI</span><p>Rumus, grafik, dan dashboard tanpa software khusus.</p></div></div></button>
   </div>
   
 </section>
@@ -660,11 +660,11 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 <section class="screen" data-id="claude" data-title="Mengenal Claude" hidden>
   <div class="banner rv"><img data-img="1680783954745-3249be59e527" alt=""><div class="in">
     <div class="eyebrow">Fokus sesi ini</div><h2 class="h-l">Claude: satu asisten, lima cara kerja</h2>
-    <p class="lead">Claude dari Anthropic bisa dipakai untuk mengobrol, bekerja dengan dokumen acuan tetap, mengerjakan file langsung di laptop, mendesain visual, sampai membangun dashboard dan aplikasi.</p></div></div>
+    <p class="lead">Mengobrol, bekerja dengan dokumen acuan, mengolah file di laptop, mendesain, sampai membangun dashboard.</p></div></div>
   <div class="modes rv" id="modes"></div>
   <div class="mdetail rv" id="mdetail"></div>
 
-  <div class="head rv"><div class="eyebrow">Pilih mode yang tepat</div><h3 class="h-m">Jawab empat pertanyaan tentang tugas Anda</h3></div>
+  <div class="head rv"><div class="eyebrow">Pilih mode yang tepat</div><h3 class="h-m">Jawab empat pertanyaan</h3></div>
   <div class="grid g2 rv">
     <div class="picker" id="picker"></div>
     <div class="rec" id="rec"></div>
@@ -673,13 +673,13 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 
 <!-- 4 MACAM AI -->
 <section class="screen" data-id="macam-ai" data-title="Macam-macam AI" hidden>
-  <div class="head rv"><div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Macam-macam AI, kelebihan dan kekurangannya</h2>
-  <p class="lead">Pilih kategori untuk menyorot tools-nya. Klik logo tools untuk detail.</p></div>
+  <div class="head rv"><div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Jenis AI, kelebihan dan kekurangannya</h2>
+  <p class="lead">Pilih kategori. Klik logo untuk detail.</p></div>
   <div class="seg rv" id="catSeg" role="group" aria-label="Kategori AI"></div>
   <div class="tool-detail rv" id="catBody"></div>
   <div class="tools rv" id="tools"></div>
-  <div class="card soft rv" id="toolInfo" aria-live="polite"><p class="muted small">Klik salah satu tools di atas untuk melihat kegunaannya.</p></div>
-  <div class="head rv"><div class="eyebrow">Peta cepat</div><h3 class="h-m">AI mana untuk ruang lingkup yang mana</h3></div>
+  <div class="card soft rv" id="toolInfo" aria-live="polite"><p class="muted small">Klik logo untuk melihat kegunaannya.</p></div>
+  <div class="head rv"><div class="eyebrow">Peta cepat</div><h3 class="h-m">AI per ruang lingkup</h3></div>
   <div class="tbl-wrap rv"><table class="t">
     <thead><tr><th>Kategori AI</th><th class="c">a. Laporan rutin</th><th class="c">b. Presentasi</th><th class="c">c. Konten medsos</th><th class="c">d. Dashboard</th></tr></thead>
     <tbody id="matrix"></tbody></table></div>
@@ -690,9 +690,9 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 <section class="screen" data-id="ai-olah-data" data-title="AI & olah data" hidden>
   <div class="banner rv"><img data-img="1551288049-bebda4e38f71" alt=""><div class="in">
     <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">AI untuk analisis dan olah data</h2>
-    <p class="lead">AI modern bisa menulis dan menjalankan kode analisis sendiri. Hitungannya dikerjakan mesin, sehingga akurat dan bisa menggantikan banyak pekerjaan software analisis.</p></div></div>
+    <p class="lead">AI menulis dan menjalankan kode analisis. Hitungan dikerjakan mesin: akurat dan bisa diperiksa.</p></div></div>
 
-  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Dua cara AI menjawab pertanyaan angka</h3>
+  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Dua cara AI menjawab angka</h3>
     <p class="small muted">Data contoh (bukan data sebenarnya): rincian ketepatan waktu lima jenis layanan.</p></div>
   <div class="row rv">
     <div class="seg" id="modeSeg" role="group" aria-label="Mode">
@@ -705,21 +705,21 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
     <div class="chat" id="chat"></div>
     <div class="card" id="simOut">
       <div class="eyebrow">Hasil</div>
-      <p class="muted small">Tekan "Jalankan simulasi" untuk melihat prosesnya.</p>
+      <p class="muted small">Tekan "Jalankan simulasi".</p>
     </div>
   </div>
 
   <div class="grid g3">
     <div class="card rv"><div class="eyebrow">Tools dengan fitur analisis data</div>
       <div class="tag-list" id="dataTools"></div>
-      <p class="small muted">Unggah file Excel/CSV, lalu minta analisis. Tools akan menulis kode Python, menjalankannya, dan menampilkan tabel serta grafik.</p></div>
+      <p class="small muted">Unggah Excel/CSV, tulis pertanyaan. AI menulis kode Python, menjalankannya, lalu menampilkan tabel dan grafik.</p></div>
     <div class="card rv"><div class="eyebrow">Analisis yang bisa dikerjakan</div><ul class="clean">
-      <li>Rekap, pivot, dan statistik deskriptif</li><li>Tren antar-triwulan dan pertumbuhan</li><li>Membersihkan dan menggabungkan tabel</li><li>Korelasi dan regresi</li><li>Grafik dan dashboard</li><li>Menandai data janggal: total tidak cocok, nilai ekstrem</li></ul></div>
+      <li>Rekap, pivot, dan statistik deskriptif</li><li>Tren antar-triwulan dan pertumbuhan</li><li>Bersihkan dan gabungkan tabel</li><li>Korelasi dan regresi</li><li>Grafik dan dashboard</li><li>Tandai data janggal: total tak cocok, nilai ekstrem</li></ul></div>
     <div class="card rv"><div class="eyebrow">Yang tetap kita periksa</div><ul class="clean amb">
-      <li><b>Data input</b>: lengkap dan terbaca benar dari file</li>
-      <li><b>Definisi</b>: misalnya "tepat waktu" = lebih cepat + sesuai standar</li>
-      <li><b>Kode</b>: minta AI menjelaskan langkah yang dijalankan</li>
-      <li><b>Kewajaran</b>: hasil dibandingkan dengan laporan sebelumnya</li></ul></div>
+      <li><b>Data input:</b> lengkap dan terbaca benar</li>
+      <li><b>Definisi:</b> misalnya "tepat waktu" = lebih cepat + sesuai standar</li>
+      <li><b>Kode:</b> AI menjelaskan langkahnya</li>
+      <li><b>Kewajaran:</b> bandingkan dengan laporan lalu</li></ul></div>
   </div>
 </section>
 
@@ -727,17 +727,17 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 <section class="screen" data-id="prompt" data-title="Prompt efektif" hidden>
   <div class="banner rv"><img data-img="1486312338219-ce68d2c6f44d" alt=""><div class="in">
     <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">Membuat prompt yang efektif</h2>
-    <p class="lead">Prompt adalah instruksi yang kita tulis ke AI. Semakin jelas konteks dan hasil yang diminta, semakin sedikit revisi.</p></div></div>
+    <p class="lead">Prompt adalah instruksi ke AI. Makin jelas, makin sedikit revisi.</p></div></div>
 
   <div class="formula rv" id="formula">
-    <div class="fbox" data-f="peran"><span class="k">01</span><b>Peran</b><p>AI berperan sebagai siapa.</p></div>
-    <div class="fbox" data-f="konteks"><span class="k">02</span><b>Konteks</b><p>Latar belakang dan data yang dilampirkan.</p></div>
-    <div class="fbox" data-f="tugas"><span class="k">03</span><b>Tugas</b><p>Apa yang dikerjakan, spesifik.</p></div>
+    <div class="fbox" data-f="peran"><span class="k">01</span><b>Peran</b><p>AI sebagai siapa.</p></div>
+    <div class="fbox" data-f="konteks"><span class="k">02</span><b>Konteks</b><p>Latar belakang dan data.</p></div>
+    <div class="fbox" data-f="tugas"><span class="k">03</span><b>Tugas</b><p>Pekerjaan yang spesifik.</p></div>
     <div class="fbox" data-f="format"><span class="k">04</span><b>Format</b><p>Bentuk hasil: tabel, poin, panjang, gaya.</p></div>
-    <div class="fbox" data-f="batasan"><span class="k">05</span><b>Batasan</b><p>Yang tidak boleh dan cara menandai yang ragu.</p></div>
+    <div class="fbox" data-f="batasan"><span class="k">05</span><b>Batasan</b><p>Larangan dan penanda ragu.</p></div>
   </div>
 
-  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Bandingkan hasil dari dua prompt</h3></div>
+  <div class="head rv"><div class="eyebrow">Simulasi</div><h3 class="h-m">Dua prompt, dua hasil</h3></div>
   <div class="cmp rv">
     <div class="card"><div class="row" style="justify-content:space-between"><span class="flag bad">Prompt kurang efektif</span><button class="btn ghost" data-sim="weak">▶ Kirim</button></div>
       <pre class="prompt">Buatkan narasi laporan kinerja investasi KEK.</pre>
@@ -750,7 +750,7 @@ Format: Subjudul Latar Belakang dan Hasil Pengukuran Kinerja. Maksimal 400 kata.
 Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
       <div class="resp" id="resp-strong"></div></div>
   </div>
-  <p class="src rv">Jawaban di atas adalah simulasi tampilan untuk menunjukkan perbedaan, bukan keluaran asli tools tertentu.</p>
+  <p class="src rv">Simulasi tampilan, bukan keluaran asli.</p>
 
   <div class="card rv">
     <div class="row" style="justify-content:space-between;align-items:flex-end">
@@ -777,62 +777,62 @@ Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
   </div>
 
   <div class="grid g3">
-    <div class="card soft lift rv"><b>Kerjakan bertahap</b><p class="small muted">Minta kerangka dulu, setujui, baru minta isi per bagian.</p></div>
-    <div class="card soft lift rv"><b>Beri contoh</b><p class="small muted">Lampirkan laporan periode lalu supaya gaya bahasanya sama.</p></div>
-    <div class="card soft lift rv"><b>Minta AI bertanya balik</b><p class="small muted">"Sebelum mulai, tanyakan informasi yang kamu butuhkan."</p></div>
+    <div class="card soft lift rv"><b>Kerjakan bertahap</b><p class="small muted">Kerangka dulu, setujui, lalu isi per bagian.</p></div>
+    <div class="card soft lift rv"><b>Beri contoh</b><p class="small muted">Lampirkan laporan lalu agar gayanya sama.</p></div>
+    <div class="card soft lift rv"><b>AI bertanya balik</b><p class="small muted">"Sebelum mulai, tanyakan informasi yang kamu butuhkan."</p></div>
     <div class="card soft lift rv"><b>Perbaiki lewat percakapan</b><p class="small muted">"Persingkat jadi 200 kata", "ubah jadi tabel", "lebih formal".</p></div>
-    <div class="card soft lift rv"><b>Untuk angka, minta dijalankan dengan kode</b><p class="small muted">"Hitung dengan Python dan tampilkan kodenya."</p></div>
-    <div class="card soft lift rv"><b>Simpan prompt yang berhasil</b><p class="small muted">Kumpulkan di dokumen bersama supaya dipakai ulang tim.</p></div>
+    <div class="card soft lift rv"><b>Angka: jalankan lewat kode</b><p class="small muted">"Hitung dengan Python dan tampilkan kodenya."</p></div>
+    <div class="card soft lift rv"><b>Simpan prompt yang berhasil</b><p class="small muted">Kumpulkan di dokumen tim.</p></div>
   </div>
 </section>
 
 <!-- 6 AMAN -->
 <section class="screen" data-id="aman" data-title="Aman & bertanggung jawab" hidden>
   <div class="banner rv"><img data-img="1550751827-4bd374c3f58b" alt=""><div class="in">
-    <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">Memakai AI dengan aman dan bertanggung jawab</h2>
-    <p class="lead">Yang kita tempel ke AI keluar dari komputer kantor. Pilah dulu datanya sebelum diunggah.</p></div></div>
-  <div class="head rv"><div class="eyebrow">Cek sebelum unggah</div><h3 class="h-m">Pilih jenis data untuk melihat statusnya</h3></div>
+    <div class="eyebrow">Objektif 1 · Dasar penggunaan</div><h2 class="h-l">Aman dan bertanggung jawab</h2>
+    <p class="lead">Data yang diunggah keluar dari komputer kantor. Pilah dulu.</p></div></div>
+  <div class="head rv"><div class="eyebrow">Cek sebelum unggah</div><h3 class="h-m">Pilih jenis data, lihat statusnya</h3></div>
   <div class="checker rv">
     <div class="dchips" id="dchips"></div>
-    <div class="verdict n" id="verdict"><div class="lampbig"><i></i><i></i><i></i></div><b class="h-m" id="vT">Pilih jenis data</b><p id="vD" class="small">Status akan muncul di sini.</p></div>
+    <div class="verdict n" id="verdict"><div class="lampbig"><i></i><i></i><i></i></div><b class="h-m" id="vT">Pilih jenis data</b><p id="vD" class="small">Status muncul di sini.</p></div>
   </div>
   <div class="grid g2">
     <div class="card rv"><div class="eyebrow">Aturan main</div><ul class="clean">
-      <li><b>AI membuat draf, pegawai yang memutuskan.</b> Laporan tetap ditandatangani pejabat.</li>
-      <li><b>Untuk angka, pakai fitur analisis data</b> lalu periksa data input, definisi, dan kodenya.</li>
-      <li><b>Cek dasar hukum</b> ke sumber resmi sebelum dikutip.</li>
-      <li><b>Gunakan akun kantor</b> bila tersedia, dan periksa pengaturan privasi tools.</li>
-      <li><b>Baca ulang gaya bahasanya.</b> Kurangi kata berlebihan seperti "krusial", "manifestasi", "secara mutlak".</li></ul></div>
+      <li><b>AI membuat draf, pegawai memutuskan.</b> Pejabat tetap yang menandatangani.</li>
+      <li><b>Angka lewat fitur analisis data.</b> Periksa input, definisi, dan kode.</li>
+      <li><b>Cek dasar hukum</b> ke sumber resmi.</li>
+      <li><b>Pakai akun kantor</b> dan cek pengaturan privasi.</li>
+      <li><b>Baca ulang.</b> Buang kata berlebihan: "krusial", "manifestasi", "secara mutlak".</li></ul></div>
     <div class="card rv"><div class="eyebrow">Contoh kesalahan yang sering terjadi</div>
-      <p class="small">Hal seperti ini perlu ditangkap sebelum laporan dikirim, baik ditulis manusia maupun AI:</p>
+      <p class="small">Tangkap sebelum laporan dikirim:</p>
       <ul class="clean amb">
-        <li>Persentase capaian yang tidak cocok dengan angka realisasi dan target di tabel.</li>
-        <li>Dasar hukum yang berbeda untuk layanan yang sama di dua laporan.</li>
-        <li>Satuan yang tertukar, misalnya kWh dan MWh.</li></ul></div>
+        <li>Persentase tak cocok dengan realisasi dan target.</li>
+        <li>Dasar hukum berbeda untuk layanan yang sama.</li>
+        <li>Satuan tertukar, misalnya kWh dan MWh.</li></ul></div>
   </div>
 </section>
 
 <!-- 8 GALERI -->
 <section class="screen" data-id="galeri" data-title="Galeri karya Claude" hidden>
   <div class="head rv"><div class="eyebrow">Bukti nyata</div><h2 class="h-l">Galeri karya dengan Claude</h2>
-  <p class="lead">Project yang sudah dikerjakan dengan Claude. Klik kartu untuk melihat instruksi awal yang diberikan ke Claude dan hasil yang dibuat.</p></div>
+  <p class="lead">Project nyata dengan Claude. Klik kartu: instruksi awal dan hasilnya.</p></div>
   <div class="row rv" style="justify-content:space-between">
     <div class="seg" id="galMode" role="group" aria-label="Filter mode"></div>
     <div class="seg" id="galScope" role="group" aria-label="Filter ruang lingkup"></div>
   </div>
   <div class="gal rv" id="gal" role="tablist" aria-label="Daftar karya"></div>
   <div class="gdetail rv" id="gdetail" aria-live="polite"></div>
-  <p class="src rv">Versi web: tampilan karya yang memuat data kantor sengaja dibuat buram. Karya yang sudah dipublikasikan bisa dibuka langsung.</p>
+  <p class="src rv">Versi web: karya berisi data kantor sengaja dibuat buram.</p>
 </section>
 
 <!-- 9 USE CASE -->
 <section class="screen" data-id="use-case" data-title="Use case KEK" hidden>
-  <div class="head rv"><div class="eyebrow">Objektif 2 · Potensi kegiatan kantor</div><h2 class="h-l">8 tugas di Administrator KEK Kendal yang bisa dibantu AI</h2>
-  <p class="lead">Pilih kartu. Ikuti langkahnya satu per satu, lalu salin prompt contohnya.</p></div>
+  <div class="head rv"><div class="eyebrow">Objektif 2 · Potensi kegiatan kantor</div><h2 class="h-l">8 tugas KEK yang bisa dibantu AI</h2>
+  <p class="lead">Pilih kartu, ikuti langkah, salin prompt.</p></div>
   <div class="seg rv" id="ucFilter" role="group" aria-label="Filter ruang lingkup"></div>
   <div class="ucgrid rv" id="ucGrid" role="tablist" aria-label="Daftar use case"></div>
   <div class="uc-detail rv" id="ucDetail" aria-live="polite"></div>
-  <div class="head rv"><div class="eyebrow">Ringkasan</div><h3 class="h-m">AI yang dibutuhkan untuk 8 use case</h3></div>
+  <div class="head rv"><div class="eyebrow">Ringkasan</div><h3 class="h-m">AI untuk tiap use case</h3></div>
   <div class="tbl-wrap rv"><table class="t">
     <thead><tr><th>#</th><th>Use case</th><th>Ruang lingkup</th><th>AI utama</th><th>Pendukung</th></tr></thead>
     <tbody id="ucSummary"></tbody></table></div>
@@ -841,16 +841,16 @@ Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
 <!-- 8 ORGANTA -->
 <section class="screen" data-id="organta" data-title="Sharing Biro Organta" hidden>
   <div class="banner rv"><img data-img="1522071820081-009f0129c71c" alt=""><div class="in">
-    <div class="eyebrow">Objektif 3</div><h2 class="h-l">Sharing penggunaan AI di Biro Organta</h2>
-    <p class="lead">Pengalaman nyata dari rekan di Sekretariat Jenderal: yang berhasil, yang tidak, dan pelajaran yang bisa langsung dipakai.</p></div></div>
-  <div class="head rv"><div class="eyebrow">Karya Biro Organta dengan Claude</div><p class="small muted">Klik untuk membuka detail di galeri.</p></div>
+    <div class="eyebrow">Objektif 3</div><h2 class="h-l">AI di Biro Organta</h2>
+    <p class="lead">Yang berhasil, yang tidak, dan pelajarannya.</p></div></div>
+  <div class="head rv"><div class="eyebrow">Karya Biro Organta dengan Claude</div><p class="small muted">Klik untuk detail.</p></div>
   <div class="gal rv" id="orgGal"></div>
   <div class="grid g3">
-    <div class="card lift rv"><span class="chip amb">Pelajaran 1</span><b class="h-s">Mulai dari folder input yang rapi</b><p class="small muted">Setiap project punya folder Input dan Output. Claude membaca bahan dari Input dan menyimpan hasil ke Output.</p></div>
-    <div class="card lift rv"><span class="chip amb">Pelajaran 2</span><b class="h-s">Minta analisis dulu, baru eksekusi</b><p class="small muted">Instruksi awal selalu meminta Claude mempelajari data dan berdiskusi sebelum mengerjakan.</p></div>
-    <div class="card lift rv"><span class="chip amb">Pelajaran 3</span><b class="h-s">Tulis aturan kerja sekali, pakai berulang</b><p class="small muted">Profil dan aturan wajib (misalnya "jangan hapus file input", "buat salinan sebelum mengedit") disimpan di file instruksi.</p></div>
+    <div class="card lift rv"><span class="chip amb">Pelajaran 1</span><b class="h-s">Folder input rapi</b><p class="small muted">Bahan di Input, hasil di Output.</p></div>
+    <div class="card lift rv"><span class="chip amb">Pelajaran 2</span><b class="h-s">Analisis dulu, baru eksekusi</b><p class="small muted">Pelajari data, diskusikan rencana, baru kerjakan.</p></div>
+    <div class="card lift rv"><span class="chip amb">Pelajaran 3</span><b class="h-s">Aturan sekali tulis, pakai berulang</b><p class="small muted">Simpan di file instruksi: "jangan hapus file input", "salin sebelum edit".</p></div>
   </div>
-  <p class="src rv">Narasumber melengkapi dengan cerita langsung: tugas yang paling terbantu, kendala, dan kesalahan AI yang pernah ditemui.</p>
+  <p class="src rv">Cerita langsung narasumber: yang terbantu, kendala, dan kesalahan AI.</p>
 </section>
 
 <!-- 9 AKSI -->
@@ -858,23 +858,23 @@ Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
   <div class="banner rv" style="min-height:280px"><img data-img="1521737604893-d14cc237f11d" alt=""><div class="in">
     <div class="eyebrow">Penutup</div><p class="quote">AI mempercepat pekerjaan. Ketelitian dan tanggung jawab tetap di tangan kita.</p></div></div>
   <div class="plan">
-    <div class="card lift rv"><span class="chip acc">Minggu ini</span><b class="h-s">Pilih satu use case</b><ul class="clean"><li>Pilih satu tugas rutin dari 8 use case.</li><li>Coba dengan prompt contoh, lalu sesuaikan.</li><li>Catat waktu dan hasilnya.</li></ul></div>
-    <div class="card lift rv"><span class="chip amb">Bulan ini</span><b class="h-s">Kumpulkan prompt tim</b><ul class="clean amb"><li>Satu dokumen bersama berisi prompt yang berhasil.</li><li>Kelompokkan per ruang lingkup a–d.</li><li>Tambahkan catatan hal yang perlu dicek.</li></ul></div>
-    <div class="card lift rv"><span class="chip">Rutin</span><b class="h-s">Berbagi di komunitas belajar</b><ul class="clean"><li>Sesi singkat berbagi antar-pegawai.</li><li>Sejalan dengan upaya "Optimalisasi Knowledge Sharing (Komunitas Belajar)" di LAKIN TW II.</li><li>Catat sebagai kegiatan pembelajaran pegawai.</li></ul></div>
+    <div class="card lift rv"><span class="chip acc">Minggu ini</span><b class="h-s">Pilih satu use case</b><ul class="clean"><li>Pilih satu tugas rutin.</li><li>Coba prompt contoh, sesuaikan.</li><li>Catat waktu dan hasilnya.</li></ul></div>
+    <div class="card lift rv"><span class="chip amb">Bulan ini</span><b class="h-s">Kumpulkan prompt tim</b><ul class="clean amb"><li>Satu dokumen prompt yang berhasil.</li><li>Kelompokkan per ruang lingkup a–d.</li><li>Beri catatan hal yang perlu dicek.</li></ul></div>
+    <div class="card lift rv"><span class="chip">Rutin</span><b class="h-s">Berbagi di komunitas belajar</b><ul class="clean"><li>Sesi singkat berbagi antar-pegawai.</li><li>Sejalan dengan "Komunitas Belajar" di LAKIN.</li><li>Catat sebagai jam pembelajaran.</li></ul></div>
   </div>
   <div class="grid g3 closing">
     <div class="card rv"><div class="eyebrow">Diskusi</div><ul class="clean">
-      <li>Tugas mana yang paling menyita waktu setiap triwulan?</li>
-      <li>Use case mana yang paling ingin dicoba lebih dulu?</li>
-      <li>Aturan apa yang perlu disepakati tim sebelum memakai AI?</li></ul></div>
-    <div class="card hl rv share"><div class="eyebrow">Buka materi ini di perangkat Anda</div>
+      <li>Tugas apa paling menyita waktu?</li>
+      <li>Use case mana dicoba duluan?</li>
+      <li>Aturan apa yang perlu disepakati tim?</li></ul></div>
+    <div class="card hl rv share"><div class="eyebrow">Materi di perangkat Anda</div>
       <div class="share-in"><div id="qr" class="qr" aria-label="QR code link materi"></div>
       <div class="share-txt"><b class="h-s">Scan atau klik tautan</b><a href="https://donny-apps.github.io/materi-ai-kek-kendal/" target="_blank" rel="noopener" id="webLink">donny-apps.github.io/materi-ai-kek-kendal/</a>
       <div class="row"><button class="btn" id="copyLink">Salin link</button><button class="btn ghost" id="copyAll">Salin semua prompt</button></div>
-      <p class="small muted">"Salin semua prompt" menyalin 8 prompt use case dan 4 template latihan, siap ditempel ke dokumen tim.</p></div></div></div>
-    <div class="card soft rv"><div class="eyebrow">Bahan yang dipakai dalam materi ini</div><ul class="clean">
-      <li>Laporan kinerja triwulanan (sebagai contoh format)</li>
-      <li>Laporan pengawasan dan pengendalian berkala (sebagai contoh format)</li>
+      <p class="small muted">Salin semua prompt: 8 use case + 4 template, siap ditempel.</p></div></div></div>
+    <div class="card soft rv"><div class="eyebrow">Bahan materi</div><ul class="clean">
+      <li>Laporan kinerja triwulanan (contoh format)</li>
+      <li>Laporan pengawasan berkala (contoh format)</li>
       <li>Objektif dan ruang lingkup kegiatan pelatihan</li></ul></div>
   </div>
 </section>
@@ -996,10 +996,10 @@ $$('.scope').forEach(b=>b.onclick=()=>{ucScope=b.dataset.scope;const f=UC.findIn
 
 /* ---------- Lapisan AI ---------- */
 const LAYER={
-  ai:['Artificial Intelligence','Bidang ilmu yang membuat mesin bisa meniru kemampuan berpikir manusia.',['Filter spam email','Navigasi rute di peta','Rekomendasi video']],
-  ml:['Machine Learning','Komputer belajar pola dari banyak contoh data, tanpa diprogram aturan satu per satu.',['Deteksi transaksi mencurigakan','Prediksi permintaan barang']],
-  dl:['Deep Learning','Machine learning dengan jaringan saraf tiruan berlapis. Mampu mengenali gambar, suara, dan bahasa.',['Pengenalan wajah','Ubah suara jadi teks (transkrip)']],
-  gen:['Generative AI / Large Language Model','AI yang membuat konten baru (teks, gambar, slide, kode) dari instruksi bahasa sehari-hari, dan kini bisa menjalankan kode untuk mengolah data. Dipakai di ChatGPT, Claude, Gemini, dan Copilot.',['Menyusun draf laporan','Merangkum dokumen','Menganalisis data Excel','Membuat bahan presentasi']]};
+  ai:['Artificial Intelligence','Mesin meniru cara berpikir manusia.',['Filter spam email','Navigasi rute di peta','Rekomendasi video']],
+  ml:['Machine Learning','Komputer belajar pola dari contoh data.',['Deteksi transaksi mencurigakan','Prediksi permintaan barang']],
+  dl:['Deep Learning','Jaringan saraf berlapis. Mengenali gambar, suara, dan bahasa.',['Pengenalan wajah','Ubah suara jadi teks (transkrip)']],
+  gen:['Generative AI / Large Language Model','Membuat teks, gambar, slide, dan kode dari instruksi biasa. Bisa menjalankan kode untuk olah data. Contoh: ChatGPT, Claude, Gemini, Copilot.',['Menyusun draf laporan','Merangkum dokumen','Menganalisis data Excel','Membuat bahan presentasi']]};
 function showLayer(k){$$('#layers .layer').forEach(l=>l.classList.toggle('on',l.dataset.k===k));const d=LAYER[k];
   $('#layerDef').innerHTML=`<div class="fade-in" style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">Definisi</div><h3 class="h-m">${d[0]}</h3><p>${d[1]}</p><div class="eyebrow">Contoh</div><div class="chips">${d[2].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`}
 $$('#layers .layer').forEach(l=>{l.addEventListener('click',e=>{e.stopPropagation();showLayer(l.dataset.k)});l.addEventListener('mouseenter',e=>{e.stopPropagation();showLayer(l.dataset.k)})});
@@ -1012,7 +1012,7 @@ let tokI=0,tokW=[],tokT=null;
 function tokRender(){
   $('#tokSentence').innerHTML=esc(TOK_BASE)+' '+tokW.map((w,i)=>i===tokW.length-1?`<span class="new">${esc(w)}</span>`:esc(w)).join(' ')+(tokI<TOK.length?' …':'.');
   if(tokI<TOK.length){$('#tokCands').innerHTML=TOK[tokI].map((x,i)=>`<div class="cand ${i===0?'top':''}"><b>${esc(x[0])}</b><div class="track"><div class="fill" data-w="${x[1]}"></div></div><span>${x[1]}%</span></div>`).join('');requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#tokCands .fill').forEach(f=>f.style.width=f.dataset.w+'%')))}
-  else $('#tokCands').innerHTML='<p class="small muted">Kalimat selesai dan terdengar meyakinkan. Tapi AI tidak memeriksa apakah target benar-benar terlampaui.</p>';
+  else $('#tokCands').innerHTML='<p class="small muted">Kalimat meyakinkan. Tapi AI tidak mengecek apakah target benar terlampaui.</p>';
   $('#tokNext').disabled=tokI>=TOK.length;
 }
 function tokStep(){if(tokI<TOK.length){tokW.push(TOK[tokI][0][0]);tokI++;tokRender()}}
@@ -1031,26 +1031,26 @@ $$('.flip').forEach(f=>f.onclick=()=>f.setAttribute('aria-pressed',f.getAttribut
 
 /* ---------- Macam-macam AI ---------- */
 const TOOLS=[
-  {n:'ChatGPT',by:'OpenAI',d:'chatgpt.com',c:['chat','data','vis'],u:'Asisten serbaguna: menulis, merangkum, analisis data dengan menjalankan kode, membuat gambar.'},
-  {n:'Claude',by:'Anthropic',d:'claude.ai',c:['chat','data'],u:'Kuat untuk tulisan panjang dan dokumen besar, analisis file, serta membuat halaman interaktif atau dashboard.'},
-  {n:'Gemini',by:'Google',d:'gemini.google.com',c:['chat','data','vis','web'],u:'Terhubung dengan Google Workspace (Docs, Sheets, Gmail) dan pencarian Google.'},
-  {n:'Microsoft Copilot',by:'Microsoft',d:'copilot.microsoft.com',c:['chat','pres','data'],u:'Terintegrasi di Word, Excel, PowerPoint, dan Teams, tergantung lisensi kantor.'},
-  {n:'NotebookLM',by:'Google',d:'notebooklm.google.com',c:['doc'],u:'Tanya-jawab hanya dari dokumen yang diunggah, lengkap dengan rujukan ke bagian dokumen.'},
-  {n:'Perplexity',by:'Perplexity AI',d:'perplexity.ai',c:['web'],u:'Riset di internet dengan tautan sumber pada setiap jawaban.'},
-  {n:'Gamma',by:'Gamma',d:'gamma.app',c:['pres'],u:'Membuat presentasi dari teks atau kerangka dalam hitungan menit.'},
-  {n:'Canva',by:'Canva',d:'canva.com',c:['pres','vis'],u:'Desain konten media sosial dan presentasi dengan fitur AI dan banyak template.'},
-  {n:'Napkin AI',by:'Napkin',d:'napkin.ai',c:['vis'],u:'Mengubah teks menjadi diagram dan infografis.'},
-  {n:'Looker Studio',by:'Google',d:'lookerstudio.google.com',c:['data'],u:'Dashboard gratis dari Google Sheets. AI membantu menyiapkan data dan rumusnya.'},
-  {n:'Zoom / Teams / Meet',by:'Fitur transkrip',d:'zoom.us',c:['rapat'],u:'Transkrip otomatis rapat online, lalu diringkas menjadi notulen dengan asisten AI.'}];
+  {n:'ChatGPT',by:'OpenAI',d:'chatgpt.com',c:['chat','data','vis'],u:'Serbaguna: menulis, merangkum, analisis data, membuat gambar.'},
+  {n:'Claude',by:'Anthropic',d:'claude.ai',c:['chat','data'],u:'Dokumen panjang, analisis file, halaman interaktif, dan dashboard.'},
+  {n:'Gemini',by:'Google',d:'gemini.google.com',c:['chat','data','vis','web'],u:'Terhubung ke Google Workspace dan pencarian Google.'},
+  {n:'Microsoft Copilot',by:'Microsoft',d:'copilot.microsoft.com',c:['chat','pres','data'],u:'Di Word, Excel, PowerPoint, dan Teams, sesuai lisensi kantor.'},
+  {n:'NotebookLM',by:'Google',d:'notebooklm.google.com',c:['doc'],u:'Tanya-jawab dari dokumen sendiri, lengkap dengan rujukan.'},
+  {n:'Perplexity',by:'Perplexity AI',d:'perplexity.ai',c:['web'],u:'Riset internet dengan tautan sumber.'},
+  {n:'Gamma',by:'Gamma',d:'gamma.app',c:['pres'],u:'Presentasi dari teks dalam hitungan menit.'},
+  {n:'Canva',by:'Canva',d:'canva.com',c:['pres','vis'],u:'Desain konten dan presentasi dengan template dan AI.'},
+  {n:'Napkin AI',by:'Napkin',d:'napkin.ai',c:['vis'],u:'Teks jadi diagram dan infografis.'},
+  {n:'Looker Studio',by:'Google',d:'lookerstudio.google.com',c:['data'],u:'Dashboard gratis dari Google Sheets.'},
+  {n:'Zoom / Teams / Meet',by:'Fitur transkrip',d:'zoom.us',c:['rapat'],u:'Transkrip rapat, lalu diringkas jadi notulen.'}];
 const CATS=[
   {k:'all',t:'Semua'},
-  {k:'chat',t:'Asisten percakapan',use:'Menulis draf, merangkum, menerjemahkan, menganalisis file.',plus:['Serbaguna untuk tugas tulis-menulis','Membaca PDF, Word, dan Excel','Revisi lewat percakapan'],minus:['Bisa mengarang fakta (halusinasi)','Tidak tahu data internal kecuali diberikan','Versi gratis punya batas pemakaian'],m:[2,2,2,2]},
-  {k:'data',t:'Analisis data dan dashboard',use:'Mengolah tabel dengan menjalankan kode, membuat pivot, grafik, dan dashboard.',plus:['Hitungan akurat karena dijalankan dengan kode','Bisa menggantikan banyak pekerjaan software analisis','Hasil disertai kode yang bisa diperiksa'],minus:['Data input dan definisi tetap harus benar','Hati-hati mengunggah data per pelaku usaha'],m:[2,2,0,2]},
-  {k:'doc',t:'Riset berbasis dokumen',use:'Tanya-jawab dari kumpulan dokumen sendiri, misalnya regulasi KEK.',plus:['Jawaban disertai rujukan','Terbatas pada sumber, risiko mengarang lebih kecil','Cocok untuk regulasi dan SOP'],minus:['Hanya tahu dokumen yang diunggah','Tetap perlu dicek ke pasal aslinya'],m:[2,1,1,0]},
-  {k:'web',t:'Riset web',use:'Mencari informasi terbaru di internet dengan tautan sumber.',plus:['Informasi lebih baru','Menampilkan tautan sumber'],minus:['Kualitas sumber bervariasi','Perlu membaca sumber aslinya'],m:[1,1,1,0]},
-  {k:'pres',t:'Presentasi dan desain',use:'Membuat slide dan desain konten dari teks atau kerangka.',plus:['Draf slide dan desain dalam hitungan menit','Banyak template siap pakai'],minus:['Desain cenderung generik','Teks di slide sering terlalu padat'],m:[0,2,2,1]},
-  {k:'vis',t:'Visual dan diagram',use:'Mengubah teks menjadi diagram, infografis, atau ilustrasi.',plus:['Ide cepat jadi visual','Membantu menjelaskan alur proses'],minus:['Teks di dalam gambar sering salah eja','Hindari gambar realistis yang menyesatkan'],m:[0,2,2,0]},
-  {k:'rapat',t:'Transkrip rapat',use:'Rekaman rapat jadi teks, lalu diringkas menjadi notulen.',plus:['Notulen dan tindak lanjut lebih cepat','Tidak ada poin yang terlewat'],minus:['Istilah teknis sering salah tulis','Perlu izin peserta untuk merekam'],m:[2,0,0,0]}];
+  {k:'chat',t:'Asisten percakapan',use:'Draf, ringkasan, terjemahan, analisis file.',plus:['Serbaguna','Baca PDF, Word, Excel','Revisi lewat percakapan'],minus:['Bisa mengarang (halusinasi)','Tak tahu data internal','Versi gratis terbatas'],m:[2,2,2,2]},
+  {k:'data',t:'Analisis data dan dashboard',use:'Olah tabel lewat kode: pivot, grafik, dashboard.',plus:['Hitungan akurat lewat kode','Ganti banyak software analisis','Kode bisa diperiksa'],minus:['Input dan definisi harus benar','Hati-hati data per perusahaan'],m:[2,2,0,2]},
+  {k:'doc',t:'Riset berbasis dokumen',use:'Tanya-jawab dari dokumen sendiri.',plus:['Ada rujukan','Risiko mengarang kecil','Cocok untuk regulasi dan SOP'],minus:['Terbatas pada dokumen diunggah','Tetap cek pasal asli'],m:[2,1,1,0]},
+  {k:'web',t:'Riset web',use:'Cari info terbaru dengan sumber.',plus:['Info lebih baru','Ada tautan sumber'],minus:['Mutu sumber beragam','Baca sumber aslinya'],m:[1,1,1,0]},
+  {k:'pres',t:'Presentasi dan desain',use:'Slide dan desain dari teks.',plus:['Jadi dalam menit','Banyak template'],minus:['Desain generik','Slide sering padat'],m:[0,2,2,1]},
+  {k:'vis',t:'Visual dan diagram',use:'Teks jadi diagram atau ilustrasi.',plus:['Ide cepat jadi visual','Jelaskan alur proses'],minus:['Teks di gambar sering salah','Hindari gambar menyesatkan'],m:[0,2,2,0]},
+  {k:'rapat',t:'Transkrip rapat',use:'Rekaman jadi teks, lalu notulen.',plus:['Notulen lebih cepat','Tak ada poin terlewat'],minus:['Istilah teknis sering salah','Perlu izin merekam'],m:[2,0,0,0]}];
 let catK='all',toolSel=null;
 function renderCat(){
   $('#catSeg').innerHTML=CATS.map(c=>`<button aria-pressed="${c.k===catK}" data-k="${c.k}">${c.t}</button>`).join('');
@@ -1092,10 +1092,10 @@ $('#simRun').onclick=async()=>{
     const a=document.createElement('div');a.className='bub a';chat.appendChild(a);
     await typeInto(a,'Berdasarkan tabel, sebagian besar layanan selesai tepat waktu, dengan persentase sekitar 95%.',18);
     chat.insertAdjacentHTML('beforeend','<span class="flag bad">Tidak ada cara hitung yang bisa diperiksa</span>');
-    $('#simOut').innerHTML=`<div class="eyebrow">Masalahnya</div><b class="h-s">Angka "ditebak" dari pola kalimat</b><ul class="clean bad"><li>Tidak ada rumus atau kode yang bisa dicek.</li><li>Tidak jelas definisi "tepat waktu" yang dipakai.</li><li>Bisa berbeda setiap kali ditanya.</li></ul><p class="src">Ilustrasi jawaban tanpa menjalankan kode.</p><button class="btn" id="toKode">Coba Mode 2 →</button>`;
+    $('#simOut').innerHTML=`<div class="eyebrow">Masalahnya</div><b class="h-s">Angka "ditebak" dari pola kalimat</b><ul class="clean bad"><li>Tanpa rumus atau kode.</li><li>Definisi "tepat waktu" tidak jelas.</li><li>Jawaban bisa berubah tiap ditanya.</li></ul><p class="src">Ilustrasi jawaban tanpa menjalankan kode.</p><button class="btn" id="toKode">Coba Mode 2 →</button>`;
     $('#toKode').onclick=()=>{$$('#modeSeg button')[1].click();$('#simRun').click()};
   }else{
-    const a=document.createElement('div');a.className='bub a';a.textContent='Saya akan menghitungnya dengan Python.';chat.appendChild(a);
+    const a=document.createElement('div');a.className='bub a';a.textContent='Saya hitung dengan Python.';chat.appendChild(a);
     await sleep(400);
     const pre=document.createElement('pre');pre.className='code';chat.appendChild(pre);
     await typeInto(pre,CODE,12);
@@ -1107,7 +1107,7 @@ $('#simRun').onclick=async()=>{
       <div class="legend"><span><i style="background:var(--accent)"></i>Tepat waktu</span><span><i style="background:var(--amber)"></i>Melewati standar</span></div>
       <div class="bars">${rows.map(r=>`<div class="barrow"><b>${r.n}</b><div class="t"><i class="g" data-w="${r.p}"></i><i class="r" data-w="${100-r.p}"></i></div><span>${r.p.toFixed(1).replace('.',',')}%</span></div>`).join('')}</div>
       <table class="mini-tbl"><thead><tr><th>Layanan</th><th>Tepat</th><th>Total</th><th>%</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.n}</td><td>${r.ok}</td><td>${r.t}</td><td>${r.p.toFixed(1).replace('.',',')}</td></tr>`).join('')}<tr class="tot"><td>Total</td><td>621</td><td>675</td><td>92,0</td></tr></tbody></table>
-      <div class="note"><b>Kebiasaan baik:</b> cocokkan hasil hitungan dengan angka yang dilaporkan sebelum dokumen dikirim.</div>`;
+      <div class="note"><b>Kebiasaan baik:</b> cocokkan hitungan dengan angka yang dilaporkan.</div>`;
     requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#simOut .barrow i').forEach(i=>i.style.width=i.dataset.w+'%')));
   }
   simBusy=false;$('#simRun').disabled=false;
@@ -1118,7 +1118,7 @@ resetSim();
 const RESP={
   weak:'Kinerja investasi KEK menunjukkan perkembangan yang sangat positif dan signifikan. Berbagai upaya strategis telah dilakukan secara optimal untuk mendorong peningkatan investasi, sehingga diharapkan dapat memberikan kontribusi yang krusial terhadap perekonomian nasional…',
   strong:'<b>Latar Belakang</b>\nUntuk tahun 2026, BUPP KEK Kendal menyepakati target investasi sebesar <mark>[CEK] Rp…</mark>. Administrator KEK Kendal berperan memberikan layanan perizinan dan non-perizinan serta pengawasan dan pengendalian.\n\n<b>Hasil Pengukuran Kinerja</b>\nRealisasi investasi s.d. Triwulan III 2026 adalah <mark>[DATA DIPERLUKAN: realisasi TW III dari LKPM]</mark>…'};
-const NOTE={weak:'<span class="flag bad">Umum, tanpa data, tanpa periode, kata berlebihan</span>',strong:'<span class="flag good">Terstruktur, angka ditandai, tidak mengarang data yang belum ada</span>'};
+const NOTE={weak:'<span class="flag bad">Umum, tanpa data, tanpa periode, kata berlebihan</span>',strong:'<span class="flag good">Terstruktur, angka ditandai, tidak mengarang</span>'};
 $$('[data-sim]').forEach(b=>b.onclick=async()=>{const k=b.dataset.sim,el=$('#resp-'+k);b.disabled=true;el.classList.add('caret');
   const plain=RESP[k].replace(/<[^>]+>/g,'');if(!RM)for(let i=0;i<=plain.length;i+=2){el.textContent=plain.slice(0,i);await sleep(14)}
   el.classList.remove('caret');el.innerHTML=RESP[k]+'\n\n'+NOTE[k];b.disabled=false});
@@ -1152,15 +1152,15 @@ $('#pCopy').onclick=()=>copyText($('#pOut').textContent,$('#pCopy'),$('#pOut'));
 
 /* ---------- Cek data ---------- */
 const DATA=[
-  ['Teks regulasi publik (PP 85/2019)','g','Boleh diunggah','Dokumen publik. Cocok untuk ditanyakan ke AI atau dimasukkan ke NotebookLM.'],
-  ['Template format LAKIN','g','Boleh diunggah','Template tidak memuat data sensitif.'],
-  ['Data capaian yang sudah dipublikasikan','g','Boleh diunggah','Data agregat yang sudah terbuka untuk publik.'],
-  ['Tabel LKPM per pelaku usaha','y','Hati-hati','Data per perusahaan. Gunakan akun kantor, unggah hanya kolom yang diperlukan, dan jangan dipublikasikan.'],
-  ['Draf laporan yang belum final','y','Hati-hati','Boleh untuk dirapikan atau diperiksa, tetapi hapus nama pejabat dan NIP yang tidak diperlukan.'],
-  ['Notulen rapat internal','y','Hati-hati','Ringkas dan hapus informasi yang belum boleh beredar sebelum diunggah.'],
-  ['Username dan password OSS / INSW','r','Jangan','Kredensial akun tidak boleh dimasukkan ke AI dalam kondisi apa pun.'],
-  ['NIK, NIP, dan data pribadi pekerja','r','Jangan','Data pribadi dilindungi. Hapus atau samarkan sebelum menggunakan AI.'],
-  ['Dokumen berklasifikasi rahasia','r','Jangan','Ikuti ketentuan klasifikasi dokumen instansi.']];
+  ['Teks regulasi publik (PP 85/2019)','g','Boleh diunggah','Dokumen publik. Aman untuk AI atau NotebookLM.'],
+  ['Template format LAKIN','g','Boleh diunggah','Tanpa data sensitif.'],
+  ['Data capaian yang sudah dipublikasikan','g','Boleh diunggah','Data agregat yang sudah terbuka.'],
+  ['Tabel LKPM per pelaku usaha','y','Hati-hati','Data per perusahaan. Pakai akun kantor, unggah kolom yang perlu saja.'],
+  ['Draf laporan yang belum final','y','Hati-hati','Boleh diperiksa AI. Hapus nama pejabat dan NIP.'],
+  ['Notulen rapat internal','y','Hati-hati','Ringkas, hapus info yang belum boleh beredar.'],
+  ['Username dan password OSS / INSW','r','Jangan','Kredensial tidak boleh masuk AI.'],
+  ['NIK, NIP, dan data pribadi pekerja','r','Jangan','Data pribadi. Hapus atau samarkan dulu.'],
+  ['Dokumen berklasifikasi rahasia','r','Jangan','Ikuti aturan klasifikasi dokumen.']];
 $('#dchips').innerHTML=DATA.map((d,i)=>`<button class="dchip" data-i="${i}" aria-pressed="false">${d[0]}</button>`).join('');
 $$('.dchip').forEach(b=>b.onclick=()=>{const d=DATA[+b.dataset.i];$$('.dchip').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
   const v=$('#verdict');v.className='verdict '+d[1];$('#vT').textContent=d[2];$('#vD').textContent=d[3]});
@@ -1169,95 +1169,96 @@ $$('.dchip').forEach(b=>b.onclick=()=>{const d=DATA[+b.dataset.i];$$('.dchip').f
 const SCOPE={a:'a. Laporan rutin',b:'b. Presentasi',c:'c. Konten medsos',d:'d. Dashboard',e:'Layanan'};
 const UC=[
  {s:'a',img:'1499914485622-a88fac536970',t:'Narasi LAKIN triwulanan',ai:['ChatGPT','Claude','Gemini'],sup:['Excel'],
-  now:'Setiap triwulan menyusun narasi IKU (latar belakang, hasil pengukuran, rencana aksi, kendala dan upaya) untuk Biro Perencanaan dan Pembentukan KEK.',
-  steps:['Siapkan tabel IKU triwulan ini (target, realisasi, capaian) dan narasi triwulan lalu sebagai contoh gaya.','Hapus nama pejabat, NIP, dan data yang tidak diperlukan.','Minta AI menghitung capaian dengan fitur analisis data (menjalankan kode), lalu cocokkan dengan tabel sumber.','Kirim prompt narasi. Kerjakan satu IKU dulu, jangan sekaligus.','Minta AI memeriksa penyebutan periode (TW II/TW III, "sebelumnya/berikutnya").','Rapikan bahasa, lalu ajukan ke atasan.'],
+  now:'Tiap triwulan: narasi IKU untuk Biro Perencanaan dan Pembentukan KEK.',
+  steps:[],
   prompt:`Peran: Kamu analis perencanaan di Administrator KEK Kendal.
 Konteks: Terlampir tabel IKU Triwulan III 2026 (target, realisasi, capaian) dan narasi Triwulan II sebagai contoh gaya.
 Tugas: (1) Hitung ulang capaian setiap IKU dengan Python dan tampilkan kodenya. (2) Susun narasi IKU 1.1 Persentase Capaian Target Investasi dengan subjudul: Latar Belakang, Hasil Pengukuran Kinerja, Pelaksanaan Rencana Aksi, Kendala dan Upaya Perbaikan.
 Format: Bahasa Indonesia baku laporan pemerintah, maksimal 400 kata. Tandai setiap angka dengan [CEK].
 Batasan: Hanya gunakan data terlampir. Jika data kurang, tulis [DATA DIPERLUKAN: ...]. Semua penyebutan periode harus Triwulan III.`,
-  out:'Hitungan capaian yang bisa diperiksa dan draf narasi per IKU.',
-  warn:'Laporan yang disalin dari periode sebelumnya sering menyisakan penyebutan periode lama. Minta AI mencarinya.'},
+  out:'Hitungan yang bisa diperiksa + draf narasi per IKU.',
+  warn:'Laporan salinan periode lalu sering menyisakan periode lama. Cari dan perbaiki.'},
  {s:'a',img:'1496247749665-49cf5b1022e9',t:'Laporan Pengawasan dari tabel data',ai:['ChatGPT','Claude'],sup:['Microsoft Copilot'],
-  now:'Menyusun Laporan Pengawasan dan Pengendalian Operasional ke Dewan Nasional dengan banyak tabel per pelaku usaha: investasi, tenaga kerja, ekspor, penjualan lokal.',
-  steps:['Gabungkan data TW I dan TW II dalam satu file Excel.','Unggah ke fitur analisis data. Minta rekap total, perubahan antar-triwulan, dan 10 pelaku usaha terbesar.','Minta AI mencocokkan hasil penjumlahan dengan baris TOTAL di tabel asli.','Minta draf narasi per subbab (investasi, tenaga kerja, ekspor, penjualan lokal).','Tambahkan sendiri analisis isu strategis dari hasil pengawasan lapangan.','Baca ulang dan buang kata-kata berlebihan.'],
+  now:'Laporan berkala ke Dewan Nasional, penuh tabel per pelaku usaha.',
+  steps:[],
   prompt:`Peran: Kamu analis pengawasan di Administrator KEK Kendal.
 Konteks: Terlampir Excel data per pelaku usaha Semester I 2026: investasi, tenaga kerja (TKI/TKA), ekspor, dan penjualan lokal per triwulan.
 Tugas: (1) Dengan Python, hitung total per kolom dan perubahan TW I ke TW II. (2) Tampilkan 10 pelaku usaha terbesar per kategori. (3) Cocokkan penjumlahan dengan baris TOTAL. (4) Susun draf narasi subbab "Kinerja Investasi Kawasan".
 Format: Bagian 1–3 dalam tabel beserta kode. Bagian 4 maksimal 300 kata.
 Batasan: Jangan membulatkan tanpa menyebutkan. Hindari kata "eksponensial", "masif", "secara mutlak".`,
-  out:'Tabel rekap yang bisa diperiksa, daftar pelaku usaha terbesar, dan draf narasi subbab.',
-  warn:'Selalu cocokkan hasil penjumlahan per baris dengan baris TOTAL di tabel sumber.'},
+  out:'Rekap terverifikasi + draf narasi subbab.',
+  warn:'Cocokkan jumlah per baris dengan baris TOTAL.'},
  {s:'a',img:'1515378791036-0648a3ef77b2',t:'Cek konsistensi laporan sebelum dikirim',ai:['Claude','ChatGPT'],sup:['Excel'],
-  now:'Laporan disusun beberapa orang dan disalin dari periode sebelumnya, sehingga angka, rumus, dan dasar hukum bisa tidak konsisten.',
-  steps:['Unggah draf laporan dan laporan pembanding.','Kirim prompt pemeriksaan. Minta setiap hitungan dijalankan dengan kode.','Minta hasil dalam bentuk tabel temuan.','Periksa setiap temuan satu per satu.','Perbaiki dokumen dan catat perubahannya.'],
+  now:'Laporan disusun banyak orang dan disalin dari periode lalu. Angka dan dasar hukum rawan tak konsisten.',
+  steps:[],
   prompt:`Peran: Kamu pemeriksa mutu dokumen pemerintah yang teliti.
 Konteks: Terlampir LAKIN Triwulan II 2026 dan Laporan Pengawasan Semester I 2026 Administrator KEK Kendal.
 Tugas: Periksa (1) hitungan persentase dan capaian, (2) kesesuaian rumus dan bobot, (3) angka yang berbeda antar-dokumen, (4) penyebutan periode, (5) dasar hukum, (6) satuan.
 Format: Tabel dengan kolom No | Lokasi | Jenis | Temuan | Hitungan ulang | Saran perbaikan.
 Batasan: Jalankan hitungan dengan kode dan tampilkan. Jika ragu, tulis "perlu konfirmasi".`,
-  out:'Daftar temuan yang siap ditindaklanjuti sebelum laporan ditandatangani.',
-  warn:'Periksa kesesuaian bobot dalam rumus dengan narasi, dan capaian di tabel ringkasan dengan tabel rinci.'},
+  out:'Daftar temuan sebelum tanda tangan.',
+  warn:'Cek bobot di rumus vs narasi, dan tabel ringkasan vs tabel rinci.'},
  {s:'b',img:'1542744173-8e7e53415bb0',t:'Bahan paparan isu strategis',ai:['ChatGPT','Claude','Gemini'],sup:['Gamma','Canva','Microsoft Copilot'],
-  now:'Menyiapkan bahan paparan untuk pimpinan atau rapat koordinasi, misalnya isu infrastruktur kawasan dan kendala sistem layanan.',
-  steps:['Tentukan audiens, durasi, dan keputusan yang diharapkan dari rapat.','Minta AI membuat alur slide: satu pesan per slide.','Periksa dan setujui alurnya.','Buat slide di Gamma, Canva, atau Copilot PowerPoint dari alur tersebut.','Pindahkan ke template kantor dan ganti visual yang generik.','Cek angka dan sumbernya, lalu latihan membawakan.'],
+  now:'Paparan untuk pimpinan atau rapat koordinasi, misalnya isu infrastruktur kawasan dan kendala sistem layanan.',
+  steps:[],
   prompt:`Peran: Kamu penyusun bahan paparan untuk Kepala Administrator KEK Kendal.
 Konteks: Terlampir Bab III Isu Strategis Laporan Pengawasan Semester I 2026. Audiens: rapat koordinasi dengan Dewan Kawasan, durasi 10 menit.
 Tugas: Buat alur presentasi 6 slide yang berakhir dengan permintaan dukungan yang jelas.
 Format: Per slide: judul berupa kalimat pesan, maksimal 3 poin, saran visual, dan catatan pembicara 2 kalimat.
 Batasan: Hanya gunakan data dari dokumen terlampir. Satu slide satu pesan.`,
-  out:'Alur 6 slide beserta catatan pembicara, siap dibuat di tools presentasi.',
-  warn:'Tools presentasi AI cenderung membuat slide padat teks. Pangkas sampai satu pesan per slide.'},
+  out:'Alur 6 slide + catatan pembicara.',
+  warn:'Slide buatan AI cenderung padat. Satu slide, satu pesan.'},
  {s:'b',img:'1460925895917-afdab827c52f',t:'Dari tabel ke grafik yang tepat',ai:['ChatGPT','Claude'],sup:['Excel','Napkin AI'],
-  now:'Tabel di laporan disalin mentah ke slide, sehingga pesan utamanya tidak terlihat.',
-  steps:['Tentukan pesan yang ingin disampaikan.','Unggah tabel dan minta 2–3 pilihan grafik beserta alasannya.','Minta AI membuat grafik terbaik dengan menjalankan kode, atau buat sendiri di Excel.','Tulis judul grafik berupa kesimpulan.','Cek skala sumbu, satuan, dan cantumkan sumber data.'],
+  now:'Tabel disalin mentah ke slide. Pesannya hilang.',
+  steps:[],
   prompt:`Peran: Kamu ahli visualisasi data untuk laporan pemerintah.
 Konteks: [Tempel tabel kapasitas air baku, IPAL, dan drainase untuk dua periode].
 Tugas: Usulkan 3 pilihan grafik untuk menunjukkan kesenjangan suplai air dan pengolahan limbah, lalu buat grafik terbaik dengan Python.
 Format: Untuk tiap pilihan: jenis grafik, alasan, kelemahan. Judul grafik berupa kalimat kesimpulan.
 Batasan: Jangan menambah data. Cantumkan sumber di bawah grafik.`,
-  out:'Grafik dengan judul berisi pesan, siap ditempel di slide.',
-  warn:'Perhatikan satuan. Samakan satuan sebelum membandingkan angka.'},
+  out:'Grafik dengan judul berisi pesan.',
+  warn:'Cek satuan. Samakan sebelum membandingkan.'},
  {s:'c',img:'1611926653458-09294b3142bf',t:'Konten edukasi layanan di media sosial',ai:['ChatGPT','Claude','Gemini'],sup:['Canva'],
-  now:'Banyak layanan yang perlu dipahami pelaku usaha: SKA, Masterlist, NPU, IT Inventory, Tax Holiday dan Tax Allowance.',
-  steps:['Pilih satu topik layanan per konten.','Siapkan sumber resmi: regulasi, SOP, atau standar pelayanan.','Minta AI membuat naskah carousel dan caption dari sumber tersebut.','Cek istilah, alur, dan dasar hukum.','Desain di Canva memakai identitas visual instansi.','Minta persetujuan atasan sebelum diunggah.'],
+  now:'Banyak layanan perlu dipahami pelaku usaha: SKA, Masterlist, NPU, IT Inventory, Tax Holiday.',
+  steps:[],
   prompt:`Peran: Kamu penulis konten edukasi layanan publik.
 Konteks: Administrator KEK Kendal adalah Instansi Penerbit SKA di Jawa Tengah. Terlampir ringkasan prosedur penerbitan SKA.
 Tugas: Buat naskah carousel Instagram 6 slide berjudul "Kenalan dengan SKA".
 Format: Per slide maksimal 25 kata dan saran visual. Tambahkan caption 80 kata dan 5 hashtag.
 Batasan: Bahasa ramah tapi tetap resmi. Jangan menyebut nama perusahaan. Jangan menulis dasar hukum yang tidak ada di dokumen terlampir.`,
-  out:'Naskah carousel dan caption, siap didesain.',
-  warn:'Jangan mengunggah data per pelaku usaha ke media sosial. Pastikan dasar hukum yang ditulis sama dengan yang dipakai di laporan resmi.'},
+  out:'Naskah carousel + caption.',
+  warn:'Jangan unggah data per perusahaan. Samakan dasar hukum dengan laporan resmi.'},
  {s:'d',img:'1526628953301-3e589a6a8b74',t:'Dashboard dari data lampiran laporan',ai:['ChatGPT','Claude'],sup:['Excel','Looker Studio'],
-  now:'Data per pelaku usaha tersedia di lampiran PDF (investasi, tenaga kerja, ekspor, penjualan lokal), tetapi sulit diolah dan dibandingkan.',
-  steps:['Unggah PDF lampiran dan minta AI mengubah tabel menjadi Excel.','Minta AI merapikan data dengan kode: satu baris satu pelaku usaha, angka tanpa "Rp".','Cocokkan penjumlahan dengan baris TOTAL di PDF.','Tentukan 4–6 pertanyaan yang ingin dijawab pimpinan.','Minta AI membuat grafik dan dashboard, atau buat di Excel / Looker Studio.','Perbarui data tiap triwulan dengan langkah yang sama.'],
+  now:'Data per perusahaan ada di lampiran PDF. Sulit diolah.',
+  steps:[],
   prompt:`Peran: Kamu analis data.
 Konteks: Terlampir PDF Lampiran III, IV, VII, dan VIII Laporan Pengawasan Semester I 2026 KEK Kendal (data per pelaku usaha).
 Tugas: (1) Ubah setiap tabel menjadi tabel rapi dengan Python. (2) Gabungkan jadi satu tabel per pelaku usaha. (3) Buat dashboard satu halaman: 4 angka utama dan 4 grafik.
 Format: File Excel dengan kolom: nama, investasi_tw1, investasi_tw2, tki, tka, ekspor, penjualan_lokal. Lalu dashboard.
 Batasan: Laporkan jika penjumlahan tidak sama dengan baris TOTAL.`,
-  out:'File Excel bersih dan dashboard yang bisa diperbarui tiap triwulan.',
-  warn:'Hasil ekstraksi tabel PDF bisa bergeser kolomnya. Cocokkan dengan baris TOTAL sebelum dipakai.'},
+  out:'Excel bersih + dashboard yang bisa diperbarui.',
+  warn:'Kolom hasil ekstraksi PDF bisa bergeser. Cocokkan dengan baris TOTAL.'},
  {s:'e',img:'1517245386807-bb43f82c33c4',t:'Asisten regulasi untuk konsultasi pelaku usaha',ai:['NotebookLM'],sup:['ChatGPT','Claude'],
-  now:'Konsultasi pelaku usaha berlangsung setiap hari. Pertanyaan yang mirip dijawab berulang dengan merujuk banyak regulasi.',
-  steps:['Kumpulkan regulasi resmi yang dipakai dalam layanan, misalnya PP 85/2019, SE Sekjen DN KEK tentang fasilitas pembebasan bea masuk (masterlist), Peraturan Sekjen DN KEK No. 4/2025 (NPU), Perdirjen BC No. 24/BC/2023 (IT Inventory), Permendag No. 34/2023 (SKA).','Buat notebook baru di NotebookLM dan unggah dokumen tersebut.','Ajukan pertanyaan yang sering muncul dari pelaku usaha.','Klik rujukan di jawaban untuk memeriksa pasal aslinya.','Pakai jawaban sebagai bahan, bukan jawaban final ke pelaku usaha.'],
+  now:'Konsultasi pelaku usaha berjalan tiap hari. Pertanyaan serupa dijawab berulang.',
+  steps:[],
   prompt:`Berdasarkan dokumen di notebook ini saja:
 Seorang pelaku usaha baru di KEK Kendal bertanya: "Apa saja kewajiban kami terkait IT Inventory dan kapan batas waktunya?"
 Jawab dalam 5 poin singkat, sebutkan pasal rujukannya, dan tulis "tidak ditemukan di dokumen" untuk hal yang tidak ada di sumber.`,
-  out:'Jawaban konsultasi yang lebih cepat, konsisten, dan menyebut rujukan.',
-  warn:'Pastikan versi regulasi yang diunggah adalah yang terbaru dan berlaku.'}];
+  out:'Jawaban cepat, konsisten, ada rujukan.',
+  warn:'Pakai regulasi versi terbaru dan berlaku.'}];
 const tagOf=n=>{const t=TOOLS.find(x=>x.n===n)||(n.startsWith('Claude')?{d:'claude.ai'}:null);return`<span class="tag">${t?`<img src="${FAV(t.d)}" alt="">`:''}${n}</span>`};
 /* Use case berbasis mode Claude */
-[[['Claude Projects','Claude Chat'],['Excel'],'Buat Project "LAKIN KEK Kendal" di Claude: tulis instruksi tetap, unggah template, laporan triwulan lalu, dan definisi IKU.'],
- [['Claude Cowork'],['Claude Chat','Excel'],'Buka Cowork di aplikasi Claude desktop dan pilih folder berisi data LKPM, ekspor, dan penjualan lokal.'],
- [['Claude Chat'],['Claude Projects'],'Buka Claude Chat dan lampirkan kedua dokumen.'],
- [['Claude Chat','Claude Design'],['Gamma','Microsoft Copilot'],'Mulai di Claude Chat untuk menyusun alur, lalu buat slide di kanvas Claude Design atau minta file PowerPoint.'],
- [['Claude Chat'],['Excel','Napkin AI'],'Buka Claude Chat dan unggah tabelnya (Excel atau tempel langsung).'],
- [['Claude Design','Claude Chat'],['Canva'],'Susun naskah di Claude Chat, lalu minta Claude membuat desain carousel di kanvas Design.'],
- [['Claude Code','Claude Cowork'],['Excel','Looker Studio'],'Siapkan folder project berisi PDF lampiran, lalu buka tab Code (atau Cowork) di aplikasi Claude.'],
- [['Claude Projects'],['NotebookLM'],null]
-].forEach((m,i)=>{UC[i].ai=m[0];UC[i].sup=m[1];if(m[2])UC[i].steps.unshift(m[2])});
-UC[7].steps=['Kumpulkan regulasi resmi yang dipakai dalam layanan, misalnya PP 85/2019, SE Sekjen DN KEK tentang fasilitas pembebasan bea masuk (masterlist), Peraturan Sekjen DN KEK No. 4/2025 (NPU), Perdirjen BC No. 24/BC/2023 (IT Inventory), Permendag No. 34/2023 (SKA).','Buat Project "Regulasi Layanan KEK" di Claude dan unggah dokumen tersebut sebagai knowledge.','Tulis instruksi tetap: jawab hanya dari dokumen project dan sebutkan pasal rujukannya.','Ajukan pertanyaan yang sering muncul dari pelaku usaha.','Cek pasal yang dirujuk ke dokumen aslinya.','Pakai jawaban sebagai bahan, bukan jawaban final ke pelaku usaha.'];
+[[['Claude Projects','Claude Chat'],['Excel']],
+ [['Claude Cowork'],['Claude Chat','Excel']],
+ [['Claude Chat'],['Claude Projects']],
+ [['Claude Chat','Claude Design'],['Gamma','Microsoft Copilot']],
+ [['Claude Chat'],['Excel','Napkin AI']],
+ [['Claude Design','Claude Chat'],['Canva']],
+ [['Claude Code','Claude Cowork'],['Excel','Looker Studio']],
+ [['Claude Projects'],['NotebookLM']]
+].forEach((m,i)=>{UC[i].ai=m[0];UC[i].sup=m[1]});
+const STEPS=[["Buat Project \"LAKIN KEK Kendal\": isi instruksi tetap, template, laporan lalu, definisi IKU.", "Siapkan tabel IKU triwulan ini: target, realisasi, capaian.", "Hapus nama pejabat dan NIP.", "Hitung capaian lewat fitur analisis data. Cocokkan dengan tabel sumber.", "Kirim prompt narasi. Satu IKU dulu.", "Cek penyebutan periode: TW, \"sebelumnya/berikutnya\".", "Rapikan, ajukan ke atasan."], ["Buka Cowork, pilih folder data LKPM, ekspor, dan penjualan lokal.", "Gabungkan data TW I dan TW II dalam satu Excel.", "Rekap total, perubahan antar-triwulan, dan 10 terbesar.", "Cocokkan jumlah dengan baris TOTAL.", "Susun draf narasi per subbab.", "Tambahkan analisis isu strategis dari lapangan.", "Baca ulang, buang kata berlebihan."], ["Buka Claude Chat, lampirkan draf dan laporan pembanding.", "Kirim prompt pemeriksaan. Hitungan wajib lewat kode.", "Terima hasil dalam tabel temuan.", "Periksa temuan satu per satu.", "Perbaiki dokumen, catat perubahan."], ["Tentukan audiens, durasi, dan keputusan yang dicari.", "Susun alur slide di Claude Chat: satu pesan per slide.", "Periksa dan setujui alur.", "Buat slide di Claude Design atau file PowerPoint.", "Pindahkan ke template kantor.", "Cek angka dan sumber, lalu latihan."], ["Tentukan pesan grafik.", "Unggah tabel ke Claude Chat.", "Pilih dari 2–3 usulan grafik.", "Buat grafik lewat kode, atau di Excel.", "Judul grafik = kesimpulan.", "Cek skala, satuan, dan sumber."], ["Pilih satu topik layanan.", "Siapkan sumber resmi: regulasi, SOP, standar layanan.", "Susun naskah carousel dan caption di Claude Chat.", "Cek istilah, alur, dan dasar hukum.", "Desain di Claude Design atau Canva.", "Ajukan ke atasan sebelum unggah."], ["Siapkan folder berisi PDF lampiran, buka tab Code atau Cowork.", "Ubah tabel PDF menjadi Excel.", "Rapikan: satu baris satu perusahaan, angka tanpa \"Rp\".", "Cocokkan jumlah dengan baris TOTAL.", "Tentukan 4–6 pertanyaan pimpinan.", "Bangun grafik dan dashboard.", "Perbarui tiap triwulan."], ["Kumpulkan regulasi layanan: PP 85/2019, SE Sekjen DN KEK (masterlist), Persekjen DN KEK 4/2025 (NPU), Perdirjen BC 24/2023 (IT Inventory), Permendag 34/2023 (SKA).", "Buat Project \"Regulasi Layanan KEK\", unggah dokumennya.", "Instruksi tetap: jawab dari dokumen project saja, sebut pasalnya.", "Ajukan pertanyaan yang sering muncul.", "Cek pasal ke dokumen asli.", "Jawaban = bahan, bukan jawaban final."]];
+STEPS.forEach((st,i)=>UC[i].steps=st);
 UC[7].prompt=UC[7].prompt.replace('Berdasarkan dokumen di notebook ini saja:','Berdasarkan dokumen di project ini saja:');
 var ucSel=0,ucScope='all',ucTab='langkah',ucStep=0;
 function renderUC(){
@@ -1301,11 +1302,11 @@ const ICON={
   design:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><circle cx="11" cy="11" r="2"/></svg>',
   code:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>'};
 const MODES=[
- {k:'chat',t:'Chat',sub:'Percakapan',c:'var(--m-chat)',what:'Bertanya, menulis, merangkum, dan menganalisis file yang diunggah. Hasilnya bisa berupa teks, file Word, Excel, PowerPoint, atau Artifact (halaman interaktif) yang bisa dibagikan lewat tautan.',fit:['Draf narasi, surat, dan caption','Merangkum dan memeriksa dokumen','Analisis data dari file Excel dengan menjalankan kode'],start:['Buka claude.ai atau aplikasi Claude','Lampirkan file lewat ikon lampiran','Tulis prompt dengan rumus Peran, Konteks, Tugas, Format, Batasan'],kek:'Cek konsistensi LAKIN sebelum dikirim. Ubah Bab Isu Strategis menjadi alur paparan.',note:'Setiap percakapan baru mulai dari nol, kecuali dijalankan di dalam Projects.'},
- {k:'proj',t:'Projects',sub:'Ruang kerja berulang',c:'var(--m-proj)',what:'Ruang kerja berisi instruksi tetap dan dokumen acuan (knowledge) yang otomatis dipakai di setiap percakapan dalam project tersebut.',fit:['Tugas rutin dengan acuan yang sama','Kumpulan regulasi untuk menjawab konsultasi','Format dan gaya bahasa laporan yang konsisten'],start:['Buat Project baru di claude.ai','Tulis instruksi tetap: peran, gaya bahasa, aturan','Unggah dokumen acuan: template, laporan lalu, regulasi','Mulai percakapan di dalam Project'],kek:'Project "LAKIN KEK Kendal" dan Project "Regulasi Layanan KEK".',note:'Perbarui dokumen acuan saat regulasi atau template berubah.'},
- {k:'cowork',t:'Cowork',sub:'Bekerja di folder laptop',c:'var(--m-cowork)',what:'Mode agen di aplikasi desktop Claude. Claude membuka folder yang Anda izinkan, membaca banyak file sekaligus, lalu membuat dan menyimpan hasil (Word, Excel, PowerPoint, HTML) langsung ke folder. Bisa terhubung ke aplikasi seperti Gmail dan Google Drive.',fit:['Rekap dari banyak file Excel dan PDF','Menyusun laporan dari folder bahan','Merapikan, mengindeks, dan memilah file atau email'],start:['Buka aplikasi Claude desktop, pilih Cowork','Pilih folder kerja (misalnya Input dan Output)','Jelaskan tugas dan minta rencana kerja dulu','Setujui langkahnya, periksa hasil di folder Output'],kek:'Folder data LKPM per triwulan menjadi rekap Excel dan draf Bab II Laporan Pengawasan.',note:'Beri akses hanya ke folder yang diperlukan. Simpan salinan sebelum file diubah.'},
- {k:'design',t:'Design',sub:'Kanvas visual',c:'var(--m-design)',what:'Kanvas untuk membuat desain visual: poster, slide, konten media sosial, mockup layar, dan prototipe. Hasilnya bisa direvisi lewat percakapan, diedit, dan dibagikan.',fit:['Carousel dan poster edukasi layanan','Slide paparan pimpinan','Mockup tampilan aplikasi atau dashboard'],start:['Minta Claude membuat desain di kanvas Design','Jelaskan ukuran, pesan, dan gaya visual','Revisi lewat percakapan atau edit langsung','Bagikan tautan atau ekspor'],kek:'Carousel "Kenalan dengan SKA" dan poster alur layanan Masterlist.',note:'Gunakan logo dan identitas visual instansi sesuai aturan.'},
- {k:'code',t:'Code',sub:'Membangun alat kerja',c:'var(--m-code)',what:'Claude Code menulis dan menjalankan kode di folder project: mengolah data, membangun dashboard, website, dan aplikasi. Tersedia di tab Code aplikasi desktop Claude, terminal, dan VS Code.',fit:['Dashboard dari data Excel dan PDF','Otomasi pengolahan data yang berulang','Prototipe aplikasi dan halaman web'],start:['Siapkan folder project berisi bahan di Input','Buka tab Code di aplikasi Claude dan pilih folder','Minta analisis bahan dan rencana kerja dulu','Uji hasil, minta perbaikan, simpan versi'],kek:'Dashboard kinerja KEK dari Lampiran III sampai VIII, diperbarui tiap triwulan.',note:'Materi sharing ini juga dibuat dengan Claude Code.'}];
+ {k:'chat',t:'Chat',sub:'Percakapan',c:'var(--m-chat)',what:'Tanya, tulis, rangkum, analisis file. Hasil: teks, file Office, atau Artifact yang bisa dibagikan.',fit:['Draf narasi, surat, caption','Ringkas dan periksa dokumen','Analisis Excel lewat kode'],start:['Buka claude.ai atau aplikasi Claude','Lampirkan file','Tulis prompt: Peran, Konteks, Tugas, Format, Batasan'],kek:'Cek konsistensi LAKIN. Ubah isu strategis jadi alur paparan.',note:'Tiap percakapan mulai dari nol, kecuali di dalam Projects.'},
+ {k:'proj',t:'Projects',sub:'Ruang kerja berulang',c:'var(--m-proj)',what:'Ruang kerja dengan instruksi tetap dan dokumen acuan. Dipakai otomatis di setiap percakapan.',fit:['Tugas rutin, acuan sama','Kumpulan regulasi untuk konsultasi','Format laporan yang konsisten'],start:['Buat Project di claude.ai','Tulis instruksi tetap','Unggah template, laporan lalu, regulasi','Mulai percakapan di Project'],kek:'Project "LAKIN KEK Kendal" dan "Regulasi Layanan KEK".',note:'Perbarui acuan saat regulasi atau template berubah.'},
+ {k:'cowork',t:'Cowork',sub:'Bekerja di folder laptop',c:'var(--m-cowork)',what:'Mode agen di Claude desktop. Membaca banyak file di folder, lalu menyimpan hasil (Word, Excel, PowerPoint, HTML) ke folder. Bisa terhubung ke Gmail dan Google Drive.',fit:['Rekap banyak Excel dan PDF','Laporan dari folder bahan','Rapikan dan indeks file atau email'],start:['Buka Claude desktop, pilih Cowork','Pilih folder kerja','Jelaskan tugas, cek rencana kerja','Setujui, periksa hasil di Output'],kek:'Folder LKPM per triwulan jadi rekap Excel dan draf Bab II.',note:'Beri akses ke folder yang perlu saja. Salin sebelum edit.'},
+ {k:'design',t:'Design',sub:'Kanvas visual',c:'var(--m-design)',what:'Kanvas visual: poster, slide, konten medsos, mockup, prototipe. Revisi lewat percakapan atau edit langsung.',fit:['Carousel dan poster layanan','Slide paparan','Mockup aplikasi atau dashboard'],start:['Buka kanvas Design di Claude','Tulis ukuran, pesan, dan gaya','Revisi atau edit langsung','Bagikan atau ekspor'],kek:'Carousel "Kenalan dengan SKA", poster alur Masterlist.',note:'Pakai logo dan identitas instansi sesuai aturan.'},
+ {k:'code',t:'Code',sub:'Membangun alat kerja',c:'var(--m-code)',what:'Menulis dan menjalankan kode di folder project: olah data, dashboard, website, aplikasi. Ada di tab Code Claude desktop, terminal, dan VS Code.',fit:['Dashboard dari Excel dan PDF','Otomasi olah data berulang','Prototipe aplikasi dan web'],start:['Siapkan folder dengan bahan di Input','Buka tab Code, pilih folder','Analisis bahan dan rencana dulu','Uji, perbaiki, simpan versi'],kek:'Dashboard kinerja KEK dari Lampiran III–VIII, diperbarui tiap triwulan.',note:'Materi ini juga dibuat dengan Claude Code.'}];
 const MC=k=>MODES.find(m=>m.k===k).c;
 let modeK='chat';
 function renderModes(){
@@ -1321,7 +1322,7 @@ function renderModes(){
       <div class="row"><button class="btn" id="toGal">Lihat karya ${m.t} →</button></div></div>`;
   $('#toGal').onclick=()=>{galMode=modeK;galScope='all';renderGal();go(8)};
 }
-const PQ=[['proj','Tugas ini berulang dengan dokumen acuan yang sama?'],['cowork','Bahannya banyak file di laptop dan hasilnya perlu disimpan sebagai file?'],['design','Hasilnya berupa visual: poster, slide, atau konten media sosial?'],['code','Hasilnya alat kerja: dashboard, aplikasi, atau otomasi?']];
+const PQ=[['proj','Tugas berulang, acuan sama?'],['cowork','Banyak file di laptop, hasilnya file?'],['design','Hasilnya visual: poster, slide, konten?'],['code','Hasilnya alat kerja: dashboard, aplikasi, otomasi?']];
 const pqOn=new Set();
 function renderPicker(){
   $('#picker').innerHTML=PQ.map(([k,q])=>`<button class="pq" aria-pressed="${pqOn.has(k)}" data-k="${k}"><span>${q}</span><span class="sw"></span></button>`).join('');
@@ -1329,40 +1330,40 @@ function renderPicker(){
   const order=['code','cowork','design','proj'],pick=order.filter(k=>pqOn.has(k)),main=pick[0]||'chat',m=MODES.find(x=>x.k===main);
   const also=pick.slice(1).map(k=>'Claude '+MODES.find(x=>x.k===k).t);
   $('#rec').style.setProperty('--mc',m.c);
-  $('#rec').innerHTML=`<div class="eyebrow" style="color:rgba(255,255,255,.8)">Rekomendasi</div><h3 class="h-l">Claude ${m.t}</h3><p>${m.what}</p>${also.length?`<p><b>Bisa dikombinasikan dengan:</b> ${also.join(', ')}.</p>`:''}${!pick.length?'<p>Tanpa kebutuhan khusus, mulai dari Chat.</p>':''}`;
+  $('#rec').innerHTML=`<div class="eyebrow" style="color:rgba(255,255,255,.8)">Rekomendasi</div><h3 class="h-l">Claude ${m.t}</h3><p>${m.what}</p>${also.length?`<p><b>Kombinasikan dengan:</b> ${also.join(', ')}.</p>`:''}${!pick.length?'<p>Belum ada yang dipilih? Mulai dari Chat.</p>':''}`;
 }
 
 /* ---------- Galeri karya ---------- */
 const G=[
- {id:'osdm',mode:['code'],scope:['d'],org:true,t:'OSDM Analytics Dashboard Kemenkeu',d:'Dashboard analitik organisasi dan SDM: OTK, uraian jabatan, kompetensi jabatan, pelimpahan wewenang, cuti, suksesi, penghargaan, dan pemberhentian. Dikembangkan bertahap dalam 12 sesi, setiap modul dari data Excel dan Word di folder input.',
+ {id:'osdm',mode:['code'],scope:['d'],org:true,t:'OSDM Analytics Dashboard Kemenkeu',d:'Dashboard organisasi dan SDM: OTK, uraian jabatan, kompetensi, pelimpahan wewenang, cuti, suksesi, penghargaan. 12 sesi, modul per modul dari Excel dan Word.',
   q:'kita akan menambah 1 modul terkait kompetensi jabatan, data nya sudah gue feeding di folder input, loe analisis dulu yah dari data … pastikan tidak ada bug, data yang hilang atau tertinggal ketika loe transform ke json',outs:[]},
- {id:'aisetjen',mode:['code'],scope:['a','b'],org:true,t:'Konsep AI-Enabled Setjen',d:'Paket bahan pemanfaatan AI di Sekretariat Jenderal: deck presentasi, konsep naratif, contoh notula yang disusun AI, dan simulasi optimasi AI per jabatan.',outs:[]},
- {id:'probis',mode:['cowork','code'],scope:['d'],org:true,t:'Dashboard Proses Bisnis Kemenkeu',d:'Dashboard peta proses bisnis, katalog layanan, dan aplikasi. Dikembangkan dalam beberapa sesi Cowork, lalu datanya dipisah ke file eksternal lewat Claude Code agar mudah diperbarui.',
+ {id:'aisetjen',mode:['code'],scope:['a','b'],org:true,t:'Konsep AI-Enabled Setjen',d:'Deck, konsep naratif, contoh notula buatan AI, dan simulasi optimasi AI per jabatan.',outs:[]},
+ {id:'probis',mode:['cowork','code'],scope:['d'],org:true,t:'Dashboard Proses Bisnis Kemenkeu',d:'Peta proses bisnis, katalog layanan, dan aplikasi. Dibangun di Cowork, datanya dipisah ke JSON lewat Claude Code.',
   q:'Tolong baca file Dashboard Proses Bisnis Kemenkeu.html … Setelah itu kita refactor supaya data dipisah ke JSON eksternal dan HTML tidak perlu diubah setiap update data.',outs:[]},
- {id:'abk',mode:['code'],scope:['d'],org:true,t:'Mesin Data Analisis Beban Kerja (ABK)',d:'Mengurai file XML Form ABK berukuran besar secara bertahap, lalu menghitung kebutuhan pegawai dibanding pegawai eksisting per jabatan, dengan status kurang, sesuai, atau lebih.',
+ {id:'abk',mode:['code'],scope:['d'],org:true,t:'Mesin Data Analisis Beban Kerja (ABK)',d:'Mengurai XML Form ABK yang besar, lalu menghitung kebutuhan vs pegawai eksisting per jabatan: kurang, sesuai, lebih.',
   q:'Cek ukuran file dan preview 100-200 baris pertama untuk memahami struktur … JANGAN load seluruh file sekaligus ke memory',outs:[]},
- {id:'kanvas',mode:['code'],scope:['b'],org:true,t:'Kanvas Inovasi Probis',d:'Halaman kerja interaktif satu file untuk workshop inovasi proses bisnis, siap dihosting di GitHub Pages.',
+ {id:'kanvas',mode:['code'],scope:['b'],org:true,t:'Kanvas Inovasi Probis',d:'Halaman kerja interaktif untuk workshop inovasi. Satu file, siap di GitHub Pages.',
   q:'Buatkan satu file HTML mandiri bernama index.html … Ini halaman kerja interaktif untuk workshop inovasi, namanya Kanvas Inovasi Probis.',outs:[]},
- {id:'rap',mode:['code'],scope:['a'],org:true,t:'Rancangan Aksi Perubahan',d:'Draf rancangan aksi perubahan yang berangkat dari hasil asesmen organisasi, dengan prototipe dashboard sebagai pendukung program. Disusun dalam beberapa versi draf.',outs:[]},
- {id:'bumdes',mode:['code'],scope:['a'],t:'Laporan Studi Lapangan BUMDes Kutuh',d:'Laporan studi lapangan dalam dua bentuk, dokumen Word dan halaman web, termasuk analisis Business Model Canvas.',
+ {id:'rap',mode:['code'],scope:['a'],org:true,t:'Rancangan Aksi Perubahan',d:'Draf rancangan aksi perubahan dari hasil asesmen, didukung prototipe dashboard. Beberapa versi draf.',outs:[]},
+ {id:'bumdes',mode:['code'],scope:['a'],t:'Laporan Studi Lapangan BUMDes Kutuh',d:'Laporan studi lapangan versi Word dan web, lengkap dengan Business Model Canvas.',
   q:'…membuat landing page BUMDES KUTUH, dalam laporan Study Lapangan dan nant ada output MBC … mari kita diskusikan brok laporan dalam bentuk web yang profesional',
   outs:[['Buka laporan versi web','https://doniebelva.github.io/bumdes-kutuh/']]},
- {id:'lppm',mode:['code'],scope:['a'],t:'Laporan Akhir Penelitian dan Pengabdian',d:'Menyusun dua laporan akhir (penelitian dan pengabdian masyarakat) dari bahan yang tersedia, sekaligus SPTB dan lampiran bukti pertanggungjawaban belanja.',
+ {id:'lppm',mode:['code'],scope:['a'],t:'Laporan Akhir Penelitian dan Pengabdian',d:'Dua laporan akhir (penelitian dan pengabdian), SPTB, dan lampiran bukti belanja.',
   q:'…ada 2 proyek laporan yaitu LPPM dan Pengmas … Tugas loe buat 2 laporan akhir … untuk LPPM loe buat juga SPTB',outs:[]},
- {id:'sengketa',mode:['code'],scope:['d'],t:'Dashboard Analitik Sengketa Pajak',d:'Menarik data dengan skrip, lalu membangun dashboard analitik beserta telaah dan rancangan pengembangannya.',
+ {id:'sengketa',mode:['code'],scope:['d'],t:'Dashboard Analitik Sengketa Pajak',d:'Tarik data lewat skrip, lalu dashboard analitik beserta telaahnya.',
   q:'gue mau bikin dashboard analitik sengketa pajak, tahap 1 gue mau tarikan datanya, gue sudah buat scipitr dan rancangannya … trus berikan insight',outs:[]},
- {id:'sigap',mode:['code'],scope:['b','d'],t:'Prototipe Aplikasi SIGAP Bencana',d:'Rancangan aplikasi web dan HP untuk komunikasi unit di daerah dengan pusat dalam Manajemen Keberlangsungan Bisnis, beserta nota kebutuhan teknis dan panduan deploy.',
+ {id:'sigap',mode:['code'],scope:['b','d'],t:'Prototipe Aplikasi SIGAP Bencana',d:'Aplikasi web dan HP untuk komunikasi daerah–pusat dalam Manajemen Keberlangsungan Bisnis. Plus nota teknis dan panduan deploy.',
   q:'…desain apps berbasis web dan HP terkait Manajemen Keberlansungan Bisnis … analisis dulu',outs:[]},
- {id:'bigdata',mode:['code'],scope:['b'],t:'Website Materi Kuliah Big Data',d:'Materi perkuliahan disajikan sebagai website interaktif untuk ditayangkan di kelas, dihosting di GitHub Pages.',
+ {id:'bigdata',mode:['code'],scope:['b'],t:'Website Materi Kuliah Big Data',d:'Materi kuliah dalam bentuk website interaktif, di GitHub Pages.',
   q:'…buat website untuk materi kuliah … nanti gue akan tayangankan website ini untuk mahasiswa menjelaskan perkuliahan',
   prev:'https://donny-apps.github.io/belajar-data-analitik/index.html',outs:[['Buka website materi','https://donny-apps.github.io/belajar-data-analitik/']]},
- {id:'index',mode:['cowork','code'],scope:['d'],t:'Indeks File Laptop "Boxfiles Saya"',d:'Cowork membuat indeks dari ribuan file di laptop. Claude Code lalu membangun dashboard pencarian file dengan filter per folder.',
+ {id:'index',mode:['cowork','code'],scope:['d'],t:'Indeks File Laptop "Boxfiles Saya"',d:'Cowork mengindeks ribuan file. Claude Code membangun dashboard pencariannya.',
   q:'Saya ingin membuat File Index Dashboard system dengan 3 komponen: Python script untuk scan … HTML Dashboard yang bisa search by keyword, filter by folder/kategori',outs:[]},
- {id:'aboutme',mode:['cowork'],scope:[],t:'File Instruksi Kerja "About me"',d:'Profil, struktur folder, aturan wajib, dan preferensi keluaran yang dibaca Claude di setiap sesi, sehingga tidak perlu menjelaskan ulang. Contoh aturannya: jangan hapus file di folder input, simpan hasil di folder output, buat salinan sebelum mengedit.',outs:[]},
- {id:'poster',mode:['design'],scope:['c'],t:'Islamic Banking Framework Poster',d:'Poster kerangka konsep yang dibuat di kanvas Design dan bisa dibagikan lewat tautan.',outs:[]},
- {id:'materi',mode:['code'],scope:['b'],t:'Materi Sharing Session Ini',d:'Halaman yang sedang Anda lihat dibuat dengan Claude Code: membaca laporan kantor, menguji angka, mencari foto, dan menyusun materi interaktif.',outs:[]},
- {id:'u-chat',usul:true,mode:['chat'],scope:['a'],t:'Usulan: Cek konsistensi laporan di Chat',d:'Lampirkan laporan kinerja dan laporan pengawasan, lalu minta Claude memeriksa angka, rumus, periode, dan dasar hukum sebelum dokumen dikirim.',outs:[['Buka Claude','https://claude.ai/new']]},
- {id:'u-proj',usul:true,mode:['proj'],scope:['a'],t:'Usulan: Project "LAKIN KEK Kendal"',d:'Satu Project berisi instruksi tetap, template LAKIN, laporan triwulan lalu, dan definisi IKU. Setiap triwulan cukup membuka percakapan baru di Project tersebut.',outs:[['Buka Projects','https://claude.ai/projects']]}];
+ {id:'aboutme',mode:['cowork'],scope:[],t:'File Instruksi Kerja "About me"',d:'Profil, struktur folder, aturan wajib, dan preferensi. Dibaca Claude tiap sesi. Contoh aturan: jangan hapus file input, salin sebelum edit.',outs:[]},
+ {id:'poster',mode:['design'],scope:['c'],t:'Islamic Banking Framework Poster',d:'Poster kerangka konsep di kanvas Design, bisa dibagikan lewat tautan.',outs:[]},
+ {id:'materi',mode:['code'],scope:['b'],t:'Materi Sharing Session Ini',d:'Halaman ini dibuat dengan Claude Code: membaca laporan, menguji angka, mencari foto, menyusun materi.',outs:[]},
+ {id:'u-chat',usul:true,mode:['chat'],scope:['a'],t:'Usulan: Cek konsistensi laporan di Chat',d:'Lampirkan laporan kinerja dan laporan pengawasan. Periksa angka, rumus, periode, dan dasar hukum sebelum dikirim.',outs:[['Buka Claude','https://claude.ai/new']]},
+ {id:'u-proj',usul:true,mode:['proj'],scope:['a'],t:'Usulan: Project "LAKIN KEK Kendal"',d:'Instruksi tetap, template LAKIN, laporan lalu, definisi IKU. Tiap triwulan cukup buka percakapan baru.',outs:[['Buka Projects','https://claude.ai/projects']]}];
 const HTTP=/^https?:$/.test(location.protocol);
 const MAP=[];
 const localFile=p=>p;
@@ -1387,7 +1388,7 @@ function renderGal(){
 }
 function renderGDetail(){
   const g=G.find(x=>x.id===galSel),m=g.mode[0];
-  const pv=g.prev?(g.prev.endsWith('.html')?`<iframe id="gFrame" src="${fileURL(g.prev)}" title="Pratinjau ${esc(g.t)}" loading="lazy"></iframe>`:`<img src="${fileURL(g.prev)}" alt="Pratinjau ${esc(g.t)}">`):g.thumb?`<img src="${g.thumb}" alt="Tampilan ${esc(g.t)}" style="object-fit:cover;object-position:top">`:`<div class="empty">Hasil karya ini ditunjukkan langsung oleh narasumber saat sesi.</div>`;
+  const pv=g.prev?(g.prev.endsWith('.html')?`<iframe id="gFrame" src="${fileURL(g.prev)}" title="Pratinjau ${esc(g.t)}" loading="lazy"></iframe>`:`<img src="${fileURL(g.prev)}" alt="Pratinjau ${esc(g.t)}">`):g.thumb?`<img src="${g.thumb}" alt="Tampilan ${esc(g.t)}" style="object-fit:cover;object-position:top">`:`<div class="empty">Ditunjukkan langsung oleh narasumber.</div>`;
   $('#gdetail').style.setProperty('--mc',MC(m));
   $('#gdetail').innerHTML=`<div class="info fade-in">
     <div class="chips">${g.mode.map(k=>`<span class="mbadge" style="--mc:${MC(k)}">Claude ${MODES.find(x=>x.k===k).t}</span>`).join('')}${g.org?'<span class="chip amb">Biro Organta</span>':''}${g.usul?'<span class="chip">Usulan untuk KEK</span>':''}</div>
