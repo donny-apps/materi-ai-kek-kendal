@@ -6,6 +6,22 @@
 <title>AI untuk Administrator KEK Kendal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="aset/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="aset/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="alternate icon" href="aset/favicon.ico">
+<link rel="apple-touch-icon" href="aset/apple-touch-icon.png">
+<meta name="theme-color" content="#0A8C82">
+<meta name="description" content="Materi sharing session Pengenalan Artificial Intelligence untuk Administrator KEK Kendal: mengenal AI, mendalami Claude, prompt efektif, dan contoh nyata pemakaiannya di tugas kantor.">
+<meta property="og:title" content="Pengenalan Artificial Intelligence · Administrator KEK Kendal">
+<meta property="og:description" content="Claude sebagai rekan kerja kantor: materi interaktif sharing session PKP, 30 September 2026.">
+<meta property="og:image" content="https://donny-apps.github.io/materi-ai-kek-kendal/aset/kendal-3.jpg">
+<meta property="og:url" content="https://donny-apps.github.io/materi-ai-kek-kendal/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: app shell ala dashboard — sidebar navigasi + layar materi interaktif dengan foto dan simulasi */
@@ -391,6 +407,28 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 @media (max-width:1100px){.cv-main{grid-template-columns:1fr}.cover{min-height:0}}
 @media (max-width:640px){.cover{padding:20px}.cv-date{text-align:left}}
 
+
+/* Perbaikan presentasi */
+.content{zoom:var(--zoom,1)}
+.cv-count{display:block;margin-top:6px;font-size:12.5px;font-weight:700;color:#FFC862}
+#timer{font-family:var(--mono);font-variant-numeric:tabular-nums}
+#timer.warn{border-color:var(--amber);color:var(--warn)}
+#timer.over{border-color:var(--bad);color:var(--bad)}
+#timer.paused{opacity:.6}
+.share .share-in{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.qr{background:#fff;padding:10px;border-radius:12px;width:156px;height:156px;flex:none;display:grid;place-items:center}
+.qr img,.qr canvas{width:136px!important;height:136px!important}
+.share-txt{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
+.share-txt a{color:var(--accent);font-weight:700;word-break:break-all}
+.closing{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr)}
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(3,10,13,.86);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+.overlay img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5);background:#fff}
+.help{position:fixed;right:24px;bottom:24px;z-index:40;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 20px 50px -20px rgba(0,0,0,.45);width:min(340px,calc(100vw - 32px))}
+.help dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:10px 0 0;font-size:14px}
+.help dt{font-family:var(--mono)}
+.help dd{margin:0;color:var(--muted)}
+.gdetail .pv img{cursor:zoom-in}
+@media (max-width:1150px){.closing{grid-template-columns:1fr}}
 /* Claude modes */
 :root{--m-chat:#0A8C82;--m-proj:#2F5FD0;--m-cowork:#B86E00;--m-design:#C2457A;--m-code:#2B3A42}
 .mbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;color:#fff;background:var(--mc,var(--m-chat));white-space:nowrap}
@@ -487,7 +525,7 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
       <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       <button class="tb-btn" id="prev" aria-label="Bagian sebelumnya">←</button>
       <button class="tb-btn" id="next" aria-label="Bagian berikutnya">→</button>
-      <button class="tb-btn" id="theme">Tema</button>
+      <button class="tb-btn" id="timer" title="Timer sesi: klik untuk jeda atau lanjut">⏱ 00:00</button><button class="tb-btn" id="zoomOut" aria-label="Perkecil tampilan">A−</button><button class="tb-btn" id="zoomIn" aria-label="Perbesar tampilan">A+</button><button class="tb-btn" id="theme">Tema</button><button class="tb-btn" id="helpBtn" aria-label="Pintasan keyboard">?</button>
     </div>
     <div class="content" id="content">
 
@@ -502,7 +540,7 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
     <canvas id="net" aria-hidden="true"></canvas>
     <div class="cv-top">
       <div class="cv-org"><span class="cv-dot"></span><div><b>Administrator KEK Kendal</b><small>Peningkatan Keterampilan Pegawai (PKP)</small></div></div>
-      <div class="cv-date"><b>Rabu, 30 September 2026</b><small>09.30 WIB s.d. selesai · Daring</small></div>
+      <div class="cv-date"><b>Rabu, 30 September 2026</b><small>09.30 WIB s.d. selesai · Daring</small><span class="cv-count" id="cvCount" hidden></span></div>
     </div>
     <div class="cv-main">
       <div class="cv-left">
@@ -822,11 +860,16 @@ Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
     <div class="card lift rv"><span class="chip amb">Bulan ini</span><b class="h-s">Kumpulkan prompt tim</b><ul class="clean amb"><li>Satu dokumen bersama berisi prompt yang berhasil.</li><li>Kelompokkan per ruang lingkup a–d.</li><li>Tambahkan catatan hal yang perlu dicek.</li></ul></div>
     <div class="card lift rv"><span class="chip">Rutin</span><b class="h-s">Berbagi di komunitas belajar</b><ul class="clean"><li>Sesi singkat berbagi antar-pegawai.</li><li>Sejalan dengan upaya "Optimalisasi Knowledge Sharing (Komunitas Belajar)" di LAKIN TW II.</li><li>Catat sebagai kegiatan pembelajaran pegawai.</li></ul></div>
   </div>
-  <div class="grid g2">
+  <div class="grid g3 closing">
     <div class="card rv"><div class="eyebrow">Diskusi</div><ul class="clean">
       <li>Tugas mana yang paling menyita waktu setiap triwulan?</li>
       <li>Use case mana yang paling ingin dicoba lebih dulu?</li>
       <li>Aturan apa yang perlu disepakati tim sebelum memakai AI?</li></ul></div>
+    <div class="card hl rv share"><div class="eyebrow">Buka materi ini di perangkat Anda</div>
+      <div class="share-in"><div id="qr" class="qr" aria-label="QR code link materi"></div>
+      <div class="share-txt"><b class="h-s">Scan atau klik tautan</b><a href="https://donny-apps.github.io/materi-ai-kek-kendal/" target="_blank" rel="noopener" id="webLink">donny-apps.github.io/materi-ai-kek-kendal/</a>
+      <div class="row"><button class="btn" id="copyLink">Salin link</button><button class="btn ghost" id="copyAll">Salin semua prompt</button></div>
+      <p class="small muted">"Salin semua prompt" menyalin 8 prompt use case dan 4 template latihan, siap ditempel ke dokumen tim.</p></div></div></div>
     <div class="card soft rv"><div class="eyebrow">Bahan yang dipakai dalam materi ini</div><ul class="clean">
       <li>Laporan kinerja triwulanan (sebagai contoh format)</li>
       <li>Laporan pengawasan dan pengendalian berkala (sebagai contoh format)</li>
@@ -881,6 +924,17 @@ document.addEventListener('keydown',e=>{
   if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
   if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1);e.preventDefault()}
   if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1);e.preventDefault()}
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  const k=e.key.toLowerCase();
+  if(e.key==='Home'){go(0);e.preventDefault()}
+  if(e.key==='End'){go(screens.length-1);e.preventDefault()}
+  if(k==='f'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(()=>{})}
+  if(k==='t')$('#theme').click();
+  if(k==='v'&&cur===0)$('#cvPlayBtn').click();
+  if(k==='+'||k==='=')setZoom(zoom+.1);
+  if(k==='-')setZoom(zoom-.1);
+  if(e.key==='?')toggleHelp();
+  if(e.key==='Escape'){const o=$('.overlay');if(o)o.remove();const h=$('#help');if(h)h.remove()}
 });
 $('#theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('kek-theme',r.dataset.theme)}catch(e){}};
 try{const t=localStorage.getItem('kek-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
@@ -912,19 +966,19 @@ try{const t=localStorage.getItem('kek-theme');if(t)document.documentElement.data
   $$('#cvDots button').forEach(b=>b.onclick=()=>{show(+b.dataset.i);start()});
   start();
   const VIDS=[
-    {id:'buaCE8Gl1Kc',t:'Kecerdasan Buatan (AI) Bisa Gantikan Pekerjaanmu? Ini Cara Menyelamatkan Masa Depanmu!',ch:'DW Indonesia',d:'5:31',l:'Bahasa Indonesia'},
+    {id:'buaCE8Gl1Kc',s:45,t:'Kecerdasan Buatan (AI) Bisa Gantikan Pekerjaanmu? Ini Cara Menyelamatkan Masa Depanmu!',ch:'DW Indonesia',d:'5:31',l:'Bahasa Indonesia, diputar mulai 0:45'},
     {id:'RDG4agaTIbE',t:'Worried About AI Replacing You? Here\'s how to future-proof your job',ch:'DW News',d:'3:33',l:'Bahasa Inggris'},
     {id:'NaxZ20xaqZE',t:'Is AI a tool to help us work smarter, not harder?',ch:'ABC News',d:'6:25',l:'Bahasa Inggris'}];
   let v=0;
   function render(play){
     const x=VIDS[v];
-    if(play&&location.protocol==='file:'){window.open('https://www.youtube.com/watch?v='+x.id,'_blank','noopener');return}
-    $('#cvFrame').innerHTML=play?`<iframe src="https://www.youtube-nocookie.com/embed/${x.id}?autoplay=1&rel=0&hl=id" title="${esc(x.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+    if(play&&location.protocol==='file:'){window.open('https://www.youtube.com/watch?v='+x.id+'&t='+(x.s||0)+'s','_blank','noopener');return}
+    $('#cvFrame').innerHTML=play?`<iframe src="https://www.youtube-nocookie.com/embed/${x.id}?autoplay=1&rel=0&hl=id&start=${x.s||0}" title="${esc(x.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`
       :`<button class="cv-poster" id="cvPoster" aria-label="Putar video ${esc(x.t)}"><img src="https://i.ytimg.com/vi/${x.id}/hqdefault.jpg" alt=""><span class="cv-play"></span></button>`;
     const fb=$('#cvFb');if(fb)fb.remove();
-    if(play)$('#cvFrame').insertAdjacentHTML('afterend',`<a id="cvFb" class="btn cv-ghost" style="align-self:flex-start;padding:8px 14px;font-size:13.5px" href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener">Video tidak muncul? Putar di YouTube ↗</a>`);
+    if(play)$('#cvFrame').insertAdjacentHTML('afterend',`<a id="cvFb" class="btn cv-ghost" style="align-self:flex-start;padding:8px 14px;font-size:13.5px" href="https://www.youtube.com/watch?v=${x.id}&t=${x.s||0}s" target="_blank" rel="noopener">Video tidak muncul? Putar di YouTube ↗</a>`);
     $('#cvVt').textContent=x.t;
-    $('#cvVm').innerHTML=`${esc(x.ch)} · ${x.d} · ${esc(x.l)} · <a href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener">Buka di YouTube ↗</a>`;
+    $('#cvVm').innerHTML=`${esc(x.ch)} · ${x.d} · ${esc(x.l)} · <a href="https://www.youtube.com/watch?v=${x.id}&t=${x.s||0}s" target="_blank" rel="noopener">Buka di YouTube ↗</a>`;
     $('#cvAlt').innerHTML=VIDS.map((y,i)=>`<button aria-pressed="${i===v}" data-i="${i}">${esc(y.ch)} · ${y.d}</button>`).join('');
     $$('#cvAlt button').forEach(b=>b.onclick=()=>{v=+b.dataset.i;render(false)});
     const p=$('#cvPoster');if(p)p.onclick=()=>render(true);
@@ -1351,6 +1405,45 @@ onShow['galeri']=fitFrame;
 $('#orgGal').innerHTML=G.filter(g=>g.org).map(g=>gcardHTML(g).replace('class="gcard dim"','class="gcard"')).join('');
 $$('#orgGal .gcard').forEach(b=>b.onclick=()=>{galSel=b.dataset.id;galMode='all';galScope='all';renderGal();go(8)});
 renderModes();renderPicker();renderGal();
+
+
+/* ---------- Perbaikan presentasi ---------- */
+const WEB_URL='https://donny-apps.github.io/materi-ai-kek-kendal/';
+// Ukuran tampilan
+let zoom=1;try{zoom=parseFloat(localStorage.getItem('kek-zoom'))||1}catch(e){}
+function setZoom(z){zoom=Math.min(1.4,Math.max(.8,Math.round(z*10)/10));document.documentElement.style.setProperty('--zoom',zoom);try{localStorage.setItem('kek-zoom',zoom)}catch(e){}}
+setZoom(zoom);$('#zoomIn').onclick=()=>setZoom(zoom+.1);$('#zoomOut').onclick=()=>setZoom(zoom-.1);
+// Bantuan pintasan
+function toggleHelp(){const h=$('#help');if(h){h.remove();return}
+  document.body.insertAdjacentHTML('beforeend',`<div class="help" id="help" role="dialog" aria-label="Pintasan keyboard"><div class="row" style="justify-content:space-between"><b>Pintasan keyboard</b><button class="tb-btn" id="helpX" aria-label="Tutup">✕</button></div><dl>
+  <dt>← →</dt><dd>Bagian sebelumnya / berikutnya</dd><dt>Home / End</dt><dd>Ke cover / ke penutup</dd><dt>F</dt><dd>Layar penuh</dd><dt>V</dt><dd>Putar video (di cover)</dd><dt>T</dt><dd>Ganti tema terang/gelap</dd><dt>+ / −</dt><dd>Perbesar / perkecil tampilan</dd><dt>Esc</dt><dd>Tutup gambar atau panel ini</dd></dl></div>`);
+  $('#helpX').onclick=toggleHelp}
+$('#helpBtn').onclick=toggleHelp;
+// Timer sesi (mulai saat keluar dari cover, klik untuk jeda)
+let tStart=0,tAcc=0,tRun=false;
+function tick(){const ms=tAcc+(tRun?Date.now()-tStart:0),m=Math.floor(ms/60000),sec=Math.floor(ms/1000)%60,b=$('#timer');
+  b.textContent='⏱ '+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')+' / 120';b.classList.toggle('warn',m>=105&&m<120);b.classList.toggle('over',m>=120);b.classList.toggle('paused',!tRun&&ms>0)}
+function tStartRun(){if(!tRun){tRun=true;tStart=Date.now()}}
+$('#timer').onclick=()=>{if(tRun){tAcc+=Date.now()-tStart;tRun=false}else tStartRun();tick()};
+setInterval(tick,1000);tick();
+const _go=go;go=function(i){_go(i);if(cur>0)tStartRun()};
+// Hitung mundur di cover
+(function(){const el=$('#cvCount'),T=new Date('2026-09-30T09:30:00+07:00').getTime();
+  function up(){const d=T-Date.now();if(d>0&&d<7*864e5){const h=Math.floor(d/36e5),m=Math.ceil((d%36e5)/6e4);el.hidden=false;el.textContent='Dimulai dalam '+(h?h+' jam ':'')+m+' menit'}
+    else if(d<=0&&d>-3*36e5){el.hidden=false;el.textContent='● Sedang berlangsung'}else el.hidden=true}
+  up();setInterval(up,30000)})();
+// Lightbox gambar galeri
+document.addEventListener('click',e=>{const im=e.target.closest('.gdetail .pv img');if(!im)return;
+  document.body.insertAdjacentHTML('beforeend',`<div class="overlay" role="dialog" aria-label="Gambar layar penuh"><img src="${im.src}" alt=""></div>`);
+  $('.overlay').onclick=()=>$('.overlay').remove()});
+// QR, salin link, salin semua prompt
+function drawQR(){const q=$('#qr');if(!q||q.dataset.done)return;if(window.QRCode){new QRCode(q,{text:WEB_URL,width:136,height:136,colorDark:'#0D1A20',colorLight:'#ffffff'});q.dataset.done=1}else q.textContent='QR memerlukan internet'}
+onShow['rencana-aksi']=drawQR;window.addEventListener('load',drawQR);
+$('#copyLink').onclick=()=>copyText(WEB_URL,$('#copyLink'),$('#webLink'));
+$('#copyAll').onclick=()=>{const txt='PROMPT AI UNTUK TUGAS KANTOR\nAdministrator KEK Kendal · '+WEB_URL+'\n\n'
+  +UC.map((u,i)=>`${i+1}. ${u.t} (${SCOPE[u.s]})\n${u.prompt}`).join('\n\n')
+  +'\n\nTEMPLATE LATIHAN\n\n'+TPL.map(t=>`${t.t}\n`+F.map(k=>`${k[0].toUpperCase()+k.slice(1)}: ${t[k]}`).join('\n')).join('\n\n');
+  copyText(txt,$('#copyAll'),$('#webLink'))};
 
 /* ---------- Mulai ---------- */
 const h=(location.hash||'').slice(1),st=screens.findIndex(s=>s.dataset.id===h);
