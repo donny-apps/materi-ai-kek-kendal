@@ -419,7 +419,7 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 .gcard{border:1px solid var(--line);background:var(--surface);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;padding:0;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,opacity .3s}
 .gcard:hover{transform:translateY(-3px);border-color:var(--mc)}
 .gcard[aria-selected="true"]{border-color:var(--mc);box-shadow:0 0 0 3px color-mix(in srgb,var(--mc) 30%,transparent)}
-.gcard .th{height:120px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--mc),color-mix(in srgb,var(--mc) 55%,#000))}
+.gcard .th{height:160px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--mc),color-mix(in srgb,var(--mc) 55%,#000))}
 .gcard .th img{width:100%;height:100%;object-fit:cover;object-position:top}
 .gcard .th .ft{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:11.5px;color:#fff;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:6px}
 .gcard .bd{padding:14px;display:flex;flex-direction:column;gap:6px}
@@ -782,7 +782,7 @@ Batasan: Hanya data terlampir. Jika kurang, tulis [DATA DIPERLUKAN].</pre>
   </div>
   <div class="gal rv" id="gal" role="tablist" aria-label="Daftar karya"></div>
   <div class="gdetail rv" id="gdetail" aria-live="polite"></div>
-  <p class="src rv">Versi web: file hasil yang memuat data kantor tidak disertakan. Karya yang sudah dipublikasikan bisa dibuka langsung.</p>
+  <p class="src rv">Versi web: tampilan karya yang memuat data kantor sengaja dibuat buram. Karya yang sudah dipublikasikan bisa dibuka langsung.</p>
 </section>
 
 <!-- 9 USE CASE -->
@@ -1310,10 +1310,12 @@ const G=[
 const HTTP=/^https?:$/.test(location.protocol);
 const MAP=[];
 const localFile=p=>p;
-const fileURL=p=>{if(/^https?:/.test(p))return p;if(HTTP){const m=MAP.find(([a])=>p.startsWith(a));if(m)return m[1]+p.slice(m[0].length).split('/').map(encodeURIComponent).join('/')}return localFile(p)};
+const fileURL=p=>{if(/^https?:/.test(p)||!/^[A-Z]:\//.test(p))return p;if(HTTP){const m=MAP.find(([a])=>p.startsWith(a));if(m)return m[1]+p.slice(m[0].length).split('/').map(encodeURIComponent).join('/')}return localFile(p)};
 const EXT=p=>/^https?:/.test(p)?'web':(p.endsWith('/')?'folder':(p.split('.').pop()||'').toLowerCase());
 const OFFICE={docx:'ms-word',xlsx:'ms-excel',pptx:'ms-powerpoint'};
 const openURL=p=>{const e=EXT(p);return OFFICE[e]?`${OFFICE[e]}:ofe|u|${localFile(p)}`:fileURL(p)};
+const THUMBS=['osdm','aisetjen','probis','abk','kanvas','rap','spmkp','bumdes','lppm','ujikom','sengketa','sigap','bigdata','index','aboutme','materi'];
+G.forEach(g=>{if(THUMBS.includes(g.id))g.thumb='aset/thumbs/'+g.id+'.jpg'});
 let galMode='all',galScope='all',galSel='osdm';
 function gcardHTML(g){const m=g.mode[0],c=MC(m);return`<button class="gcard ${(galMode!=='all'&&!g.mode.includes(galMode))||(galScope!=='all'&&!g.scope.includes(galScope))?'dim':''}" style="--mc:${c}" role="tab" aria-selected="${g.id===galSel}" data-id="${g.id}">
   <div class="th">${g.thumb?`<img src="${fileURL(g.thumb)}" alt="" loading="lazy" onerror="this.remove()">`:`<div style="position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85)"><span style="width:54px;height:54px;display:block">${ICON[m]}</span></div>`}<span class="ft">${g.usul?'usulan':'karya nyata'}</span></div>
@@ -1329,7 +1331,7 @@ function renderGal(){
 }
 function renderGDetail(){
   const g=G.find(x=>x.id===galSel),m=g.mode[0];
-  const pv=g.prev?(g.prev.endsWith('.html')?`<iframe id="gFrame" src="${fileURL(g.prev)}" title="Pratinjau ${esc(g.t)}" loading="lazy"></iframe>`:`<img src="${fileURL(g.prev)}" alt="Pratinjau ${esc(g.t)}">`):`<div class="empty">Hasil karya ini ditunjukkan langsung oleh narasumber saat sesi.</div>`;
+  const pv=g.prev?(g.prev.endsWith('.html')?`<iframe id="gFrame" src="${fileURL(g.prev)}" title="Pratinjau ${esc(g.t)}" loading="lazy"></iframe>`:`<img src="${fileURL(g.prev)}" alt="Pratinjau ${esc(g.t)}">`):g.thumb?`<img src="${g.thumb}" alt="Tampilan ${esc(g.t)}" style="object-fit:cover;object-position:top">`:`<div class="empty">Hasil karya ini ditunjukkan langsung oleh narasumber saat sesi.</div>`;
   $('#gdetail').style.setProperty('--mc',MC(m));
   $('#gdetail').innerHTML=`<div class="info fade-in">
     <div class="chips">${g.mode.map(k=>`<span class="mbadge" style="--mc:${MC(k)}">Claude ${MODES.find(x=>x.k===k).t}</span>`).join('')}${g.org?'<span class="chip amb">Biro Organta</span>':''}${g.usul?'<span class="chip">Usulan untuk KEK</span>':''}</div>
