@@ -306,7 +306,7 @@ pre.prompt{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.6;whi
 .uc-card.dim{opacity:.25}
 .uc-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
 .uc-side{position:relative;color:#fff;display:flex;flex-direction:column;background:#0D1A20}
-.uc-side img{width:100%;height:170px;object-fit:cover;flex:none}
+.uc-side>img{width:100%;height:170px;object-fit:cover;flex:none}
 
 .uc-side .in{padding:22px;display:flex;flex-direction:column;gap:12px}
 .uc-side .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#5FE3D5;font-weight:700}
@@ -510,6 +510,43 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* ===== Zoom-friendly: huruf kecil dinaikkan agar tetap terbaca setelah dikompres video ===== */
+.small{font-size:15px} .src{font-size:14px} .eyebrow{font-size:13.5px} .chip{font-size:13.5px}
+.crumb{font-size:14px} .tag{font-size:14px} .run{font-size:14px} .flag{font-size:13px} .legend{font-size:14px}
+.layer-t small{font-size:14px} .cand span{font-size:14px} .pc h4{font-size:14px}
+.obj p{font-size:14.5px} .scope small{font-size:13.5px} .ag time{font-size:13px}
+.code{font-size:13.5px} pre.prompt{font-size:14.5px} .bub{font-size:15.5px}
+.barrow span{font-size:14px} .mini-tbl{font-size:14.5px} .mini-tbl th{font-size:12.5px} table.t th{font-size:13px}
+.field label{font-size:13.5px} .warnbox{font-size:14.5px} .flip .hint{font-size:13.5px}
+.uc-card small{font-size:13.5px} .uc-side .lbl{font-size:12.5px} .steps li .sn{font-size:13.5px}
+.mbadge{font-size:13px} .mode small{font-size:14px} .mode .cnt{font-size:13px}
+.gcard small{font-size:14px} .gcard .th .ft{font-size:12.5px} .out .ext{font-size:12px} .out .cp{font-size:12.5px}
+.pager small{font-size:13px}
+
+/* ===== Kartu AI: logo besar, kegunaan langsung terbaca, kategori jadi titik warna ===== */
+.tools{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.tool{padding:18px;gap:12px}
+.tool .ico{width:52px;height:52px;border-radius:14px}
+.tool .ico img{width:34px;height:34px}
+.tool b{font-size:17px}
+.tool small{font-size:13px}
+.tool .use{font-size:14.5px;line-height:1.45;color:var(--muted);flex:1}
+.tool .dots{display:flex;gap:6px;flex-wrap:wrap}
+.cdot{width:12px;height:12px;border-radius:50%;background:var(--cc);flex:none;box-shadow:0 0 0 2px var(--surface)}
+#catSeg button{display:inline-flex;align-items:center;gap:7px}
+#catSeg .cdot{width:10px;height:10px;box-shadow:none}
+
+/* ===== Mode Zoom: tanpa sidebar dan bar atas, konten selebar layar ===== */
+body.present .side,body.present .topbar{display:none}
+body.present .app{grid-template-columns:minmax(0,1fr)}
+body.present .content{max-width:1300px;margin:0 auto;padding:26px 36px 90px;zoom:calc(var(--zoom,1)*1.1)}
+.pbar{position:fixed;right:18px;bottom:16px;z-index:40;display:none;align-items:center;gap:6px;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--line);border-radius:14px;padding:6px 8px;box-shadow:0 10px 30px rgba(0,0,0,.18);backdrop-filter:blur(8px);opacity:.45;transition:opacity .25s}
+.pbar:hover{opacity:1}
+body.present:not(.is-cover) .pbar{display:flex}
+.pbar .pn{font-family:var(--mono);font-size:13px;padding:0 8px;color:var(--muted)}
+.pbar .ptr{width:120px;height:5px;border-radius:9px;background:var(--surface-2);overflow:hidden}
+.pbar .ptr i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--amber));transition:width .4s}
 </style>
 </head>
 <body>
@@ -527,7 +564,7 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
       <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       <button class="tb-btn" id="prev" aria-label="Bagian sebelumnya">←</button>
       <button class="tb-btn" id="next" aria-label="Bagian berikutnya">→</button>
-      <button class="tb-btn" id="timer" title="Timer sesi: klik untuk jeda atau lanjut">⏱ 00:00</button><button class="tb-btn" id="zoomOut" aria-label="Perkecil tampilan">A−</button><button class="tb-btn" id="zoomIn" aria-label="Perbesar tampilan">A+</button><button class="tb-btn" id="theme">Tema</button><button class="tb-btn" id="helpBtn" aria-label="Pintasan keyboard">?</button>
+      <button class="tb-btn" id="timer" title="Timer sesi: klik untuk jeda atau lanjut">⏱ 00:00</button><button class="tb-btn" id="zoomOut" aria-label="Perkecil tampilan">A−</button><button class="tb-btn" id="zoomIn" aria-label="Perbesar tampilan">A+</button><button class="tb-btn" id="presBtn" title="Mode Zoom: sembunyikan menu (P)">⛶ Mode Zoom</button><button class="tb-btn" id="theme">Tema</button><button class="tb-btn" id="helpBtn" aria-label="Pintasan keyboard">?</button>
     </div>
     <div class="content" id="content">
 
@@ -674,11 +711,11 @@ body.is-cover .content{max-width:none;padding:24px 24px 64px}
 <!-- 4 MACAM AI -->
 <section class="screen" data-id="macam-ai" data-title="Macam-macam AI" hidden>
   <div class="head rv"><div class="eyebrow">Objektif 1 · Pengantar AI</div><h2 class="h-l">Jenis AI, kelebihan dan kekurangannya</h2>
-  <p class="lead">Pilih kategori. Klik logo untuk detail.</p></div>
+  <p class="lead">Pilih kategori untuk melihat kelebihan dan kekurangannya.</p></div>
   <div class="seg rv" id="catSeg" role="group" aria-label="Kategori AI"></div>
   <div class="tool-detail rv" id="catBody"></div>
   <div class="tools rv" id="tools"></div>
-  <div class="card soft rv" id="toolInfo" aria-live="polite"><p class="muted small">Klik logo untuk melihat kegunaannya.</p></div>
+  <div class="card soft rv" id="toolInfo" aria-live="polite" hidden><p class="muted small">Klik logo untuk melihat kegunaannya.</p></div>
   <div class="head rv"><div class="eyebrow">Peta cepat</div><h3 class="h-m">AI per ruang lingkup</h3></div>
   <div class="tbl-wrap rv"><table class="t">
     <thead><tr><th>Kategori AI</th><th class="c">a. Laporan rutin</th><th class="c">b. Presentasi</th><th class="c">c. Konten medsos</th><th class="c">d. Dashboard</th></tr></thead>
@@ -1056,24 +1093,24 @@ const TOOLS=[
   {n:'Zoom / Teams / Meet',by:'Fitur transkrip',d:'zoom.us',c:['rapat'],u:'Transkrip rapat, lalu diringkas jadi notulen.'}];
 const CATS=[
   {k:'all',t:'Semua'},
-  {k:'chat',t:'Asisten percakapan',use:'Draf, ringkasan, terjemahan, analisis file.',plus:['Serbaguna','Baca PDF, Word, Excel','Revisi lewat percakapan'],minus:['Bisa mengarang (halusinasi)','Tak tahu data internal','Versi gratis terbatas'],m:[2,2,2,2]},
-  {k:'data',t:'Analisis data dan dashboard',use:'Olah tabel lewat kode: pivot, grafik, dashboard.',plus:['Hitungan akurat lewat kode','Ganti banyak software analisis','Kode bisa diperiksa'],minus:['Input dan definisi harus benar','Hati-hati data per perusahaan'],m:[2,2,0,2]},
-  {k:'doc',t:'Riset berbasis dokumen',use:'Tanya-jawab dari dokumen sendiri.',plus:['Ada rujukan','Risiko mengarang kecil','Cocok untuk regulasi dan SOP'],minus:['Terbatas pada dokumen diunggah','Tetap cek pasal asli'],m:[2,1,1,0]},
-  {k:'web',t:'Riset web',use:'Cari info terbaru dengan sumber.',plus:['Info lebih baru','Ada tautan sumber'],minus:['Mutu sumber beragam','Baca sumber aslinya'],m:[1,1,1,0]},
-  {k:'pres',t:'Presentasi dan desain',use:'Slide dan desain dari teks.',plus:['Jadi dalam menit','Banyak template'],minus:['Desain generik','Slide sering padat'],m:[0,2,2,1]},
-  {k:'vis',t:'Visual dan diagram',use:'Teks jadi diagram atau ilustrasi.',plus:['Ide cepat jadi visual','Jelaskan alur proses'],minus:['Teks di gambar sering salah','Hindari gambar menyesatkan'],m:[0,2,2,0]},
-  {k:'video',t:'Video dan suara',use:'Video pendek, subtitle, dan sulih suara.',plus:['Konten medsos cepat jadi','Subtitle otomatis'],minus:['Cek hak cipta musik dan gambar','Beri label jika suara buatan AI'],m:[0,1,2,0]},
-  {k:'rapat',t:'Transkrip rapat',use:'Rekaman jadi teks, lalu notulen.',plus:['Notulen lebih cepat','Tak ada poin terlewat'],minus:['Istilah teknis sering salah','Perlu izin merekam'],m:[2,0,0,0]}];
+  {k:'chat',col:'#0A8C82',t:'Asisten percakapan',use:'Draf, ringkasan, terjemahan, analisis file.',plus:['Serbaguna','Baca PDF, Word, Excel','Revisi lewat percakapan'],minus:['Bisa mengarang (halusinasi)','Tak tahu data internal','Versi gratis terbatas'],m:[2,2,2,2]},
+  {k:'data',col:'#2F6FDB',t:'Analisis data dan dashboard',use:'Olah tabel lewat kode: pivot, grafik, dashboard.',plus:['Hitungan akurat lewat kode','Ganti banyak software analisis','Kode bisa diperiksa'],minus:['Input dan definisi harus benar','Hati-hati data per perusahaan'],m:[2,2,0,2]},
+  {k:'doc',col:'#7B4FD6',t:'Riset berbasis dokumen',use:'Tanya-jawab dari dokumen sendiri.',plus:['Ada rujukan','Risiko mengarang kecil','Cocok untuk regulasi dan SOP'],minus:['Terbatas pada dokumen diunggah','Tetap cek pasal asli'],m:[2,1,1,0]},
+  {k:'web',col:'#0B8FD1',t:'Riset web',use:'Cari info terbaru dengan sumber.',plus:['Info lebih baru','Ada tautan sumber'],minus:['Mutu sumber beragam','Baca sumber aslinya'],m:[1,1,1,0]},
+  {k:'pres',col:'#D6336C',t:'Presentasi dan desain',use:'Slide dan desain dari teks.',plus:['Jadi dalam menit','Banyak template'],minus:['Desain generik','Slide sering padat'],m:[0,2,2,1]},
+  {k:'vis',col:'#E08A00',t:'Visual dan diagram',use:'Teks jadi diagram atau ilustrasi.',plus:['Ide cepat jadi visual','Jelaskan alur proses'],minus:['Teks di gambar sering salah','Hindari gambar menyesatkan'],m:[0,2,2,0]},
+  {k:'video',col:'#C43D3D',t:'Video dan suara',use:'Video pendek, subtitle, dan sulih suara.',plus:['Konten medsos cepat jadi','Subtitle otomatis'],minus:['Cek hak cipta musik dan gambar','Beri label jika suara buatan AI'],m:[0,1,2,0]},
+  {k:'rapat',col:'#6B7C83',t:'Transkrip rapat',use:'Rekaman jadi teks, lalu notulen.',plus:['Notulen lebih cepat','Tak ada poin terlewat'],minus:['Istilah teknis sering salah','Perlu izin merekam'],m:[2,0,0,0]}];
 let catK='all',toolSel=null;
 function renderCat(){
-  $('#catSeg').innerHTML=CATS.map(c=>`<button aria-pressed="${c.k===catK}" data-k="${c.k}">${c.t}</button>`).join('');
+  $('#catSeg').innerHTML=CATS.map(c=>`<button aria-pressed="${c.k===catK}" data-k="${c.k}">${c.col?`<span class="cdot" style="--cc:${c.col}"></span>`:''}${c.t}</button>`).join('');
   $$('#catSeg button').forEach(b=>b.onclick=()=>{catK=b.dataset.k;renderCat()});
   const c=CATS.find(x=>x.k===catK);
   $('#catBody').hidden=catK==='all';
   if(catK!=='all')$('#catBody').innerHTML=`<div class="card fade-in"><div class="eyebrow">Kegunaan</div><b class="h-s">${c.t}</b><p class="small muted">${c.use}</p></div><div class="pc plus fade-in"><h4>Kelebihan</h4><ul class="clean good">${c.plus.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="pc minus fade-in"><h4>Kekurangan</h4><ul class="clean bad">${c.minus.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
   $$('.tool').forEach(t=>t.classList.toggle('dim',catK!=='all'&&!TOOLS[+t.dataset.i].c.includes(catK)));
 }
-$('#tools').innerHTML=TOOLS.map((t,i)=>`<button class="tool" data-i="${i}" aria-expanded="false"><div class="top"><div class="ico"><img src="${ICO(t)}" alt="" loading="lazy"></div><div><b>${t.n}</b><small>${t.by}</small></div></div><div class="chips">${t.c.map(k=>`<span class="chip">${CATS.find(c=>c.k===k).t}</span>`).join('')}</div></button>`).join('');
+$('#tools').innerHTML=TOOLS.map((t,i)=>`<button class="tool" data-i="${i}" aria-expanded="false"><div class="top"><div class="ico"><img src="${ICO(t)}" alt="" loading="lazy"></div><div><b>${t.n}</b><small>${t.by}</small></div></div><p class="use">${t.u}</p><div class="dots">${t.c.map(k=>{const c=CATS.find(x=>x.k===k);return`<span class="cdot" style="--cc:${c.col}" title="${c.t}"></span>`}).join('')}</div></button>`).join('');
 $$('.tool').forEach(b=>b.onclick=()=>{const t=TOOLS[+b.dataset.i];$$('.tool').forEach(x=>x.setAttribute('aria-expanded',x===b?'true':'false'));
   $('#toolInfo').innerHTML=`<div class="row fade-in"><div class="tool" style="cursor:default;padding:0;border:0;background:none"><div class="top"><div class="ico"><img src="${ICO(t)}" alt=""></div><div><b>${t.n}</b><small>${t.by}</small></div></div></div><p style="flex:1;min-width:240px">${t.u}</p></div>`});
 renderCat();
@@ -1432,7 +1469,7 @@ setZoom(zoom);$('#zoomIn').onclick=()=>setZoom(zoom+.1);$('#zoomOut').onclick=()
 // Bantuan pintasan
 function toggleHelp(){const h=$('#help');if(h){h.remove();return}
   document.body.insertAdjacentHTML('beforeend',`<div class="help" id="help" role="dialog" aria-label="Pintasan keyboard"><div class="row" style="justify-content:space-between"><b>Pintasan keyboard</b><button class="tb-btn" id="helpX" aria-label="Tutup">✕</button></div><dl>
-  <dt>← →</dt><dd>Bagian sebelumnya / berikutnya</dd><dt>Home / End</dt><dd>Ke cover / ke penutup</dd><dt>F</dt><dd>Layar penuh</dd><dt>V</dt><dd>Putar video (di cover)</dd><dt>T</dt><dd>Ganti tema terang/gelap</dd><dt>+ / −</dt><dd>Perbesar / perkecil tampilan</dd><dt>Esc</dt><dd>Tutup gambar atau panel ini</dd></dl></div>`);
+  <dt>← →</dt><dd>Bagian sebelumnya / berikutnya</dd><dt>Home / End</dt><dd>Ke cover / ke penutup</dd><dt>F</dt><dd>Layar penuh</dd><dt>V</dt><dd>Putar video (di cover)</dd><dt>T</dt><dd>Ganti tema terang/gelap</dd><dt>P</dt><dd>Mode Zoom (tanpa menu)</dd><dt>+ / −</dt><dd>Perbesar / perkecil tampilan</dd><dt>Esc</dt><dd>Tutup gambar atau panel ini</dd></dl></div>`);
   $('#helpX').onclick=toggleHelp}
 $('#helpBtn').onclick=toggleHelp;
 // Timer sesi (mulai saat keluar dari cover, klik untuk jeda)
@@ -1460,6 +1497,16 @@ $('#copyAll').onclick=()=>{const txt='PROMPT AI UNTUK TUGAS KANTOR\nAdministrato
   +UC.map((u,i)=>`${i+1}. ${u.t} (${SCOPE[u.s]})\n${u.prompt}`).join('\n\n')
   +'\n\nTEMPLATE LATIHAN\n\n'+TPL.map(t=>`${t.t}\n`+F.map(k=>`${k[0].toUpperCase()+k.slice(1)}: ${t[k]}`).join('\n')).join('\n\n');
   copyText(txt,$('#copyAll'),$('#webLink'))};
+
+// Mode Zoom: sembunyikan sidebar dan bar atas, navigasi lewat bar mini di pojok
+document.body.insertAdjacentHTML('beforeend',`<div class="pbar" id="pbar"><button class="tb-btn" id="pPrev" aria-label="Sebelumnya">←</button><span class="pn" id="pNum"></span><span class="ptr"><i id="pProg"></i></span><button class="tb-btn" id="pNext" aria-label="Berikutnya">→</button><button class="tb-btn" id="pExit" title="Keluar Mode Zoom (P)">✕</button></div>`);
+function pUpd(){$('#pNum').textContent=String(cur).padStart(2,'0')+' / '+String(screens.length-1).padStart(2,'0');$('#pProg').style.width=((cur+1)/screens.length*100)+'%'}
+function setPres(on){document.body.classList.toggle('present',on);try{localStorage.setItem('kek-pres',on?1:0)}catch(e){};pUpd()}
+$('#presBtn').onclick=()=>setPres(true);$('#pExit').onclick=()=>setPres(false);
+$('#pPrev').onclick=()=>go(cur-1);$('#pNext').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key.toLowerCase()==='p')setPres(!document.body.classList.contains('present'))});
+const _go2=go;go=function(i){_go2(i);pUpd()};
+try{if(localStorage.getItem('kek-pres')==='1'||/[?&]zoom=1/.test(location.search))document.body.classList.add('present')}catch(e){}
 
 /* ---------- Mulai ---------- */
 const h=(location.hash||'').slice(1),st=screens.findIndex(s=>s.dataset.id===h);
